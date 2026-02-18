@@ -1,12 +1,62 @@
-node_modules/
+# MatarixWEB — recommended ignores
+
+# Runtime / uploads / demos
+uploads/
+examples/
+tmp/
+temp/
+cache/
+logs/
+
+# PHP dependencies
+vendor/
+
+# Environment / credentials
 .env
-.env.local
-config/database.local.php
-.DS_Store
+.env.*
+connection.php
+config.php
+config/
+
+# Composer / PHPUnit
+composer.phar
+.phpunit.result.cache
+vendor/
+
+# Database dumps / backups
+*.sql
+*.sql.gz
+*.sql.bak
+*.bak
+
+# Node / build
+node_modules/
 dist/
 build/
+out/
+
+# IDEs / editors
 .vscode/
 .idea/
+*.sublime-*
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs / temp files
 *.log
-npm-debug.log*
-.cache/
+*.tmp
+*.cache
+sessions/
+
+# Misc
+*.swp
+*~
+.history/
+npm-debug.log
+yarn-error.log
+*.zip
+*.tar.gz
