@@ -1,0 +1,21 @@
+<?php
+/**
+ * Hostinger / Production Database Configuration
+ * 
+ * INSTRUCTIONS:
+ * 1. Copy this file to database.local.php (remove .example)
+ * 2. Fill in your Hostinger MySQL credentials from hPanel
+ * 3. database.local.php is ignored by git - keep your password safe!
+ * 
+ * Hostinger: Databases → MySQL Databases
+ * - Host: usually localhost (or use the MySQL hostname from Hostinger)
+ * - Database name: e.g. u634157906_matarik
+ * - Username: e.g. u634157906_matarik
+ * - Password: from Hostinger MySQL panel
+ */
+
+$db_host = 'localhost';
+$db_port = '3306';
+$db_name = 'u634157906_matarik';   // Your Hostinger database name
+$db_username = 'u634157906_matarik'; // Your Hostinger MySQL username
+$db_password = 'YOUR_PASSWORD_HERE';  // Your Hostinger MySQL password

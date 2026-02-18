@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Archive - MATARIX</title>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS File -->
+    <link rel="stylesheet" href="../Admin_assets/css/InventoryAdmin.css">
+    <!-- Admin Notification System -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+    <link rel="stylesheet" href="../Admin_assets/css/admin-sidebar-fixed.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         MAIN HEADER SECTION
+    ========================================== -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty -->
+                <div class="col-md-4"></div>
+                
+                <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+                        <a href="../Admin/AdminProfile.html" class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         MAIN LAYOUT CONTAINER
+    ========================================== -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- LEFT SIDEBAR NAVIGATION -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        <ul class="nav-links">
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../Admin/ArchiveAdmin.html" class="nav-link active" id="archive-nav">
+                                    <span>Archive</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav">
+                                    <span>Analytics</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <div class="sidebar-footer">
+                        <button class="logout-button">Logout</button>
+                    </div>
+                </aside>
+
+                <!-- MAIN CONTENT AREA -->
+                <main class="col-md-10 main-content">
+                    
+                    <!-- CONTENT HEADER -->
+                    <div class="content-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <h1 class="page-title">Product Archive</h1>
+                            </div>
+                            <div class="col-md-5 text-right">
+                                <a href="../Admin/InventoryAdmin.html" class="add-product-button" style="text-decoration: none; display: inline-flex;">
+                                    <i class="fas fa-arrow-left"></i>
+                                    <span>Back to Inventory</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FILTERS SECTION -->
+                    <div class="filters-section">
+                        <div class="row align-items-center">
+                            <div class="col-md-10">
+                                <select class="filter-dropdown" id="category-filter">
+                                    <option value="">All Categories</option>
+                                    <option value="Cement & Concrete Products">Cement & Concrete Products</option>
+                                    <option value="Masonry">Masonry</option>
+                                    <option value="Sand & Gravel">Sand & Gravel</option>
+                                    <option value="Lumber & Wood">Lumber & Wood</option>
+                                    <option value="Steel & Metal">Steel & Metal</option>
+                                    <option value="Roofing & Insulation">Roofing & Insulation</option>
+                                    <option value="Pipes & Plumbing">Pipes & Plumbing</option>
+                                    <option value="Paints & Finishes">Paints & Finishes</option>
+                                    <option value="Tools & Hardware">Tools & Hardware</option>
+                                    <option value="Electrical">Electrical</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ARCHIVE TABLE SECTION -->
+                    <div class="inventory-table-section">
+                        <div class="table-header">
+                            <h2 class="table-title">Archived Products</h2>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="inventory-table table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Category</th>
+                                        <th>Stock Level</th>
+                                        <th>Status</th>
+                                        <th>Price</th>
+                                        <th>Archived Date</th>
+                                        <th>Archived By</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Archived products will be loaded dynamically here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Admin Notifications -->
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    <!-- Load Archived Products -->
+    <script src="../Admin_assets/js/load_archive.js"></script>
+    <!-- Admin Auth Check -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+

@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management - MATARIX</title>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS File -->
+    <link rel="stylesheet" href="../Admin_assets/css/InventoryAdmin.css">
+    <!-- Admin Notification System -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         MAIN HEADER SECTION
+    ========================================== -->
+    <!-- MAIN HEADER SECTION -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <!-- MATARIX LOGO IMAGE -->
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty (Search removed) -->
+                <div class="col-md-4"></div>
+                
+                <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+
+                       <!-- USER PROFILE ICON BUTTON - Now clickable with href -->
+                        <a href="../Admin/AdminProfile.html" class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+    <!-- ==========================================
+         MAIN LAYOUT CONTAINER
+    ========================================== -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- LEFT SIDEBAR NAVIGATION -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        
+                        <!-- SIDEBAR NAVIGATION LINKS -->
+                        <ul class="nav-links">
+                            <!-- ORDERS NAVIGATION LINK (ACTIVE) -->
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            
+                            <!-- INVENTORY NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link active" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            
+                            <!-- DELIVERIES NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            
+                            <!-- ANALYTICS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav">
+                                    <span>Sales and Reports</span>
+                                </a>
+                            </li>
+                            
+                            <!-- USER MANAGEMENT NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <!-- SIDEBAR FOOTER WITH LOGOUT BUTTON -->
+                    <div class="sidebar-footer">
+                        <button class="logout-button">Logout</button>
+                    </div>
+
+                </aside>
+
+                <!-- ==========================================
+                     MAIN CONTENT AREA
+                ========================================== -->
+                <main class="col-md-10 main-content" style="flex: 1; min-width: 0;">
+                    
+                    <!-- CONTENT HEADER WITH TITLE AND ADD BUTTON -->
+                    <div class="content-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <!-- PAGE TITLE -->
+                                <h1 class="page-title">Inventory Management</h1>
+                            </div>
+                            <div class="col-md-5 text-right">
+                                <div style="display: inline-flex; gap: 10px;">
+                                    <!-- MANAGE CATEGORIES BUTTON -->
+                                    <button class="add-product-button" id="manage-categories-btn" data-toggle="modal" data-target="#manageCategoriesModal" style="background-color: #6c757d; border-color: #6c757d;">
+                                        <i class="fas fa-tags"></i>
+                                        <span>Manage Categories</span>
+                                    </button>
+                                    <!-- ADD PRODUCT BUTTON -->
+                                    <button class="add-product-button" id="add-product-btn" data-toggle="modal" data-target="#addProductModal">
+                                        <i class="fas fa-plus"></i>
+                                        <span>Add Product</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==========================================
+                         STATISTICS CARDS SECTION
+                    ========================================== -->
+                    <div class="stats-section">
+                        <div class="row">
+                            
+                            <!-- TOTAL PRODUCTS STAT CARD -->
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <div class="stat-header">
+                                        <h4>Total Products</h4>
+                                    </div>
+                                    
+                                    <div class="stat-icon">
+                                        <div class="stat-number">247</div>
+                                        <!-- TOTAL PRODUCTS ICON -->
+                                        <img src="../Admin_assets/images/Products.png" alt="Total Products Icon">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- LOW STOCK ITEMS STAT CARD -->
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <div class="stat-header">
+                                        <h4>Low Stock Items</h4>
+                                    </div>
+                                    <div class="stat-icon">
+                                        <div class="stat-number">12</div>
+                                        <!-- LOW STOCK WARNING ICON -->
+                                        <img src="../Admin_assets/images/WarningSign.png" alt="Low Stock Icon">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- OUT OF STOCK STAT CARD -->
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <div class="stat-header">
+                                        <h4>Out of Stock</h4>
+                                    </div>
+                                    <div class="stat-icon">
+                                        <div class="stat-number">3</div>
+                                        <!-- OUT OF STOCK CHART ICON -->
+                                        <img src="../Admin_assets/images/DownChart.png" alt="Out of Stock Icon">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- ==========================================
+                         FILTERS AND CONTROLS SECTION
+                    ========================================== -->
+                    <div class="filters-section">
+                        <div class="row align-items-center">
+                            <div class="col-md-10">
+                                
+                                <!-- CATEGORY FILTER DROPDOWN -->
+                                <select class="filter-dropdown" id="category-filter">
+                                    <option value="">All Categories</option>
+                                    <option value="Cement & Concrete Products">Cement & Concrete Products</option>
+                                    <option value="Masonry">Masonry</option>
+                                    <option value="Sand & Gravel">Sand & Gravel</option>
+                                    <option value="Lumber & Wood">Lumber & Wood</option>
+                                    <option value="Steel & Metal">Steel & Metal</option>
+                                    <option value="Roofing & Insulation">Roofing & Insulation</option>
+                                    <option value="Pipes & Plumbing">Pipes & Plumbing</option>
+                                    <option value="Paints & Finishes">Paints & Finishes</option>
+                                    <option value="Tools & Hardware">Tools & Hardware</option>
+                                    <option value="Electrical">Electrical</option>
+                                </select>
+                                
+                                <!-- ITEMS FILTER DROPDOWN -->
+                                <select class="filter-dropdown" id="items-filter">
+                                    <option value="">All Items</option>
+                                    <option value="in-stock">In Stock</option>
+                                    <option value="low-stock">Low Stock</option>
+                                    <option value="out-of-stock">Out of Stock</option>
+                                </select>
+                                
+                            </div>
+                            <div class="col-md-2">
+                                
+                                <!-- MORE FILTERS BUTTON -->
+                                <button class="more-filters-btn" id="more-filters-btn">
+                                    <span>More Filters</span>
+                                </button>
+                                
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <!-- DELETE SELECTED BUTTON -->
+                                <button class="btn btn-danger" id="delete-selected-products-btn" style="display: none; margin-bottom: 10px;">
+                                    <i class="fas fa-trash"></i> Delete Selected (<span id="selected-products-count">0</span>)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==========================================
+                         PRODUCT INVENTORY TABLE SECTION
+                    ========================================== -->
+                    <div class="inventory-table-section">
+                        
+                        <!-- TABLE CONTAINER HEADER -->
+                        <div class="table-header">
+                            <h2 class="table-title">Product Inventory</h2>
+                        </div>
+                        
+                        <!-- INVENTORY TABLE -->
+                        <div class="table-responsive">
+                            <table class="inventory-table table">
+                                
+                                <!-- TABLE HEADERS -->
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px;">
+                                            <input type="checkbox" id="select-all-products" title="Select All">
+                                        </th>
+                                        <th>Product</th>
+                                        <th>Category</th>
+                                        <th>Stock Level</th>
+                                        <th>Status</th>
+                                        <th>Price</th>
+                                        <th>Last Restocked</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                
+                                <!-- TABLE BODY WITH PRODUCT ROWS -->
+                                <tbody>
+                                    <!-- Products will be loaded dynamically here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ADD PRODUCT MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content add-product-modal">
+                
+                <!-- MODAL HEADER WITH TITLE -->
+                <div class="modal-header add-product-header">
+                    <h2 class="modal-title add-product-title" id="addProductModalLabel">Add Products</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY WITH FORM -->
+                <div class="modal-body add-product-body">
+                    <form id="addProductForm">
+                        
+                        <!-- PRODUCT IMAGE UPLOAD SECTION -->
+                        <div class="product-upload-section">
+                            <label class="form-label"><strong>Main Product Image:</strong></label>
+                            <div class="upload-container">
+                                <!-- UPLOAD BUTTON -->
+                                <button type="button" class="upload-btn" id="uploadImageBtn">
+                                    <i class="fas fa-plus upload-icon"></i>
+                                    <span class="upload-text">Upload Main Image</span>
+                                </button>
+                                <!-- HIDDEN FILE INPUT -->
+                                <input type="file" id="productImageInput" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                        
+                        <!-- THUMBNAIL IMAGES UPLOAD SECTION -->
+                        <div class="product-upload-section mt-3">
+                            <label class="form-label"><strong>Thumbnail Images (Optional):</strong></label>
+                            <small class="form-text text-muted mb-2">Upload up to 4 thumbnail images that will be displayed below the main image</small>
+                            <div class="upload-container">
+                                <!-- UPLOAD BUTTON -->
+                                <button type="button" class="upload-btn" id="uploadThumbnailsBtn">
+                                    <i class="fas fa-images upload-icon"></i>
+                                    <span class="upload-text">Upload Thumbnails</span>
+                                </button>
+                                <!-- HIDDEN FILE INPUT -->
+                                <input type="file" id="productThumbnailsInput" accept="image/*" multiple style="display: none;">
+                            </div>
+                            <!-- Thumbnail Preview Container -->
+                            <div id="thumbnailsPreview" class="mt-3" style="display: none;">
+                                <div class="row" id="thumbnailsPreviewRow">
+                                    <!-- Thumbnail previews will be shown here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- PRODUCT NAME INPUT FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="productName" class="form-label">Product Name:</label>
+                            <input type="text" class="form-control product-input" id="productName" placeholder="Enter product name" required>
+                        </div>
+                        
+                        <!-- CATEGORY DROPDOWN FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="productCategory" class="form-label">Category:</label>
+                            <select class="form-control product-select" id="productCategory" required>
+                                <option value="">Select a Category</option>
+                                <option value="Cement & Concrete Products">Cement & Concrete Products</option>
+                                <option value="Masonry">Masonry</option>
+                                <option value="Sand & Gravel">Sand & Gravel</option>
+                                <option value="Lumber & Wood">Lumber & Wood</option>
+                                <option value="Steel & Metal">Steel & Metal</option>
+                                <option value="Roofing & Insulation">Roofing & Insulation</option>
+                                <option value="Pipes & Plumbing">Pipes & Plumbing</option>
+                                <option value="Paints & Finishes">Paints & Finishes</option>
+                                <option value="Tools & Hardware">Tools & Hardware</option>
+                                <option value="Electrical">Electrical</option>
+                            </select>
+                        </div>
+                        
+                        <!-- PRODUCT PRICE INPUT FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="productPrice" class="form-label">Price:</label>
+                            <input type="number" class="form-control product-input" id="productPrice" placeholder="₱ 00.00" min="0" step="0.01" required>
+                        </div>
+                        
+                        <!-- STOCK QUANTITY INPUT FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="productStock" class="form-label">No. of Stocks:</label>
+                            <input type="number" class="form-control product-input" id="productStock" placeholder="Enter stock quantity (Minimum of no: --)" min="0" required>
+                        </div>
+                        
+                        <!-- STOCK UNIT SELECTION FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="productStockUnit" class="form-label">Stock Unit:</label>
+                            <select class="form-control product-select" id="productStockUnit" required>
+                                <option value="PC">PC (Pieces)</option>
+                                <option value="GAL">GAL (Gallons)</option>
+                                <option value="ROL">ROL (Rolls)</option>
+                                <option value="PAC">PAC (Packages)</option>
+                                <option value="BOX">BOX (Boxes)</option>
+                                <option value="BAG">BAG (Bags)</option>
+                                <option value="SET">SET (Sets)</option>
+                                <option value="PKG">PKG (Packages)</option>
+                                <option value="CTN">CTN (Cartons)</option>
+                                <option value="PCS">PCS (Pieces)</option>
+                                <option value="UNT">UNT (Units)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- PRODUCT DESCRIPTION TEXTAREA -->
+                        <div class="form-group product-form-group">
+                            <label for="productDescription" class="form-label">Add Product Description:</label>
+                            <textarea class="form-control product-textarea" id="productDescription" rows="4" placeholder="Product description" required></textarea>
+                        </div>
+                        
+                        <!-- PRODUCT VARIATIONS SECTION -->
+                        <div class="variations-section">
+                            <h6 class="mb-3">Product Variations</h6>
+                            <div id="variationsContainer">
+                                <!-- Variations will be added dynamically here -->
+                            </div>
+                            <button type="button" class="btn btn-sm btn-secondary mt-2" id="addVariationBtn">
+                                <i class="fas fa-plus"></i> Add Variation
+                            </button>
+                            <small class="form-text text-muted">Add variations like Size, Length, Color, Material, or Type</small>
+                        </div>
+                        
+                        <!-- PRODUCT WEIGHT SECTION -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group product-form-group">
+                                    <label for="productWeight" class="form-label">Weight:</label>
+                                    <input type="number" class="form-control product-input" id="productWeight" placeholder="e.g., 40.00" step="0.01" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group product-form-group">
+                                    <label for="productWeightUnit" class="form-label">Weight Unit:</label>
+                                    <select class="form-control product-select" id="productWeightUnit">
+                                        <option value="">Select Weight Unit</option>
+                                        <option value="kg">kg</option>
+                                        <option value="g">g</option>
+                                        <option value="lb">lb</option>
+                                        <option value="oz">oz</option>
+                                        <option value="ton">ton</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- MINIMUM STOCK INPUT FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="productMinStock" class="form-label">Minimum Stock Level:</label>
+                            <input type="number" class="form-control product-input" id="productMinStock" placeholder="Enter minimum stock level" min="0" required>
+                        </div>
+                        
+                    </form>
+                </div>
+                
+                <!-- MODAL FOOTER WITH ACTION BUTTON -->
+                <div class="modal-footer add-product-footer">
+                    <!-- SUBMIT ADD PRODUCT BUTTON -->
+                    <button type="submit" class="btn add-product-submit-btn" id="addProductSubmitBtn" form="addProductForm">
+                        Add Products
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         EDIT PRODUCT MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content add-product-modal">
+                
+                <!-- MODAL HEADER WITH TITLE -->
+                <div class="modal-header add-product-header">
+                    <h2 class="modal-title add-product-title" id="editProductModalLabel">Edit Product</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY WITH FORM -->
+                <div class="modal-body add-product-body">
+                    <form id="editProductForm">
+                        <input type="hidden" id="editProductId" name="product_id">
+                        
+                        <!-- PRODUCT IMAGE UPLOAD SECTION -->
+                        <div class="product-upload-section">
+                            <label class="form-label"><strong>Main Product Image:</strong></label>
+                            <div class="upload-container">
+                                <!-- UPLOAD BUTTON -->
+                                <button type="button" class="upload-btn" id="editUploadImageBtn">
+                                    <i class="fas fa-plus upload-icon"></i>
+                                    <span class="upload-text">Upload Main Image</span>
+                                </button>
+                                <!-- HIDDEN FILE INPUT -->
+                                <input type="file" id="editProductImageInput" accept="image/*" style="display: none;">
+                                <!-- CURRENT IMAGE PREVIEW -->
+                                <div id="editCurrentImagePreview" style="display: none; margin-top: 10px;">
+                                    <img id="editCurrentImage" src="" alt="Current Image" style="max-width: 100px; max-height: 100px; border-radius: 5px;">
+                                    <small class="d-block text-muted mt-1">Current Image</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- THUMBNAIL IMAGES UPLOAD SECTION -->
+                        <div class="product-upload-section mt-3">
+                            <div class="mb-2">
+                                <label class="form-label mb-1"><strong>Thumbnail Images (Optional):</strong></label>
+                                <small class="form-text text-muted d-block">Upload up to 4 thumbnail images. New uploads will replace existing thumbnails.</small>
+                            </div>
+                            <div class="upload-container">
+                                <!-- UPLOAD BUTTON -->
+                                <button type="button" class="upload-btn" id="editUploadThumbnailsBtn">
+                                    <i class="fas fa-images upload-icon"></i>
+                                    <span class="upload-text">Upload Thumbnails</span>
+                                </button>
+                                <!-- HIDDEN FILE INPUT -->
+                                <input type="file" id="editProductThumbnailsInput" accept="image/*" multiple style="display: none;">
+                            </div>
+                            <!-- Current Thumbnails Preview -->
+                            <div id="editCurrentThumbnailsPreview" class="mt-3" style="display: none;">
+                                <label class="form-label"><small>Current Thumbnails:</small></label>
+                                <div class="row" id="editCurrentThumbnailsRow">
+                                    <!-- Current thumbnails will be shown here -->
+                                </div>
+                            </div>
+                            <!-- New Thumbnails Preview Container -->
+                            <div id="editThumbnailsPreview" class="mt-3" style="display: none;">
+                                <label class="form-label"><small>New Thumbnails (will replace current):</small></label>
+                                <div class="row" id="editThumbnailsPreviewRow">
+                                    <!-- New thumbnail previews will be shown here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- PRODUCT NAME INPUT FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="editProductName" class="form-label">Product Name:</label>
+                            <input type="text" class="form-control product-input" id="editProductName" placeholder="Enter product name" required>
+                        </div>
+                        
+                        <!-- CATEGORY DROPDOWN FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="editProductCategory" class="form-label">Category:</label>
+                            <select class="form-control product-select" id="editProductCategory" required>
+                                <option value="">Select a Category</option>
+                                <option value="Cement & Concrete Products">Cement & Concrete Products</option>
+                                <option value="Masonry">Masonry</option>
+                                <option value="Sand & Gravel">Sand & Gravel</option>
+                                <option value="Lumber & Wood">Lumber & Wood</option>
+                                <option value="Steel & Metal">Steel & Metal</option>
+                                <option value="Roofing & Insulation">Roofing & Insulation</option>
+                                <option value="Pipes & Plumbing">Pipes & Plumbing</option>
+                                <option value="Paints & Finishes">Paints & Finishes</option>
+                                <option value="Tools & Hardware">Tools & Hardware</option>
+                                <option value="Electrical">Electrical</option>
+                            </select>
+                        </div>
+                        
+                        <!-- PRODUCT PRICE INPUT FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="editProductPrice" class="form-label">Price:</label>
+                            <input type="number" class="form-control product-input" id="editProductPrice" placeholder="₱ 00.00" min="0" step="0.01" required>
+                        </div>
+                        
+                        <!-- STOCK QUANTITY INPUT FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="editProductStock" class="form-label">No. of Stocks:</label>
+                            <input type="number" class="form-control product-input" id="editProductStock" placeholder="Enter stock quantity" min="0" required>
+                        </div>
+                        
+                        <!-- STOCK UNIT SELECTION FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="editProductStockUnit" class="form-label">Stock Unit:</label>
+                            <select class="form-control product-select" id="editProductStockUnit" required>
+                                <option value="PC">PC (Pieces)</option>
+                                <option value="GAL">GAL (Gallons)</option>
+                                <option value="ROL">ROL (Rolls)</option>
+                                <option value="PAC">PAC (Packages)</option>
+                                <option value="BOX">BOX (Boxes)</option>
+                                <option value="BAG">BAG (Bags)</option>
+                                <option value="SET">SET (Sets)</option>
+                                <option value="PKG">PKG (Packages)</option>
+                                <option value="CTN">CTN (Cartons)</option>
+                                <option value="PCS">PCS (Pieces)</option>
+                                <option value="UNT">UNT (Units)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- PRODUCT DESCRIPTION TEXTAREA -->
+                        <div class="form-group product-form-group">
+                            <label for="editProductDescription" class="form-label">Add Product Description:</label>
+                            <textarea class="form-control product-textarea" id="editProductDescription" rows="4" placeholder="Product description" required></textarea>
+                        </div>
+                        
+                        <!-- PRODUCT VARIATIONS SECTION -->
+                        <div class="variations-section">
+                            <h6 class="mb-3">Product Variations</h6>
+                            <div id="editVariationsContainer">
+                                <!-- Variations will be added dynamically here -->
+                            </div>
+                            <button type="button" class="btn btn-sm btn-secondary mt-2" id="editAddVariationBtn">
+                                <i class="fas fa-plus"></i> Add Variation
+                            </button>
+                            <small class="form-text text-muted">Add variations like Size, Length, Color, Material, or Type</small>
+                        </div>
+                        
+                        <!-- MINIMUM STOCK INPUT FIELD -->
+                        <div class="form-group product-form-group">
+                            <label for="editProductMinStock" class="form-label">Minimum Stock Level:</label>
+                            <input type="number" class="form-control product-input" id="editProductMinStock" placeholder="Enter minimum stock level" min="0" required>
+                        </div>
+                        
+                    </form>
+                </div>
+                
+                <!-- MODAL FOOTER WITH ACTION BUTTON -->
+                <div class="modal-footer add-product-footer">
+                    <!-- DELETE BUTTON -->
+                    <button type="button" class="btn btn-danger" id="deleteProductBtn" style="margin-right: auto;">
+                        <i class="fas fa-trash"></i> Delete Product
+                    </button>
+                    <!-- CANCEL BUTTON -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <!-- SUBMIT EDIT PRODUCT BUTTON -->
+                    <button type="submit" class="btn add-product-submit-btn" form="editProductForm">
+                        Update Product
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         VIEW PRODUCT DETAILS MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="viewProductModal" tabindex="-1" role="dialog" aria-labelledby="viewProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content add-product-modal">
+                
+                <!-- MODAL HEADER WITH TITLE -->
+                <div class="modal-header add-product-header">
+                    <h2 class="modal-title add-product-title" id="viewProductModalLabel">Product Details</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY WITH PRODUCT DETAILS -->
+                <div class="modal-body add-product-body">
+                    <div id="viewProductLoading" class="text-center p-4" style="display: none;">
+                        <i class="fas fa-spinner fa-spin fa-2x"></i>
+                        <p class="mt-2">Loading product details...</p>
+                    </div>
+                    
+                    <div id="viewProductContent" style="display: none;">
+                        <!-- PRODUCT IMAGE -->
+                        <div class="text-center mb-4">
+                            <img id="viewProductImage" src="" alt="Product Image" style="max-width: 200px; max-height: 200px; object-fit: cover; border-radius: 10px; border: 1px solid #ddd;">
+                        </div>
+                        
+                        <!-- PRODUCT INFORMATION TABLE -->
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 40%;">Product Name:</th>
+                                    <td id="viewProductName"></td>
+                                </tr>
+                                <tr>
+                                    <th>Product ID:</th>
+                                    <td id="viewProductId"></td>
+                                </tr>
+                                <tr>
+                                    <th>Category:</th>
+                                    <td id="viewProductCategory"></td>
+                                </tr>
+                                <tr>
+                                    <th>Description:</th>
+                                    <td id="viewProductDescription"></td>
+                                </tr>
+                                <tr>
+                                    <th>Price:</th>
+                                    <td id="viewProductPrice" class="text-primary font-weight-bold"></td>
+                                </tr>
+                                <tr>
+                                    <th>Stock Level:</th>
+                                    <td id="viewProductStock"></td>
+                                </tr>
+                                <tr>
+                                    <th>Minimum Stock:</th>
+                                    <td id="viewProductMinStock"></td>
+                                </tr>
+                                <tr>
+                                    <th>Stock Status:</th>
+                                    <td id="viewProductStatus"></td>
+                                </tr>
+                                <tr>
+                                    <th>Dimensions:</th>
+                                    <td id="viewProductDimensions"></td>
+                                </tr>
+                                <tr>
+                                    <th>Weight:</th>
+                                    <td id="viewProductWeight"></td>
+                                </tr>
+                                <tr>
+                                    <th>Last Restocked:</th>
+                                    <td id="viewProductRestock"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <!-- PRODUCT VARIATIONS -->
+                        <div class="mt-4">
+                            <h6 class="mb-3">Product Variations</h6>
+                            <div id="viewProductVariations" class="variations-list">
+                                <!-- Variations will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer add-product-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MANAGE VARIATIONS MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="manageVariationsModal" tabindex="-1" role="dialog" aria-labelledby="manageVariationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content add-product-modal">
+                
+                <!-- MODAL HEADER WITH TITLE -->
+                <div class="modal-header add-product-header">
+                    <h2 class="modal-title add-product-title" id="manageVariationsModalLabel">Manage Product Variations</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body add-product-body">
+                    <div id="variationsProductInfo" class="mb-3">
+                        <h5 id="variationsProductName" class="text-primary"></h5>
+                        <p class="text-muted mb-0">Product ID: <span id="variationsProductId"></span></p>
+                    </div>
+                    
+                    <!-- EXISTING VARIATIONS LIST -->
+                    <div class="mb-4">
+                        <h6 class="mb-3">Existing Variations</h6>
+                        <div id="variationsList" class="variations-list">
+                            <!-- Variations will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- ADD NEW VARIATION FORM -->
+                    <div class="add-variation-section">
+                        <h6 class="mb-3">Add New Variation</h6>
+                        <form id="addVariationForm">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group product-form-group">
+                                        <label for="variationName" class="form-label">Variation Type:</label>
+                                        <select class="form-control product-select" id="variationName" required>
+                                            <option value="">Select Type</option>
+                                            <option value="Size">Size</option>
+                                            <option value="Length">Length</option>
+                                            <option value="Color">Color</option>
+                                            <option value="Material">Material</option>
+                                            <option value="Type">Type</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group product-form-group">
+                                        <label for="variationValue" class="form-label">Variation Value:</label>
+                                        <input type="text" class="form-control product-input" id="variationValue" placeholder="e.g., 2x2 x 8ft, 10ft, Red" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group product-form-group">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            <i class="fas fa-plus"></i> Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer add-product-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JavaScript Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Admin Notification System (load early) -->
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    
+    <!-- Admin Order Notifications - Polls for new order notifications -->
+    <script src="../Admin_assets/js/admin-order-notifications.js"></script>
+    
+    <!-- Admin Notification Center - Mailbox for viewing all notifications -->
+    <script src="../Admin_assets/js/admin-notification-center.js"></script>
+    
+    <!-- Admin Authentication Check - MUST load first to verify session -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Load Inventory from Database -->
+    <script src="../Admin_assets/js/load_inventory.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="../Admin_assets/js/InventoryAdmin.js"></script>
+    
+    <!-- Variations Management JavaScript -->
+    <script src="../Admin_assets/js/manage_variations.js"></script>
+    
+    <!-- Category Management JavaScript -->
+    <script src="../Admin_assets/js/manage_categories.js"></script>
+    
+    <!-- ==========================================
+         MANAGE CATEGORIES MODAL
+    ========================================== -->
+    <div class="modal fade" id="manageCategoriesModal" tabindex="-1" role="dialog" aria-labelledby="manageCategoriesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- MODAL HEADER -->
+                <div class="modal-header add-product-header">
+                    <h2 class="modal-title add-product-title" id="manageCategoriesModalLabel">
+                        <i class="fas fa-tags mr-2"></i>Manage Categories
+                    </h2>
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body">
+                    <!-- Add New Category Form -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0"><i class="fas fa-plus-circle mr-2"></i>Add New Category</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="addCategoryForm">
+                                <div class="form-group">
+                                    <label for="newCategoryName">Category Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="newCategoryName" placeholder="e.g., Tools & Hardware" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newCategoryDescription">Description (Optional)</label>
+                                    <textarea class="form-control" id="newCategoryDescription" rows="2" placeholder="Brief description of the category"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newCategoryIcon">Icon Class (Optional)</label>
+                                    <input type="text" class="form-control" id="newCategoryIcon" placeholder="e.g., fas fa-tools" value="fas fa-box">
+                                    <small class="form-text text-muted">Font Awesome icon class (e.g., fas fa-tools, fas fa-hammer)</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newCategoryOrder">Display Order</label>
+                                    <input type="number" class="form-control" id="newCategoryOrder" value="0" min="0">
+                                    <small class="form-text text-muted">Lower numbers appear first</small>
+                                </div>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-plus mr-2"></i>Add Category
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Categories List -->
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0"><i class="fas fa-list mr-2"></i>Existing Categories</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="categoriesList" class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Order</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="categoriesTableBody">
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <div class="spinner-border text-danger" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer add-product-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header add-product-header">
+                    <h2 class="modal-title add-product-title" id="editCategoryModalLabel">
+                        <i class="fas fa-edit mr-2"></i>Edit Category
+                    </h2>
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editCategoryForm">
+                        <input type="hidden" id="editCategoryId">
+                        <div class="form-group">
+                            <label for="editCategoryName">Category Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editCategoryName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategoryDescription">Description</label>
+                            <textarea class="form-control" id="editCategoryDescription" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategoryIcon">Icon Class</label>
+                            <input type="text" class="form-control" id="editCategoryIcon">
+                            <small class="form-text text-muted">Font Awesome icon class</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategoryOrder">Display Order</label>
+                            <input type="number" class="form-control" id="editCategoryOrder" min="0">
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="editCategoryActive">
+                                <label class="form-check-label" for="editCategoryActive">
+                                    Active (visible in dropdowns)
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Inactive Category Warning (shown when category is inactive) -->
+                        <div id="inactiveCategoryOptions" style="display: none;">
+                            <div class="alert alert-warning">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>
+                                <strong>This category is currently inactive.</strong>
+                            </div>
+                        </div>
+                        
+                        <!-- Move Products Section (shown when category has products, regardless of active/inactive status) -->
+                        <div class="form-group" id="moveProductsSection" style="display: none;">
+                            <label for="moveProductsToCategory">Move Products to Another Category</label>
+                            <select class="form-control" id="moveProductsToCategory">
+                                <option value="">-- Keep products in this category --</option>
+                            </select>
+                            <small class="form-text text-muted">
+                                If this category has products, you can move them to another category.
+                            </small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-save mr-2"></i>Save Changes
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer add-product-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+/**
+ * Admin / Employee / Driver – fixed sidebar (desktop)
+ * Sidebar stays fixed and is not scrollable; only main content scrolls.
+ */
+@media (min-width: 992px) {
+    .main-layout {
+        position: relative;
+    }
+
+    .sidebar-container {
+        position: fixed !important;
+        top: 110px;
+        left: 0;
+        width: 175px !important;
+        max-width: 175px !important;
+        height: calc(100vh - 110px) !important;
+        min-height: calc(100vh - 110px) !important;
+        overflow: hidden !important;
+        z-index: 100;
+        flex-shrink: 0;
+    }
+
+    /* Main content column: offset so it doesn’t sit under the fixed sidebar */
+    .main-layout .row > .col-md-10,
+    .main-layout .container-fluid .row > [class*="col-md-10"] {
+        margin-left: 175px;
+        flex: 0 0 calc(100% - 175px);
+        max-width: calc(100% - 175px);
+    }
+}

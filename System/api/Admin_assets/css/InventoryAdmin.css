@@ -1,0 +1,1351 @@
+/* ==========================================
+   INVENTORY MANAGEMENT SYSTEM - COMPLETE CSS
+   ==========================================
+   
+   This CSS file contains all styling for the 
+   Inventory Management System UI including the
+   Add Product Modal Popup.
+   
+   File Structure:
+   1. Global & Reset Styles
+   2. Header Styles
+   3. Sidebar Navigation Styles
+   4. Main Content Styles
+   5. Statistics Cards Styles
+   6. Filters Section Styles
+   7. Product Table Styles
+   8. Interactive Elements Styles
+   9. Add Product Modal Styles
+   10. Responsive Design Styles
+   
+========================================== */
+
+/* ==========================================
+   1. GLOBAL & RESET STYLES
+========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* ==========================================
+   2. HEADER STYLES
+========================================== */
+
+/* Main Header Container */
+.main-header {
+    background-color: #444444;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* MATARIX Logo Image */
+.logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* MATARIX Logo Text */
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: #dc3545;
+    letter-spacing: 1px;
+}
+
+/* Search Container */
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    position: relative;
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Search Input Field */
+.search-input {
+    background-color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px 12px 50px;
+    font-size: 14px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+/* Search Icon */
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 16px;
+}
+
+/* Header Actions Container */
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Header Action Buttons */
+.header-action-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.header-action-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   3. SIDEBAR NAVIGATION STYLES
+========================================== */
+
+/* Main Layout Container */
+.main-layout {
+    min-height: calc(100vh - 80px);
+}
+
+.sidebar-container {
+    background-color: #940909;
+    padding: 0;
+    min-height: calc(100vh - 80px);
+    position: relative;
+    width: 175px !important; /* Fixed width - reduced by 30% from 250px */
+    max-width: 175px !important;
+    flex: 0 0 175px !important; /* Prevent flexbox from expanding it */
+}
+
+/* Override Bootstrap column width for sidebar */
+.col-md-2.sidebar-container {
+    width: 175px !important;
+    max-width: 175px !important;
+    flex: 0 0 175px !important;
+}
+
+/* Navigation Links Container */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    display: block;
+    padding: 30px 25px;
+    color: #e2e8f0;
+    border-bottom: 0.5px solid #4a5568;
+    transition: background-color 0.3s;
+    text-decoration: underline;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    background-color: rgba(255,255,255,0.2);
+    font-weight: 600;
+    border-left: 4px solid white;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+/* Logout Button */
+.logout-button {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* ==========================================
+   4. MAIN CONTENT STYLES
+========================================== */
+
+/* Main Content Container */
+.main-content {
+    background-color: white;
+    padding: 30px;
+    min-height: calc(100vh - 80px);
+}
+
+/* Content Header */
+.content-header {
+    margin-bottom: 35px;
+}
+
+/* Page Title */
+.page-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #2c2c2c;
+    margin: 0;
+}
+
+/* Add Product Button */
+.add-product-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.add-product-button:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* ==========================================
+   5. STATISTICS CARDS STYLES
+========================================== */
+
+/* Statistics Section Container */
+.stats-section {
+    margin-bottom: 30px;
+}
+
+/* Individual Stat Card */
+.stat-card {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Stat Card Header */
+.stat-header h4 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* Stat Card Icon */
+.stat-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.stat-icon img {
+    width: 50px;
+    height: 50px;
+    opacity: 0.7;
+}
+
+/* ==========================================
+   6. FILTERS SECTION STYLES
+========================================== */
+
+/* Filters Section Container */
+.filters-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #e9ecef;
+}
+
+/* Filter Dropdown Styles */
+.filter-dropdown {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-right: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+.filter-dropdown:focus {
+    outline: none;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 2px rgba(220,53,69,0.2);
+}
+
+/* More Filters Button */
+.more-filters-btn {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.more-filters-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #999;
+}
+
+/* ==========================================
+   7. PRODUCT TABLE STYLES
+========================================== */
+
+/* Inventory Table Section */
+.inventory-table-section {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* Table Header */
+.table-header {
+    background-color: #f8f9fa;
+    padding: 20px 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+/* Inventory Table */
+.inventory-table {
+    width: 100%;
+    margin-bottom: 0;
+    background-color: transparent;
+}
+
+/* Table Headers */
+.inventory-table thead th {
+    background-color: #f8f9fa;
+    border-top: none;
+    border-bottom: 2px solid #e9ecef;
+    padding: 15px;
+    font-weight: 600;
+    color: #666;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Table Data Cells */
+.inventory-table tbody td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+/* Product Row Hover Effect */
+.product-row {
+    transition: background-color 0.2s ease;
+}
+
+.product-row:hover {
+    background-color: #f8f9fa;
+}
+
+/* ==========================================
+   8. INTERACTIVE ELEMENTS STYLES
+========================================== */
+
+/* Product Info Container */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Product Add Button */
+.product-add-btn {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.product-add-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #999;
+}
+
+/* Product Image */
+.product-image {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+/* Product Details */
+.product-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.product-lot {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Category Badge */
+.category-badge {
+    background-color: #6c757d;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* Stock Information */
+.stock-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stock-level {
+    background-color: #ffc107;
+    color: #333;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 4px;
+    width: fit-content;
+}
+
+.stock-min {
+    font-size: 11px;
+    color: #666;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status-in-stock {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-low-stock {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.status-out-of-stock {
+    background-color: #dc3545;
+    color: white;
+}
+
+.stat-number {
+    font-weight: 600;
+    font-size: 30px;
+    color: #333;
+}
+
+/* Product Price */
+.product-price {
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 12px;
+    color: #333;
+}
+
+/* Restock Date */
+.restock-date {
+    font-size: 13px;
+    color: #666;
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Category table action buttons spacing */
+.action-buttons-cell {
+    white-space: nowrap;
+}
+
+.action-buttons-cell .edit-category-btn,
+.action-buttons-cell .delete-category-btn {
+    margin: 2px 4px;
+    min-width: 70px;
+}
+
+.action-buttons-cell .edit-category-btn {
+    margin-right: 8px;
+}
+
+/* Individual Action Buttons */
+.action-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #666;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* View Button */
+.view-btn:hover {
+    color: #007bff;
+}
+
+/* Edit Button */
+.edit-btn:hover {
+    color: #28a745;
+}
+
+/* Restock Button */
+.restock-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.restock-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   9. ADD PRODUCT MODAL STYLES
+========================================== */
+
+/* Modal Dialog Container */
+.add-product-modal {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+/* Modal Header */
+.add-product-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    padding: 25px 30px;
+    position: relative;
+}
+
+/* Modal Title */
+.add-product-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+/* Modal Close Button */
+.modal-close-btn {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    color: #666;
+}
+
+/* Modal Body */
+.add-product-body {
+    padding: 30px;
+    background-color: white;
+}
+
+/* Product Images Section - Edit Product Modal */
+.product-images-section {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 20px;
+    background: #fafbfc;
+}
+
+.image-upload-card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid #e9ecef;
+}
+
+.image-upload-zone {
+    position: relative;
+    min-width: 160px;
+}
+
+.image-upload-placeholder {
+    width: 160px;
+    height: 140px;
+    border: 2px dashed #ced4da;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: white;
+}
+.image-upload-placeholder:hover {
+    border-color: #dc3545;
+    background: #fff5f5;
+}
+
+.image-preview {
+    position: relative;
+    width: 160px;
+    height: 140px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.change-image-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.thumbnail-upload-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.thumbnail-upload-slot .thumbnail-add-btn {
+    width: 80px;
+    height: 80px;
+    border: 2px dashed #ced4da;
+    border-radius: 8px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #6c757d;
+    transition: all 0.25s ease;
+}
+.thumbnail-upload-slot .thumbnail-add-btn:hover {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.thumbnail-previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.thumbnail-preview-item {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+.thumbnail-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.thumbnail-remove-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 2px 6px;
+    font-size: 10px;
+}
+
+/* Variation image upload */
+.variation-image-upload {
+    position: relative;
+    min-height: 70px;
+}
+
+.variation-image-placeholder {
+    width: 80px;
+    height: 70px;
+    border: 2px dashed #ced4da;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: #f8f9fa;
+}
+.variation-image-placeholder:hover {
+    border-color: #dc3545;
+    background: #fff5f5;
+}
+
+.variation-image-preview {
+    position: relative;
+    width: 80px;
+    height: 70px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+.variation-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.variation-image-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 2px 5px;
+    font-size: 10px;
+}
+
+/* Product Upload Section (legacy / Add Product) */
+.product-upload-section {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.product-upload-section .form-label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.product-upload-section .form-text {
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Upload Container */
+.upload-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* Upload Button */
+.upload-btn {
+    width: 150px;
+    height: 120px;
+    background-color: #f8f9fa;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.upload-btn:hover {
+    border-color: #999;
+    background-color: #f0f0f0;
+}
+
+/* Upload Icon */
+.upload-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+/* Upload Text */
+.upload-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Form Group Styling */
+.product-form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.product-form-group .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.product-form-group .form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Form Labels */
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 14px;
+}
+
+/* Form Input Fields */
+.product-input {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    width: 100%;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.product-input:focus {
+    outline: none;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 2px rgba(220,53,69,0.2);
+}
+
+.product-input::placeholder {
+    color: #999;
+}
+
+/* Form Select Dropdown */
+.product-select {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 14px;
+    width: 100%;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.product-select:focus {
+    outline: none;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 2px rgba(220,53,69,0.2);
+}
+
+/* Form Textarea */
+.product-textarea {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    width: 100%;
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.product-textarea:focus {
+    outline: none;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 2px rgba(220,53,69,0.2);
+}
+
+.product-textarea::placeholder {
+    color: #999;
+}
+
+/* Modal Footer */
+.add-product-footer {
+    background-color: #f8f9fa;
+    padding: 20px 30px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: center;
+}
+
+/* Submit Button */
+.add-product-submit-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(220,53,69,0.3);
+}
+
+.add-product-submit-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220,53,69,0.4);
+}
+
+.add-product-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* ==========================================
+   10. VARIATIONS MANAGEMENT STYLES
+========================================== */
+
+/* Variations List */
+.variations-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+/* Variation Type Group */
+.variation-type-group {
+    margin-bottom: 20px;
+}
+
+.variation-type-group h6 {
+    font-weight: 600;
+    color: #333;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #dc3545;
+}
+
+/* Variation Card */
+.variation-card {
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.variation-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-color: #dc3545;
+}
+
+.variation-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.variation-actions .btn {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+/* Add Variation Section */
+.add-variation-section {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    margin-top: 20px;
+}
+
+.add-variation-section h6 {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* ==========================================
+   11. RESPONSIVE DESIGN STYLES
+========================================== */
+
+/* Tablet Styles */
+@media (max-width: 992px) {
+    .main-content {
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 28px;
+    }
+    
+    .content-header .row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .content-header .col-md-4 {
+        text-align: left !important;
+    }
+    
+    /* Modal Responsive */
+    .add-product-header,
+    .add-product-body,
+    .add-product-footer {
+        padding: 20px;
+    }
+    
+    .add-product-title {
+        font-size: 20px;
+    }
+}
+
+/* ==========================================
+   CHECKBOX AND BULK DELETE STYLES
+========================================== */
+
+/* Checkbox column styling */
+.inventory-table thead th:first-child,
+.inventory-table tbody td:first-child {
+    width: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.inventory-table thead th:first-child {
+    padding: 12px 8px;
+}
+
+.inventory-table tbody td:first-child {
+    padding: 12px 8px;
+}
+
+.product-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #dc3545;
+}
+
+#select-all-products {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #dc3545;
+}
+
+/* Delete Selected Button */
+#delete-selected-products-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+}
+
+#delete-selected-products-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#delete-selected-products-btn:active {
+    transform: translateY(0);
+}
+
+#delete-selected-products-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#delete-selected-products-btn i {
+    margin-right: 5px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .sidebar-container {
+        min-height: auto;
+        width: 175px !important;
+        max-width: 175px;
+    }
+    
+    .main-content {
+        padding: 15px;
+    }
+    
+    .page-title {
+        font-size: 24px;
+    }
+    
+    .stats-section .row {
+        flex-direction: column;
+    }
+    
+    .filters-section .row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .filter-dropdown {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .inventory-table-section {
+        overflow-x: auto;
+    }
+    
+    .inventory-table {
+        min-width: 700px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    /* Modal Mobile Styles */
+    .modal-dialog {
+        margin: 10px;
+        max-width: none;
+    }
+    
+    .upload-btn {
+        width: 120px;
+        height: 100px;
+    }
+    
+    .upload-icon {
+        font-size: 20px;
+    }
+    
+    .upload-text {
+        font-size: 12px;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 576px) {
+    .logo-text {
+        font-size: 20px;
+    }
+    
+    .search-input {
+        padding: 10px 15px 10px 40px;
+    }
+    
+    .header-actions {
+        gap: 10px;
+    }
+    
+    .header-action-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+    
+    .nav-link {
+        padding: 15px 20px;
+    }
+    
+    .page-title {
+        font-size: 20px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .inventory-table {
+        font-size: 12px;
+    }
+    
+    .product-info {
+        gap: 10px;
+    }
+    
+    .product-image {
+        width: 35px;
+        height: 35px;
+    }
+    
+    /* Modal Small Mobile */
+    .add-product-header,
+    .add-product-body,
+    .add-product-footer {
+        padding: 15px;
+    }
+    
+    .add-product-title {
+        font-size: 18px;
+    }
+    
+    .upload-btn {
+        width: 100px;
+        height: 80px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar-container,
+    .header-actions,
+    .action-buttons,
+    .add-product-modal {
+        display: none !important;
+    }
+    
+    .main-content {
+        padding: 0;
+    }
+    
+    .inventory-table {
+        font-size: 11px;
+    }
+}

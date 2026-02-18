@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>MATARIX Construction Supply</title>
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Customer_assets/css/MainPage.css">
+    <!-- Customer Notifications CSS -->
+    <link rel="stylesheet" href="../Customer_assets/css/customer-notifications.css">
+    <!-- Mobile Enhancements CSS -->
+    <link rel="stylesheet" href="../Customer_assets/css/mobile-enhancements.css">
+    <!-- Minimum Order Notice -->
+    <link rel="stylesheet" href="../Customer_assets/css/min-order-notice.css">
+</head>
+<body class="has-fixed-navbar">
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- ========== NAVBAR START ========== -->
+<nav class="navbar navbar-expand-lg navbar-custom is-fixed">
+    <div class="container">
+        <!-- TOP ROW: Logo | Search | Icons -->
+        <div class="navbar-top-row">
+            <!-- Logo - Left -->
+            <a class="navbar-brand" href="MainPage.html">
+                <img src="../Customer_assets/images/MatarixWhite_logo.png" alt="MATARIX Logo" class="logo-placeholder">
+            </a>
+
+            <!-- Search Bar - Center (Flexible) -->
+            <div class="search-container">
+                <form onsubmit="return false;">
+                    <input type="text" name="q" class="form-control search-input" placeholder="Search materials...">
+                    <button class="search-btn" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Action Icons - Right -->
+            <div class="nav-icons">
+                <a href="#" class="signin-btn" id="customerNotificationsBtn" title="Notifications" style="position: relative;">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="customerNotificationBadge" style="display: none;">0</span>
+                </a>
+                <a href="./Cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" style="display: none;">0</span>
+                </a>
+                <a href="OrderSummary.html" class="cart-btn" title="Order Summary">
+                    <i class="fas fa-clipboard-list"></i>
+                </a>
+                <a href="../Customer/CustomerProfile.html" class="login-btn">
+                    <i class="fas fa-user"></i> 
+                </a>
+            </div>
+        </div>
+
+        <!-- SECOND ROW: Navigation Links -->
+        <div class="navbar-bottom-row">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </a>
+                    <div class="dropdown-menu" id="categories-dropdown-menu" aria-labelledby="categoriesDropdown">
+                        <!-- Categories will be loaded dynamically -->
+                        <div class="dropdown-item-text text-center">
+                            <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <small class="d-block mt-2">Loading categories...</small>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- ========== NAVBAR END ========== -->
+
+    <!-- SIDEBAR NAVIGATION -->
+
+    <!-- Main Content Start -->
+    <main id="main-content">
+    <!-- ========== HERO SECTION START ========== -->
+    <section class="hero-section">
+        <!-- Hero Background Image Placeholder -->
+        <div class="hero-background">
+            <img src="../Customer_assets/images/BC.png" alt="Construction Background" class="hero-bg-image">
+        </div>
+        <!-- Hero Overlay -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Floating Contact Button -->
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="hero-title">MATARIX</h1>
+                    <h2 class="hero-subtitle">Construction Supply</h2>
+                    <p class="hero-description">Your go-to shop for reliable, bulk construction materials delivery. Fast orders, wholesale ready.</p>
+                    
+                    <div class="hero-buttons">
+                        <!-- Request Quote Link -->
+                        <a href="./Quotation.html" class="btn btn-light btn-lg quote-btn" onclick="sessionStorage.setItem('navigationOrigin', 'main');">
+                            <i class="fas fa-clipboard-list"></i> REQUEST A QUOTE
+                        </a>
+                        <!-- Browse Materials Link -->
+                        <a href="#products" class="btn btn-outline-light btn-lg browse-btn">
+                            <i class="fas fa-th-large"></i> BROWSE MATERIALS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== HERO SECTION END ========== -->
+
+    <!-- ========== CATEGORIES SECTION START ========== -->
+    <!-- Categories section removed - now in navbar dropdown -->
+
+    <!-- ========== ALL PRODUCTS SECTION START ========== -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <!-- Minimum order notice (plain red text, above All Products) -->
+            <p class="min-order-notice min-order-notice--text" id="minOrderNoticeBanner" role="status" aria-live="polite">There's a minimum order of ₱<span id="minOrderAmountBanner">—</span> for FREE delivery.</p>
+            <h2 class="section-title">All Products</h2>
+            
+            <!-- Products will be loaded dynamically from database -->
+            <div id="products-loading" style="text-align: center; padding: 20px;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading products...</span>
+                </div>
+                <p class="mt-3">Loading products...</p>
+            </div>
+
+            <!-- Category sections will be created dynamically by load_products.js -->
+        </div>
+    </section>
+    <!-- ========== ALL PRODUCTS SECTION END ========== -->
+
+    <!-- ========== ABOUT SECTION START ========== -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title text-white">About MATARIX</h2>
+                    <div class="about-content">
+                        <p>MATARIX Construction Supply is your trusted partner for all construction material needs. We provide high-quality, reliable construction supplies with bulk delivery services across the region.</p>
+                        <p>With years of experience in the construction supply industry, we understand the importance of timely delivery and consistent quality for your projects.</p>
+                    </div>
+                    
+                    <div class="about-features">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="feature-item justify-content-center">
+                                    <i class="fas fa-truck feature-icon"></i>
+                                    <span>Reliable Bulk Delivery Services</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="feature-item justify-content-center">
+                                    <i class="fas fa-award feature-icon"></i>
+                                    <span>Premium Quality Materials</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="feature-item justify-content-center">
+                                    <i class="fas fa-clock feature-icon"></i>
+                                    <span>On-Time Delivery Guarantee</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="feature-item justify-content-center">
+                                    <i class="fas fa-handshake feature-icon"></i>
+                                    <span>Competitive Pricing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== ABOUT SECTION END ========== -->
+
+    <!-- ========== FOOTER START ========== -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Company Info -->
+                <div class="col-lg-4 col-md-6">
+                    <h5>MATARIX Construction Supply</h5>
+                    <p>Your trusted partner for quality construction materials and reliable bulk deliveries.</p>
+                    <div class="social-icons">
+                        <a href="#" class="facebook-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="instagram-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="linkedin-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="quote.html">Get Quote</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-3 col-md-6">
+                    <h5>Contact Information</h5>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Manila, Philippines</li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+63912345678">+63 912 345 678</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@matarix.com">info@matarix.com</a></li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 7:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2024 MATARIX Construction Supply. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="PrivacyPolicy1.html" onclick="sessionStorage.setItem('previousPage', window.location.href); return true;">Privacy Policy</a> | 
+                        <a href="TermsOfService1.html" onclick="sessionStorage.setItem('previousPage', window.location.href); return true;">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ========== FOOTER END ========== -->
+    </main>
+    <!-- Main Content End -->
+    
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="./MainPage.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#products" class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="./OrderSummary.html" class="nav-item">
+            <i class="fas fa-box"></i>
+            <span>Orders</span>
+        </a>
+    </nav>
+    
+    <!-- ========== MOBILE CART DRAWER ========== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-drawer-content">
+            <p class="text-center text-muted">Cart items will load here</p>
+            <p class="text-center"><a href="./Cart.html" class="btn btn-primary-red">View Full Cart</a></p>
+        </div>
+        <div class="cart-drawer-footer">
+            <a href="./Cart.html" class="btn btn-primary-red btn-block">Go to Cart</a>
+        </div>
+    </div>
+    
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+
+    <!-- Bootstrap 4 JS -->
+    <!-- Use full jQuery for AJAX support (same CDN as other pages) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Customer Authentication Check - MUST load first to verify session -->
+    <script src="../Customer_assets/js/customer_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Cart Manager - Must load for cart badge -->
+    <script src="../Customer_assets/js/cart_manager.js"></script>
+    
+    <!-- Minimum Order Notice: fetch amount from store settings -->
+    <script>
+        (function() {
+            var banner = document.getElementById('minOrderNoticeBanner');
+            var amountEl = document.getElementById('minOrderAmountBanner');
+            if (!banner || !amountEl) return;
+            fetch('../api/get_order_settings.php?t=' + Date.now())
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (!data.success || !data.settings) return;
+                    var disabled = data.settings.disable_minimum_order_value === true;
+                    var minVal = parseFloat(data.settings.min_order_value) || 0;
+                    if (disabled || minVal <= 0) return;
+                    var formatted = minVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    amountEl.textContent = formatted;
+                    banner.classList.add('is-visible');
+                })
+                .catch(function() {});
+        })();
+    </script>
+    
+    <!-- Load Categories from Database -->
+    <script src="../Customer_assets/js/load_mainpage_categories.js?v=2"></script>
+    <!-- Fallback: If script doesn't load, try inline version -->
+    <script>
+        // Check if categories script loaded after 1 second
+        setTimeout(function() {
+            if (typeof loadMainPageCategories === 'undefined') {
+                console.error('[Categories] ERROR: load_mainpage_categories.js did not load! Function loadMainPageCategories is undefined.');
+                console.error('[Categories] Attempting to load categories manually...');
+                // Try to load categories manually as fallback
+                (async function() {
+                    try {
+                        const response = await fetch('../api/get_categories.php?t=' + Date.now());
+                        const data = await response.json();
+                        console.log('[Categories] Fallback: Categories loaded:', data);
+                        if (data.success && data.categories) {
+                            const categoriesDropdown = document.getElementById('categories-dropdown-menu');
+                            if (categoriesDropdown) {
+                                categoriesDropdown.innerHTML = '';
+                                // Sort by display_order
+                                const sorted = [...data.categories].sort((a, b) => {
+                                    const orderA = a.display_order || 0;
+                                    const orderB = b.display_order || 0;
+                                    if (orderA !== orderB) return orderA - orderB;
+                                    return (a.category_name || '').toLowerCase().localeCompare((b.category_name || '').toLowerCase());
+                                });
+                                
+                                sorted.forEach((cat) => {
+                                    const sectionId = cat.category_name.toLowerCase().replace(/&/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-products';
+                                    const dropdownItem = document.createElement('a');
+                                    dropdownItem.className = 'dropdown-item';
+                                    dropdownItem.href = `#${sectionId}`;
+                                    dropdownItem.innerHTML = `<i class="${cat.category_icon || 'fas fa-box'} mr-2"></i>${cat.category_name}`;
+                                    categoriesDropdown.appendChild(dropdownItem);
+                                });
+                                console.log('[Categories] Fallback: Categories displayed successfully');
+                            }
+                        }
+                    } catch (err) {
+                        console.error('[Categories] Fallback also failed:', err);
+                    }
+                })();
+            }
+        }, 1000);
+    </script>
+    
+    <!-- Load Products from Database -->
+    <script src="../Customer_assets/js/load_products.js"></script>
+    
+    <!-- Navigation Tracker - Track origin page -->
+    <script src="../Customer_assets/js/navigation-tracker.js"></script>
+    <script>
+        // Set origin to main page (only if authenticated)
+        // Wait for jQuery to be available
+        if (typeof jQuery !== 'undefined') {
+            jQuery(document).ready(function() {
+                if (window.NavigationTracker) {
+                    const userId = sessionStorage.getItem('user_id');
+                    if (userId) {
+                        window.NavigationTracker.setOrigin('main');
+                    }
+                }
+            });
+        } else {
+            // Fallback if jQuery not loaded yet
+            document.addEventListener('DOMContentLoaded', function() {
+                // Wait a bit for jQuery to load
+                setTimeout(function() {
+                    if (typeof jQuery !== 'undefined' && window.NavigationTracker) {
+                        const userId = sessionStorage.getItem('user_id');
+                        if (userId) {
+                            window.NavigationTracker.setOrigin('main');
+                        }
+                    }
+                }, 100);
+            });
+        }
+    </script>
+    
+    <!-- MATARIX Search System -->
+    <script src="../Customer_assets/js/Search.js"></script>
+    
+    <!-- Customer Notifications System -->
+    <script src="../Customer_assets/js/customer-notifications.js"></script>
+    <script src="../Customer_assets/js/customer-notification-center.js"></script>
+    
+    <!-- Customer Notifications Modal -->
+    <div class="modal fade" id="customerNotificationsModal" tabindex="-1" role="dialog" aria-labelledby="customerNotificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customerNotificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="customerNotificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="customerNotificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="customerNotificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllCustomerReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Navigation Handler -->
+    <script src="../Customer_assets/js/mobile-navigation.js"></script>
+    <!-- Enhanced Mobile Navigation -->
+    <script src="../Customer_assets/js/mobile-navigation-enhanced.js"></script>
+</body>
+</html>
+                

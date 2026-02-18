@@ -1,0 +1,1516 @@
+/* ==========================================
+   MATARIX DELIVERY MANAGEMENT STYLES
+   File: deliveries-admin.css
+   ==========================================
+   
+   This CSS file contains all styling for the 
+   Delivery Management System with Interactive Tabs.
+   
+   File Structure:
+   1. Global Styles
+   2. Main Header Styles
+   3. Sidebar Navigation Styles
+   4. Main Content Styles
+   5. Delivery Management Page Styles
+   6. Tab Functionality Styles
+   7. Active Deliveries Section Styles
+   8. Driver Management Styles
+   9. Fleet Management Styles
+   10. Interactive Elements Styles
+   11. Responsive Design Styles
+   
+========================================== */
+
+/* ==========================================
+   1. GLOBAL STYLES
+========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   2. MAIN HEADER STYLES - DEFAULT FOR ALL ADMIN PAGES
+========================================== */
+
+/* Main Header Container */
+.main-header {
+    background-color: #444444;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* MATARIX Logo Image */
+.logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Header Actions Container */
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Header Action Buttons */
+.header-action-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.header-action-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   3. SIDEBAR NAVIGATION STYLES - DEFAULT FOR ALL ADMIN PAGES
+========================================== */
+
+/* Main Layout Container */
+.main-layout {
+    min-height: calc(100vh - 80px);
+}
+
+/* Sidebar Container */
+.sidebar-container {
+    background-color: #940909;
+    padding: 0;
+    min-height: calc(100vh - 80px);
+    position: relative;
+    width: 100%;
+    max-width: 175px; /* Reduced by 30% from 250px */
+}
+
+/* Navigation Links Container */
+.nav-links {
+    list-style: none;
+    padding: 0; 
+    margin: 0;
+}
+
+.nav-links li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    display: block;
+    padding: 30px 25px;
+    color: #e2e8f0;
+    border-bottom: 0.5px solid #4a5568;
+    transition: background-color 0.3s;
+    text-decoration: underline;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    background-color: rgba(255,255,255,0.2);
+    font-weight: 600;
+    border-left: 4px solid white;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+/* Logout Button */
+.logout-button {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* ==========================================
+   4. MAIN CONTENT STYLES
+========================================== */
+
+/* Main Content Container */
+.main-content {
+    background-color: #ffffff;
+    min-height: calc(100vh - 110px);
+    padding: 30px;
+}
+
+/* ==========================================
+   5. DELIVERY MANAGEMENT PAGE STYLES
+========================================== */
+
+/* Page Header */
+.page-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.page-subtitle {
+    font-size: 16px;
+    color: #6c757d;
+    margin: 0;
+}
+
+.header-actions-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Filter and Export Buttons */
+.filter-btn, .export-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .export-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+.export-btn {
+    background-color: #dc3545;
+}
+
+.export-btn:hover {
+    background-color: #c82333;
+}
+
+/* Delivery Statistics Cards */
+.delivery-stats {
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.stat-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.stat-sublabel {
+    font-size: 12px;
+    color: #999;
+}
+
+.stat-icon-img {
+    width: 50px;
+    height: 50px;
+    opacity: 0.7;
+}
+
+/* ==========================================
+   6. TAB FUNCTIONALITY STYLES
+========================================== */
+
+/* Delivery Tabs */
+.delivery-tabs {
+    display: flex;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 25px;
+    border: 1px solid #e9ecef;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6c757d;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.tab-btn.active {
+    background-color: white;
+    color: #2c3e50;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tab-btn:hover {
+    color: #2c3e50;
+}
+
+/* Status Tabs Container (sub-tabs within Active Deliveries) */
+.status-tabs-container {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.status-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+}
+
+.status-tab-btn,
+.history-status-tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6c757d;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.status-tab-btn:hover,
+.history-status-tab-btn:hover {
+    color: #2c3e50;
+    background-color: #f8f9fa;
+}
+
+.status-tab-btn.active,
+.history-status-tab-btn.active {
+    color: #333;
+    border-bottom-color: #666;
+    font-weight: 600;
+}
+
+.status-count {
+    background-color: #e9ecef;
+    color: #6c757d;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 24px;
+    text-align: center;
+}
+
+.status-tab-btn.active .status-count,
+.history-status-tab-btn.active .status-count {
+    background-color: #555;
+    color: white;
+}
+
+/* Tab Content Sections */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==========================================
+   7. ACTIVE DELIVERIES SECTION STYLES
+========================================== */
+
+/* Order Status Section - Container for cards */
+.order-status-section {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.section-header-title {
+    flex: 1;
+    min-width: 0;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.section-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Delivery Cards */
+.delivery-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Order Cards Container - match OrdersAdmin styling */
+.order-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-height: calc(100vh - 300px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+}
+
+/* Custom scrollbar styling for order cards container */
+.order-cards-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.order-cards-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.order-cards-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.order-cards-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Date Group Styling - match OrdersAdmin */
+.order-date-group {
+    margin-bottom: 24px;
+}
+
+.order-date-group:last-child {
+    margin-bottom: 0;
+}
+
+.order-date-group-header {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.order-date-group-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.order-date-group-cards .order-card {
+    flex: 0 1 350px;
+    min-width: 350px;
+    max-width: 350px;
+}
+
+.delivery-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.delivery-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px 15px 25px;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.delivery-id {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.delivery-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e9ecef;
+}
+
+.delivery-icon-img {
+    width: 30px;
+    height: 30px;
+}
+
+.delivery-code {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0 0 4px 0;
+}
+
+.order-id {
+    font-size: 12px;
+    color: #6c757d;
+    margin: 0 0 4px 0;
+    font-weight: 500;
+}
+
+.customer-name {
+    font-size: 14px;
+    color: #6c757d;
+    margin: 0;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.card-body {
+    padding: 20px 25px 25px 25px;
+}
+
+.delivery-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.info-icon {
+    color: #6c757d;
+    font-size: 14px;
+    width: 16px;
+}
+
+.delivery-address, .driver-name {
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+/* Vehicle and Driver Assignment Styles */
+.vehicle-assignment, .driver-assignment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: 10px;
+}
+
+.vehicle-list, .driver-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+}
+
+.vehicle-name, .driver-name {
+    font-size: 14px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* Truck Count Badge */
+.truck-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background-color: #e9ecef;
+    color: #333;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.truck-count-badge i {
+    font-size: 11px;
+}
+
+.delivery-status {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f1f3f4;
+}
+
+.status-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.status-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.delivery-status-dropdown {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    background-color: white;
+    min-width: 150px;
+    cursor: pointer;
+    color: #2c3e50;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.delivery-status-dropdown:hover {
+    border-color: #999;
+}
+
+.delivery-status-dropdown:focus {
+    outline: none;
+    border-color: #666;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-items {
+    font-size: 13px;
+    color: #6c757d;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   8. DRIVER MANAGEMENT STYLES
+========================================== */
+
+/* Driver Management Section */
+.driver-management-section {
+    margin-top: 20px;
+}
+
+.add-driver-btn {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    float: right;
+}
+
+.add-driver-btn:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+}
+
+/* Drivers Table */
+.drivers-table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.drivers-table {
+    width: 100%;
+    margin-bottom: 0;
+    background-color: transparent;
+}
+
+.drivers-table thead th {
+    background-color: #f8f9fa;
+    border-top: none;
+    border-bottom: 2px solid #e9ecef;
+    padding: 18px 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.drivers-table tbody td {
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.driver-row {
+    transition: background-color 0.2s ease;
+}
+
+.driver-row:hover {
+    background-color: #f8f9fa;
+}
+
+.driver-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.vehicle-id {
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+    color: #495057;
+}
+
+.delivery-id {
+    font-family: 'Courier New', monospace;
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.location {
+    color: #495057;
+}
+
+/* Driver Actions */
+.driver-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* ==========================================
+   9. FLEET MANAGEMENT STYLES
+========================================== */
+
+/* Fleet Management Section */
+.fleet-management-section {
+    margin-top: 20px;
+}
+
+.add-fleet-btn {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    float: right;
+}
+
+.add-fleet-btn:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+}
+
+/* Fleet Table */
+.fleet-table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.fleet-table {
+    width: 100%;
+    margin-bottom: 0;
+    background-color: transparent;
+}
+
+.fleet-table thead th {
+    background-color: #f8f9fa;
+    border-top: none;
+    border-bottom: 2px solid #e9ecef;
+    padding: 18px 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.fleet-table tbody td {
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.fleet-row {
+    transition: background-color 0.2s ease;
+}
+
+.fleet-row:hover {
+    background-color: #f8f9fa;
+}
+
+.vehicle-capacity {
+    color: #495057;
+    font-weight: 500;
+}
+
+/* Fleet Actions */
+.fleet-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ==========================================
+   10. INTERACTIVE ELEMENTS STYLES
+========================================== */
+
+/* Action Buttons */
+.action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    background: white;
+    color: #6c757d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #666;
+    color: #333;
+}
+
+.action-btn.view-btn:hover,
+.action-btn.edit-btn:hover {
+    color: #333;
+    border-color: #666;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Status Badges for Drivers & Fleet - Monochrome */
+.status-active,
+.status-available,
+.status-unavailable,
+.status-busy,
+.status-in-use {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+/* Assign Driver/Vehicle buttons - Monochrome */
+.assign-driver-btn,
+.assign-vehicle-btn {
+    color: #333 !important;
+}
+
+.assign-driver-btn:hover,
+.assign-vehicle-btn:hover {
+    color: #555 !important;
+}
+
+/* Modal and page buttons - Monochrome */
+.driver-page .btn-primary,
+.driver-page .btn-secondary {
+    background: #555;
+    border-color: #555;
+    color: white;
+}
+
+.driver-page .btn-primary:hover,
+.driver-page .btn-secondary:hover {
+    background: #333;
+    border-color: #333;
+    color: white;
+}
+
+.driver-page .btn-secondary {
+    background: #6c757d;
+    border-color: #6c757d;
+}
+
+.driver-page .btn-secondary:hover {
+    background: #5a6268;
+    border-color: #5a6268;
+}
+
+.driver-page .btn-danger {
+    background: #555;
+    border-color: #555;
+}
+
+.driver-page .btn-danger:hover {
+    background: #333;
+    border-color: #333;
+}
+
+/* ==========================================
+   MODAL POPUP STYLES
+========================================== */
+
+/* Delivery Details Modal */
+.delivery-details-modal {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    max-width: 500px;
+}
+
+.delivery-details-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    padding: 20px 25px;
+    position: relative;
+}
+
+.delivery-details-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    text-align: left;
+}
+
+.delivery-details-body {
+    padding: 25px;
+    background-color: white;
+}
+
+.delivery-details-footer {
+    background-color: #f8f9fa;
+    padding: 15px 25px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Driver Profile Modal */
+.driver-profile-modal {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+    max-width: 500px;
+}
+
+.driver-profile-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    padding: 20px 25px;
+    position: relative;
+}
+
+.driver-profile-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    text-align: left;
+}
+
+.driver-profile-body {
+    padding: 25px;
+    background-color: white;
+}
+
+.driver-profile-footer {
+    background-color: #f8f9fa;
+    padding: 15px 25px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Modal Details Rows */
+.details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.details-row:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+    min-width: 120px;
+    flex-shrink: 0;
+}
+
+.detail-value {
+    color: #333;
+    font-size: 14px;
+    text-align: right;
+    flex: 1;
+    word-wrap: break-word;
+}
+
+.progress-status {
+    color: #28a745;
+    font-weight: 600;
+}
+
+/* Modal Close Button */
+.modal-close-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    color: #666;
+}
+
+/* Close Modal Button */
+.close-modal-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    background-color: #555;
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   11. RESPONSIVE DESIGN STYLES
+========================================== */
+
+/* Tablet Styles */
+@media (max-width: 992px) {
+    .main-content {
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 28px;
+    }
+    
+    .page-header .row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header-actions-right {
+        justify-content: flex-start;
+    }
+    
+    .delivery-cards {
+        gap: 15px;
+    }
+    
+    .stat-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .sidebar-container {
+        position: fixed;
+        left: -250px;
+        top: 110px;
+        height: calc(100vh - 110px);
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+    
+    .sidebar-container.active {
+        left: 0;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+    
+    .page-title {
+        font-size: 24px;
+    }
+    
+    .delivery-tabs {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .tab-btn {
+        padding: 10px 15px;
+        text-align: left;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .card-actions {
+        align-self: flex-end;
+    }
+    
+    .delivery-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .section-header .row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .add-driver-btn, .add-fleet-btn {
+        float: none;
+        margin-left: 0;
+        align-self: flex-start;
+    }
+    
+    .drivers-table, .fleet-table {
+        font-size: 12px;
+    }
+    
+    .drivers-table thead th, 
+    .fleet-table thead th,
+    .drivers-table tbody td,
+    .fleet-table tbody td {
+        padding: 12px 8px;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 576px) {
+    .logo-image {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .search-input {
+        padding: 10px 15px 10px 40px;
+    }
+    
+    .header-actions {
+        gap: 10px;
+    }
+    
+    .header-action-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+    
+    .nav-link {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    
+    .page-title {
+        font-size: 20px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 24px;
+    }
+    
+    .delivery-card {
+        margin-bottom: 15px;
+    }
+    
+    .card-header, .card-body {
+        padding: 15px;
+    }
+    
+    .delivery-code {
+        font-size: 16px;
+    }
+    
+    .section-title {
+        font-size: 20px;
+    }
+    
+    .drivers-table, .fleet-table {
+        min-width: 600px;
+    }
+    
+    .drivers-table-container, .fleet-table-container {
+        overflow-x: auto;
+    }
+}
+
+/* ==========================================
+   DELIVERY TIMETABLE MODAL
+========================================== */
+#timetableModal.modal {
+    z-index: 1060;
+}
+#timetableModal .modal-dialog {
+    z-index: 1061;
+}
+#timetableModal .modal-body {
+    min-height: 400px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    /* Prevent zoom from squashing: scroll instead of shrink */
+    overflow-wrap: normal;
+}
+#timetableModal .modal-xl {
+    max-width: 95%;
+}
+#timetableCalendar {
+    min-height: 320px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+#timetableModal .fc {
+    font-size: 14px;
+}
+#timetableModal .fc-toolbar-title {
+    font-size: 1.35rem;
+}
+/* Event cards: fixed min size so time + order ID never crop */
+#timetableModal .fc-event {
+    cursor: pointer;
+    font-size: 12px;
+    min-height: 48px !important;
+    min-width: 200px !important;
+    padding: 8px 10px;
+    line-height: 1.4;
+    margin: 2px 4px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+#timetableModal .fc-event .fc-event-main,
+#timetableModal .fc-event .fc-event-main-frame,
+#timetableModal .fc-event .fc-event-title-container {
+    overflow: visible;
+    min-height: 1em;
+}
+#timetableModal .fc-event-title {
+    font-weight: 500;
+    overflow: visible;
+    word-break: break-word;
+    line-height: 1.35;
+    font-size: 12px;
+    white-space: normal;
+    display: block;
+}
+#timetableModal .fc-event .fc-event-main {
+    padding: 2px 4px;
+}
+#timetableModal .fc-event .fc-event-time {
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+/* Stack multiple orders vertically (neat, like month view) – one slot only */
+#timetableModal .fc-timegrid-slot-lane {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px;
+}
+#timetableModal .fc-timegrid-slot-lane .fc-timegrid-event-harness {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 0;
+    flex: 0 0 auto !important;
+}
+#timetableModal .fc-timegrid-slot-lane .fc-timegrid-event-harness:last-child {
+    margin-bottom: 0;
+}
+#timetableModal .fc-timegrid-event {
+    margin: 2px 4px;
+    box-sizing: border-box;
+    overflow: visible;
+    min-height: 48px !important;
+    min-width: 200px !important;
+    width: calc(100% - 8px) !important;
+    max-width: 100%;
+}
+#timetableModal .fc-timegrid-event .fc-event-main {
+    overflow: visible;
+}
+#timetableModal .fc-timegrid-event .fc-event-title {
+    overflow: visible;
+}
+/* DayGrid (month/week/day same design): event blocks in day cells */
+#timetableModal .fc-daygrid-event {
+    margin: 2px 4px;
+    border-radius: 4px;
+    overflow: visible;
+}
+#timetableModal .fc-daygrid-event .fc-event-main {
+    padding: 6px 8px;
+    overflow: visible;
+}
+#timetableModal .fc-daygrid-day-frame {
+    min-height: 80px;
+}
+/* ----- Table scales to fit container; grid lines ----- */
+#timetableModal .fc-scrollgrid {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+#timetableModal .fc-scrollgrid td,
+#timetableModal .fc-scrollgrid th {
+    border: 1px solid #e2e8f0;
+    vertical-align: top;
+}
+/* Week view: match month look – spacious, neat, organized */
+#timetableModal .fc-timegrid-slot-label {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 14px;
+    min-width: 200px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+#timetableModal .fc-timegrid-axis {
+    min-width: 200px;
+    border: 1px solid #e2e8f0;
+}
+#timetableModal .fc-col-header-cell {
+    min-width: 200px;
+    font-size: 13px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+#timetableModal .fc-col-header-cell-cushion {
+    display: block;
+    overflow: visible;
+    white-space: nowrap;
+}
+#timetableModal .fc-col-header {
+    overflow: visible;
+}
+/* Rows: room for multiple stacked cards (like month view cells) */
+#timetableModal .fc-timegrid-slot {
+    min-height: 160px;
+    height: auto;
+    overflow: visible;
+}
+#timetableModal .fc-timegrid-slot-lane {
+    min-height: 160px;
+    overflow: visible;
+}
+/* Day cells: enough width for full “ORD-xxxx - Customer User” text */
+#timetableModal .fc-timegrid-col {
+    min-width: 200px;
+    padding: 0 14px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+#timetableModal .fc-view-harness {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+#timetableModal .fc-timegrid-body {
+    overflow: visible;
+}
+#timetableModal .fc-timegrid-body table {
+    border-collapse: collapse;
+}
+@media (max-width: 1200px) {
+    #timetableModal .modal-body {
+        overflow-x: auto;
+    }
+}

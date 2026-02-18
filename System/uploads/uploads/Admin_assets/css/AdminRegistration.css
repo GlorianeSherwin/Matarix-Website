@@ -1,0 +1,208 @@
+/* AdminRegistration.css - Registration Form Styles */
+
+/* ===== BODY STYLES ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===== BACKGROUND SECTION ===== */
+/* BACKGROUND CONTAINER with placeholder image */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../images/BackgroundLoginRegistration.png'); /* Background image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #4a4a4a; /* Fallback gray color matching reference */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== REGISTRATION FORM CONTAINER ===== */
+.registration-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 40px 50px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    z-index: 10;
+}
+
+/* ===== LOGO SECTION ===== */
+.logo-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* LOGO IMAGE - Replace with your actual logo */
+.logo-img {
+    height: 150px;
+    width: auto;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* ===== FORM TITLE ===== */
+.form-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #0B1046;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+/* ===== FORM SECTION ===== */
+.registration-form {
+    width: 100%;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}
+
+/* FORM LABELS */
+.form-label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* FORM INPUT FIELDS */
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f5f5f5; /* Light gray background matching reference */
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* INPUT FIELD FOCUS STATE */
+.form-input:focus {
+    border-color: #d32f2f; /* Red border on focus */
+    background-color: white;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.2);
+}
+
+.form-input::placeholder {
+    color: #999;
+    font-size: 13px;
+}
+
+/* FULL WIDTH ADDRESS FIELD */
+.address-field {
+    grid-column: span 2;
+}
+
+/* ===== SIGN UP BUTTON ===== */
+.signup-button {
+    background-color: #d32f2f; /* Red color matching reference */
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 30px auto 20px;
+    min-width: 140px;
+}
+
+/* SIGN UP BUTTON HOVER EFFECT */
+.signup-button:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+}
+
+/* ===== LOGIN LINK SECTION ===== */
+.login-link-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-text {
+    color: #666;
+    font-size: 14px;
+}
+
+/* LOGIN LINK */
+.login-link {
+    color: #d32f2f;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.login-link:hover {
+    color: #b71c1c;
+    text-decoration: underline;
+}
+
+/* ===== TERMS OF SERVICE LINK SECTION ===== */
+.terms-link-section {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* TERMS OF SERVICE LINK */
+.terms-link {
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.terms-link:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .registration-container {
+        padding: 30px 25px;
+        margin: 20px;
+    }
+
+    .form-title {
+        font-size: 24px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row .col-md-6 {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration-container {
+        padding: 25px 20px;
+    }
+
+    .form-title {
+        font-size: 22px;
+    }
+}

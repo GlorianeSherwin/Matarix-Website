@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <title>Privacy Policy - MATARIX</title>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Link to External CSS File -->
+    <link rel="stylesheet" href="../Customer_assets/css/TermsOfService.css?v=2.0">
+    <!-- Mobile Enhancements CSS -->
+    <link href="../Customer_assets/css/mobile-enhancements.css" rel="stylesheet">
+    
+    <!-- Continuous monitoring script - ensures back button ALWAYS exists and is visible -->
+    <script>
+        // Continuous monitoring - runs forever to ensure button exists
+        (function() {
+            var checkCount = 0;
+            var maxChecks = 1000; // Run for about 10 seconds (100 checks * 100ms)
+            
+            function createBackButton() {
+                var backBtn = document.getElementById('backButton');
+                
+                // If button doesn't exist, create it
+                if (!backBtn) {
+                    var agreementSection = document.querySelector('.agreement-section');
+                    if (agreementSection) {
+                        var newBtn = document.createElement('button');
+                        newBtn.type = 'button';
+                        newBtn.className = 'back-button';
+                        newBtn.id = 'backButton';
+                        newBtn.style.cssText = 'display: inline-block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; background-color: #dc3545 !important; color: white !important; border: none !important; padding: 12px 30px !important; border-radius: 6px !important; font-size: 15px !important; font-weight: 600 !important; cursor: pointer !important; z-index: 9999 !important;';
+                        newBtn.innerHTML = '<i class="fas fa-arrow-left"></i> Back';
+                        
+                        newBtn.onclick = function() {
+                            // Get the referrer page
+                            var referrer = document.referrer || sessionStorage.getItem('previousPage') || 'MainPage.html';
+                            var previousPage = 'MainPage.html'; // Default
+                            
+                            // Check if referrer contains MainPage or LandingPage
+                            if (referrer.includes('MainPage.html')) {
+                                previousPage = 'MainPage.html';
+                            } else if (referrer.includes('LandingPage.html')) {
+                                previousPage = 'LandingPage.html';
+                            }
+                            
+                            window.location.href = previousPage;
+                        };
+                        
+                        agreementSection.appendChild(newBtn);
+                        return true; // Button created
+                    }
+                } else {
+                    // Button exists, ensure it's visible
+                    backBtn.style.cssText = 'display: inline-block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; background-color: #dc3545 !important; color: white !important; border: none !important; padding: 12px 30px !important; border-radius: 6px !important; font-size: 15px !important; font-weight: 600 !important; cursor: pointer !important; z-index: 9999 !important;';
+                }
+                return false; // Button already exists
+            }
+            
+            // Store referrer when page loads
+            var referrer = document.referrer || '';
+            if (referrer) {
+                sessionStorage.setItem('previousPage', referrer);
+            }
+            
+            // Run immediately
+            createBackButton();
+            
+            // Run continuously every 100ms
+            var intervalId = setInterval(function() {
+                checkCount++;
+                var created = createBackButton();
+                
+                // If button exists and is visible, we can stop checking after a while
+                if (checkCount > 50 && !created) {
+                    clearInterval(intervalId);
+                } else if (checkCount >= maxChecks) {
+                    clearInterval(intervalId);
+                }
+            }, 100);
+            
+            // Also run on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    createBackButton();
+                });
+            } else {
+                createBackButton();
+            }
+            
+            // Run at various intervals
+            setTimeout(createBackButton, 0);
+            setTimeout(createBackButton, 50);
+            setTimeout(createBackButton, 100);
+            setTimeout(createBackButton, 200);
+            setTimeout(createBackButton, 500);
+            setTimeout(createBackButton, 1000);
+        })();
+    </script>
+    
+    <!-- Immediate cleanup script - runs before DOM is ready -->
+    <script>
+        // Run immediately to catch cached content
+        (function() {
+            function removeCompleteRegButton() {
+                // Remove by class
+                var completeRegBtn = document.querySelector('.complete-registration-btn');
+                if (completeRegBtn) {
+                    completeRegBtn.remove();
+                }
+                
+                // Remove by text content (case insensitive) - BUT PROTECT BACK BUTTON
+                var allButtons = document.querySelectorAll('button');
+                allButtons.forEach(function(btn) {
+                    // Skip the back button - protect it from removal
+                    if (btn.id === 'backToRegistration' || btn.classList.contains('back-button')) {
+                        return; // Skip this button
+                    }
+                    var btnText = btn.textContent || btn.innerText || '';
+                    if (btnText.toUpperCase().includes('COMPLETE REGISTRATION')) {
+                        btn.remove();
+                    }
+                });
+                
+                // Remove any links with "Complete Registration" text
+                var allLinks = document.querySelectorAll('a');
+                allLinks.forEach(function(link) {
+                    var linkText = link.textContent || link.innerText || '';
+                    if (linkText.toUpperCase().includes('COMPLETE REGISTRATION')) {
+                        link.remove();
+                    }
+                });
+                
+                // Always ensure back button is visible after cleanup
+                var backBtn = document.getElementById('backButton');
+                if (backBtn) {
+                    backBtn.style.display = 'inline-block';
+                    backBtn.style.visibility = 'visible';
+                }
+            }
+            
+            // Run immediately
+            removeCompleteRegButton();
+            
+            // Run when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', removeCompleteRegButton);
+            } else {
+                removeCompleteRegButton();
+            }
+            
+            // Run after a short delay to catch any late-rendered content
+            setTimeout(removeCompleteRegButton, 100);
+            setTimeout(removeCompleteRegButton, 500);
+            setTimeout(removeCompleteRegButton, 1000);
+            
+            // Use MutationObserver to catch dynamically added elements
+            if (window.MutationObserver) {
+                var observer = new MutationObserver(function(mutations) {
+                    removeCompleteRegButton();
+                    // Ensure back button is always visible after mutations
+                    setTimeout(function() {
+                        var backBtn = document.getElementById('backButton');
+                        if (backBtn) {
+                            backBtn.style.display = 'inline-block';
+                            backBtn.style.visibility = 'visible';
+                        }
+                    }, 50);
+                });
+                
+                // Start observing when body is available
+                if (document.body) {
+                    observer.observe(document.body, {
+                        childList: true,
+                        subtree: true,
+                        attributes: true,
+                        attributeFilter: ['class', 'style']
+                    });
+                } else {
+                    document.addEventListener('DOMContentLoaded', function() {
+                        observer.observe(document.body, {
+                            childList: true,
+                            subtree: true,
+                            attributes: true,
+                            attributeFilter: ['class', 'style']
+                        });
+                    });
+                }
+            }
+            
+            // Final safeguard - ensure back button exists and is visible after all scripts
+            setTimeout(function() {
+                var backBtn = document.getElementById('backButton');
+                if (backBtn) {
+                    backBtn.style.display = 'inline-block';
+                    backBtn.style.visibility = 'visible';
+                } else {
+                    // If back button doesn't exist, something went wrong - log it
+                    console.warn('Back button not found in DOM');
+                }
+            }, 1500);
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- MAIN CONTAINER -->
+    <div class="terms-container">
+        
+        <!-- TOP LEFT CORNER TRIANGLE -->
+        <div class="corner-triangle top-left">
+            <!-- MATARIX LOGO -->
+            <div class="logo-section">
+                <img src="../Customer_assets/images/MatarixWhite_logo.png" alt="MATARIX Logo" class="matarix-logo">
+            </div>
+        </div>
+        
+        <!-- BOTTOM RIGHT CORNER TRIANGLE -->
+        <div class="corner-triangle bottom-right"></div>
+        
+        <!-- PRIVACY POLICY CONTENT CARD -->
+        <div class="terms-card">
+            
+            <!-- PRIVACY POLICY HEADER -->
+            <div class="terms-header">
+                <h1 class="terms-title">PRIVACY POLICY</h1>
+            </div>
+            
+            <!-- PRIVACY POLICY CONTENT -->
+            <div class="terms-content">
+                
+                <!-- WELCOME SECTION -->
+                <div class="terms-section">
+                    <p class="terms-intro">
+                        At Matarix Construction Supply, we are committed to protecting your privacy and personal information.
+                    </p>
+                </div>
+                
+                <!-- 1. INFORMATION WE COLLECT -->
+                <div class="terms-section">
+                    <h3 class="section-number">1. Information We Collect</h3>
+                    <p class="section-text">
+                        We collect information you provide when registering, placing orders, or contacting us. This includes name, email, phone number, address, and payment information.
+                    </p>
+                </div>
+                
+                <!-- 2. HOW WE USE YOUR INFORMATION -->
+                <div class="terms-section">
+                    <h3 class="section-number">2. How We Use Your Information</h3>
+                    <p class="section-text">
+                        We use your information to process orders, communicate with you, improve our services, and comply with legal obligations. We do not sell your personal information to third parties.
+                    </p>
+                </div>
+                
+                <!-- 3. DATA SECURITY -->
+                <div class="terms-section">
+                    <h3 class="section-number">3. Data Security</h3>
+                    <p class="section-text">
+                        We implement security measures to protect your personal information. However, no method of transmission over the internet is 100% secure.
+                    </p>
+                </div>
+                
+                <!-- 4. COOKIES AND TRACKING -->
+                <div class="terms-section">
+                    <h3 class="section-number">4. Cookies and Tracking</h3>
+                    <p class="section-text">
+                        We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. You can control cookies through your browser settings.
+                    </p>
+                </div>
+                
+                <!-- 5. THIRD-PARTY SERVICES -->
+                <div class="terms-section">
+                    <h3 class="section-number">5. Third-Party Services</h3>
+                    <p class="section-text">
+                        We may use third-party services for payment processing, delivery, and analytics. These services have their own privacy policies.
+                    </p>
+                </div>
+                
+                <!-- 6. YOUR RIGHTS -->
+                <div class="terms-section">
+                    <h3 class="section-number">6. Your Rights</h3>
+                    <p class="section-text">
+                        You have the right to access, update, or delete your personal information. You can also opt-out of marketing communications at any time.
+                    </p>
+                </div>
+                
+                <!-- 7. CONTACT US -->
+                <div class="terms-section">
+                    <h3 class="section-number">7. Contact Us</h3>
+                    <p class="section-text">
+                        If you have questions about this Privacy Policy, please contact us at info@matarix.com or through our customer service channels.
+                    </p>
+                </div>
+                
+                <!-- LAST UPDATED -->
+                <div class="terms-section">
+                    <p class="section-text" style="font-style: italic; color: #666; margin-top: 30px;">
+                        Last updated: December 2024
+                    </p>
+                </div>
+                
+            </div>
+            
+            <!-- BACK BUTTON SECTION -->
+            <div class="agreement-section">
+                <!-- BACK BUTTON -->
+                <button type="button" class="back-button" id="backButton">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Ensure correct button is displayed (prevent cached button from showing) -->
+    <script>
+        // Aggressively remove any old "Complete Registration" button that might be cached
+        (function() {
+            // Remove by class
+            var completeRegBtn = document.querySelector('.complete-registration-btn');
+            if (completeRegBtn) {
+                completeRegBtn.remove();
+            }
+            
+            // Remove by text content (case insensitive)
+            var allButtons = document.querySelectorAll('button');
+            allButtons.forEach(function(btn) {
+                var btnText = btn.textContent || btn.innerText || '';
+                if (btnText.toUpperCase().includes('COMPLETE REGISTRATION')) {
+                    btn.remove();
+                }
+            });
+            
+            // Remove any links with "Complete Registration" text
+            var allLinks = document.querySelectorAll('a');
+            allLinks.forEach(function(link) {
+                var linkText = link.textContent || link.innerText || '';
+                if (linkText.toUpperCase().includes('COMPLETE REGISTRATION')) {
+                    link.remove();
+                }
+            });
+            
+            // Ensure back button is visible and in the correct location
+            var backBtn = document.getElementById('backButton');
+            if (backBtn) {
+                backBtn.style.display = 'inline-block';
+                backBtn.style.visibility = 'visible';
+            }
+        })();
+    </script>
+
+    <!-- Bootstrap 4 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Store referrer when page loads
+            var referrer = document.referrer || '';
+            if (referrer) {
+                sessionStorage.setItem('previousPage', referrer);
+            }
+            
+            // Ensure back button is visible (jQuery safeguard)
+            var $backBtn = $('#backButton');
+            if ($backBtn.length) {
+                $backBtn.css({
+                    'display': 'inline-block',
+                    'visibility': 'visible'
+                });
+            }
+            
+            // Back button - return to previous page (MainPage or LandingPage)
+            $(document).on('click', '#backButton', function() {
+                // Get the referrer page
+                var referrer = document.referrer || sessionStorage.getItem('previousPage') || 'MainPage.html';
+                var previousPage = 'MainPage.html'; // Default
+                
+                // Check if referrer contains MainPage or LandingPage
+                if (referrer.includes('MainPage.html')) {
+                    previousPage = 'MainPage.html';
+                } else if (referrer.includes('LandingPage.html')) {
+                    previousPage = 'LandingPage.html';
+                }
+                
+                window.location.href = previousPage;
+            });
+            
+            // Also ensure back button exists after jQuery loads
+            setTimeout(function() {
+                var $backBtn = $('#backButton');
+                if (!$backBtn.length) {
+                    // Button still doesn't exist, create it
+                    var agreementSection = $('.agreement-section');
+                    if (agreementSection.length) {
+                        var newBtn = $('<button>', {
+                            type: 'button',
+                            class: 'back-button',
+                            id: 'backButton',
+                            html: '<i class="fas fa-arrow-left"></i> Back',
+                            css: {
+                                'display': 'inline-block',
+                                'visibility': 'visible',
+                                'opacity': '1'
+                            }
+                        });
+                        agreementSection.append(newBtn);
+                    }
+                } else {
+                    // Button exists, ensure it's visible
+                    $backBtn.css({
+                        'display': 'inline-block',
+                        'visibility': 'visible',
+                        'opacity': '1'
+                    });
+                }
+            }, 100);
+        });
+    </script>
+    </main>
+    <!-- Main Content End -->
+    
+    <!-- Enhanced Mobile Navigation -->
+    <script src="../Customer_assets/js/mobile-navigation-enhanced.js"></script>
+    
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="../index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#products" class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="../Customer/Login.html" class="nav-item">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
+        </a>
+        <a href="../Customer/Registration.html" class="nav-item">
+            <i class="fas fa-user-plus"></i>
+            <span>Sign Up</span>
+        </a>
+    </nav>
+    
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    
+</body>
+</html>

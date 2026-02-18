@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile - MATARIX</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Admin_assets/css/AdminProfile.css">
+    <!-- Admin Notification System -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+    <link rel="stylesheet" href="../Admin_assets/css/admin-sidebar-fixed.css">
+</head>
+<body>
+    <!-- MAIN HEADER SECTION -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <!-- MATARIX LOGO IMAGE -->
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty (Search removed) -->
+                <div class="col-md-4"></div>
+                
+                <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- EMAIL/MESSAGES ICON BUTTON -->
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+
+                        <!-- USER PROFILE ICON BUTTON - Now clickable with href -->
+                        <a href="../Admin/AdminProfile.html" class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT CONTAINER -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- ==========================================
+                     LEFT SIDEBAR NAVIGATION - DEFAULT FOR ALL ADMIN PAGES
+                ========================================== -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        
+                        <!-- SIDEBAR NAVIGATION LINKS -->
+                        <ul class="nav-links">
+                            <!-- ORDERS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            
+                            <!-- INVENTORY NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            
+                            <!-- DELIVERIES NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            
+                            <!-- ANALYTICS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav">
+                                    <span>Sales and Reports</span>
+                                </a>
+                            </li>
+                            
+                            <!-- USER MANAGEMENT NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <!-- SIDEBAR FOOTER WITH LOGOUT BUTTON -->
+                    <div class="sidebar-footer">
+                        <!-- LOGOUT BUTTON -->
+                        <button class="logout-button">Logout</button>
+                    </div>
+                </aside>
+
+                <!-- PROFILE CONTENT SECTION -->
+                <div class="col-md-10 profile-content">
+                    
+                    <!-- Profile Header -->
+                    <div class="profile-header">
+                        <h1 class="profile-title">My Profile</h1>
+                        <p class="profile-subtitle">Manage your account settings</p>
+                    </div>
+
+                    <!-- Profile Content Container -->
+                    <div class="row profile-container">
+                        
+                        <!-- Left Section - Profile Picture -->
+                        <div class="col-md-4">
+                            <div class="profile-picture-section">
+                                <h3 class="section-title">Profile Picture</h3>
+                                
+                                <!-- Profile Picture Container -->
+                                <div class="profile-picture-container">
+                                    <div class="profile-picture">
+                                        <img src="../Admin_assets/images/ProfileIcon.svg" alt="Profile Picture" class="profile-img" id="adminProfileImg">
+                                        <!-- Add Image Button (+) -->
+                                        <div class="profile-status-indicator" title="Click to upload profile picture"></div>
+                                    </div>
+                                    
+                                    <!-- User Name Display -->
+                                    <div class="profile-name">Name</div>
+                                    
+                                    <!-- Admin Badge -->
+                                    <div class="admin-badge">Admin</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Section - Profile Information -->
+                        <div class="col-md-8">
+                            <div class="profile-information-section">
+                                <h3 class="section-title">Profile Information</h3>
+                                
+                                <!-- Profile Information Form -->
+                                <form class="profile-form">
+                                    
+                                    <!-- First Row: First Name and Last Name -->
+                                    <div class="form-row row">
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name</label>
+                                            <div class="input-with-icon">
+                                                <input type="text" class="form-input" id="firstName" placeholder="Enter first name">
+                                                <i class="fas fa-edit input-edit-icon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name</label>
+                                            <div class="input-with-icon">
+                                                <input type="text" class="form-input" id="lastName" placeholder="Enter last name">
+                                                <i class="fas fa-edit input-edit-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Second Row: Email Address -->
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            <label class="form-label">Email Address</label>
+                                            <div class="input-with-icon">
+                                                <input type="email" class="form-input" id="email" placeholder="Enter email address">
+                                                <i class="fas fa-edit input-edit-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Third Row: Phone Number -->
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            <label class="form-label">Phone Number</label>
+                                            <div class="input-with-icon">
+                                                <input type="tel" class="form-input" id="phoneNumber" placeholder="Enter phone number">
+                                                <i class="fas fa-edit input-edit-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Fourth Row: Password -->
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            <label class="form-label">Password</label>
+                                            <div class="input-with-icon">
+                                                <input type="password" class="form-input" placeholder="Enter password">
+                                                <i class="fas fa-edit input-edit-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logout Button at Bottom -->
+                    <div class="bottom-logout-section">
+                        <a href="../Customer/Login.html" class="logout-btn">Logout</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <!-- Admin Authentication Check - MUST load first to verify session -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <script src="../Admin_assets/js/AdminProfile.js"></script>
+    
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

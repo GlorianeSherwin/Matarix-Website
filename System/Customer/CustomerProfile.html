@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>MATARIX - My Profile</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../Customer_assets/css/CustomerProfile.css" rel="stylesheet">
+    <!-- Customer Notifications CSS -->
+    <link href="../Customer_assets/css/customer-notifications.css" rel="stylesheet">
+    <!-- Mobile Enhancements CSS -->
+    <link href="../Customer_assets/css/mobile-enhancements.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg matarix-header">
+        <div class="container-fluid">
+            <!-- LOGO - Left -->
+            <a class="navbar-brand" href="MainPage.html">
+                <img src="../Customer_assets/images/LOGO.png" alt="MATARIX Logo" height="50" class="logo-img d-none d-md-inline">
+                <span class="d-md-none">MATARIX</span>
+            </a>
+            
+            <!-- HEADER ICONS - Right -->
+            <div class="ml-auto header-icons">
+                <a href="#" class="navbar-icons" id="customerNotificationsBtn" title="Notifications" style="position: relative;">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="customerNotificationBadge" style="display: none;">0</span>
+                </a>
+                <a href="Cart.html" class="navbar-icons">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="OrderSummary.html" class="navbar-icons" title="Order Summary">
+                    <i class="fas fa-clipboard-list"></i>
+                </a>
+                <a href="CustomerProfile.html" class="navbar-icons">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay (for mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="./MainPage.html" class="sidebar-item"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="./Quotation.html" class="sidebar-item"><i class="fas fa-cubes"></i> Materials</a></li>
+                <li><a href="./OrderSummary.html" class="sidebar-item"><i class="fas fa-box"></i> Orders</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- MAIN CONTENT AREA -->
+            <div class="main-content">
+                <!-- Profile Page -->
+                <div class="page-header">
+                    <div class="header-top">
+                        <button class="btn btn-back" onclick="goBack()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <div class="header-info">
+                            <h1 class="page-title">My Profile</h1>
+                            <p class="page-subtitle">Manage your account settings</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Profile Picture Section -->
+                    <div class="col-12 col-md-4 col-lg-3 mb-4">
+                        <div class="profile-card profile-picture-card">
+                            <div class="profile-header">
+                                <h5 class="card-title">Profile Picture</h5>
+                            </div>
+                            <div class="profile-picture-container">
+                                <div class="profile-picture" id="profilePictureDisplay">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <button class="btn btn-upload" onclick="uploadPicture()">
+                                    <i class="fas fa-camera"></i> Upload
+                                </button>
+                            </div>
+                            <div class="profile-name">
+                                <h6 id="profileDisplayName">Loading...</h6>
+                                <p class="text-muted" id="profileDisplayRole">Customer</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Information Section -->
+                    <div class="col-12 col-md-8 col-lg-9 mb-4">
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <h5 class="card-title">Profile Information</h5>
+                            </div>
+                            <form class="profile-form">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control profile-input" id="firstName" placeholder="Enter your first name" required>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control profile-input" id="lastName" placeholder="Enter your last name" required>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="middleName" class="form-label">Middle Name (Optional)</label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control profile-input" id="middleName" placeholder="Enter your middle name">
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <input type="email" class="form-control profile-input" id="email" placeholder="Enter your Email" required>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Mobile Number <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <input type="tel" class="form-control profile-input" id="phone" name="phone_number" placeholder="Enter your mobile number" required maxlength="11" pattern="[0-9]{10,11}">
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Structured Address Fields -->
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label for="address_street" class="form-label">Street Address <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control profile-input" id="address_street" placeholder="Enter street address, building, house number" required>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="address_district" class="form-label">Province/District <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <select class="form-control profile-input" id="address_district" required>
+                                                <option value="">Select Province/District</option>
+                                            </select>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="address_city" class="form-label">City/Municipality <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <select class="form-control profile-input" id="address_city" required>
+                                                <option value="">Select City/Municipality</option>
+                                            </select>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label for="address_barangay" class="form-label">Barangay <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <select class="form-control profile-input" id="address_barangay" required>
+                                                <option value="">Select Barangay</option>
+                                            </select>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="address_postal_code" class="form-label">Postal Code <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control profile-input" id="address_postal_code" placeholder="Enter postal code" pattern="[0-9]{4}" maxlength="4" required>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="address_region" class="form-label">Region <span class="required">*</span></label>
+                                        <div class="input-with-icon">
+                                            <select class="form-control profile-input" id="address_region" required>
+                                                <option value="">Select Region</option>
+                                                <option value="Region III (Central Luzon)">Region III (Central Luzon)</option>
+                                                <option value="National Capital Region (NCR)">National Capital Region (NCR)</option>
+                                            </select>
+                                            <i class="fas fa-edit input-edit-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings Section -->
+                <div class="row">
+                    <div class="col-12 col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <h5 class="card-title">Security Settings</h5>
+                            </div>
+                            <div class="security-section">
+                                <div class="security-item">
+                                    <div class="security-info">
+                                        <h6>Change Password</h6>
+                                        <p class="text-muted">Update your password for better security</p>
+                                    </div>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="changePassword()">
+                                        <i class="fas fa-key"></i> Change
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preferences Section -->
+                    <div class="col-12 col-lg-6 mb-4">
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <h5 class="card-title">Preferences</h5>
+                            </div>
+                            <div class="preferences-section">
+                                <div class="preference-item">
+                                    <div class="preference-info">
+                                        <h6>SMS Notifications</h6>
+                                        <p class="text-muted">Receive delivery updates via SMS</p>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="smsNotifs">
+                                        <label class="form-check-label" for="smsNotifs">Enable</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="profile-actions">
+                            <button class="btn btn-custom" onclick="saveProfile()">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <button class="btn btn-secondary ml-2" onclick="cancelChanges()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button class="btn btn-danger ml-auto" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Customer Authentication Check - MUST load first to verify session -->
+    <script src="../Customer_assets/js/customer_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Central Luzon Address Selector (same as Registration) -->
+    <script src="../Customer_assets/js/central_luzon_address.js"></script>
+    
+    <script>
+        // Load user profile data
+        function loadUserProfile() {
+            // First try to get from sessionStorage (quick access)
+            const userId = sessionStorage.getItem('user_id');
+            const userEmail = sessionStorage.getItem('user_email');
+            const userName = sessionStorage.getItem('user_name');
+            const userRole = sessionStorage.getItem('user_role');
+            
+            // If we have basic data, use it temporarily while fetching full profile
+            if (userName) {
+                document.getElementById('profileDisplayName').textContent = userName;
+            }
+            if (userRole) {
+                document.getElementById('profileDisplayRole').textContent = userRole;
+            }
+            
+            // Address selector will be initialized by central_luzon_address.js automatically
+            
+            // Fetch full profile data from API
+            fetch('../api/get_profile.php', {
+                method: 'GET',
+                credentials: 'include' // Include cookies for session
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.user) {
+                    const user = data.user;
+                    
+                    // Populate form fields
+                    document.getElementById('firstName').value = user.first_name || '';
+                    document.getElementById('lastName').value = user.last_name || '';
+                    document.getElementById('middleName').value = user.middle_name || '';
+                    document.getElementById('email').value = user.email || '';
+                    document.getElementById('phone').value = user.phone_number || '';
+                    // Populate structured address fields
+                    document.getElementById('address_street').value = user.address_street || '';
+                    document.getElementById('address_postal_code').value = user.address_postal_code || '';
+                    
+                    // Set address dropdowns using central_luzon_address.js (same as Registration)
+                    if (user.address_region) {
+                        // Set region first, which will trigger province/district population
+                        $('#address_region').val(user.address_region).trigger('change');
+                        
+                        // Wait for districts to populate, then set district
+                        const checkDistrict = setInterval(function() {
+                            const districtOptions = $('#address_district option').length;
+                            if (districtOptions > 1) { // More than just the default option
+                                clearInterval(checkDistrict);
+                                if (user.address_district) {
+                                    $('#address_district').val(user.address_district).trigger('change');
+                                    
+                                    // Wait for cities to populate, then set city
+                                    const checkCity = setInterval(function() {
+                                        const cityOptions = $('#address_city option').length;
+                                        if (cityOptions > 1) {
+                                            clearInterval(checkCity);
+                                            if (user.address_city) {
+                                                $('#address_city').val(user.address_city).trigger('change');
+                                                
+                                                // Wait for barangays to populate, then set barangay
+                                                const checkBarangay = setInterval(function() {
+                                                    const barangayOptions = $('#address_barangay option').length;
+                                                    if (barangayOptions > 1) {
+                                                        clearInterval(checkBarangay);
+                                                        if (user.address_barangay) {
+                                                            $('#address_barangay').val(user.address_barangay);
+                                                        }
+                                                    }
+                                                }, 100);
+                                                
+                                                // Timeout after 5 seconds
+                                                setTimeout(function() {
+                                                    clearInterval(checkBarangay);
+                                                }, 5000);
+                                            }
+                                        }
+                                    }, 100);
+                                    
+                                    // Timeout after 5 seconds
+                                    setTimeout(function() {
+                                        clearInterval(checkCity);
+                                    }, 5000);
+                                }
+                            }
+                        }, 100);
+                        
+                        // Timeout after 5 seconds
+                        setTimeout(function() {
+                            clearInterval(checkDistrict);
+                        }, 5000);
+                    }
+                    
+                    // Update profile name display
+                    const fullName = user.full_name || (user.first_name + ' ' + user.last_name).trim() || 'User';
+                    document.getElementById('profileDisplayName').textContent = fullName || 'User';
+                    
+                    // Update role display
+                    if (user.role) {
+                        document.getElementById('profileDisplayRole').textContent = user.role;
+                    }
+                    
+                    // Update profile picture if available
+                    if (user.profile_picture) {
+                        const profilePicture = document.getElementById('profilePictureDisplay') || document.querySelector('.profile-picture');
+                        if (profilePicture) {
+                            // Ensure path doesn't already start with ../ or /
+                            let imagePath = user.profile_picture;
+                            if (!imagePath.startsWith('../') && !imagePath.startsWith('/') && !imagePath.startsWith('http')) {
+                                imagePath = '../' + imagePath;
+                            }
+                            
+                            const img = document.createElement('img');
+                            img.src = imagePath;
+                            img.alt = 'Profile Picture';
+                            img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; border-radius: 50%;';
+                            
+                            // Handle image load error - show default icon if image fails to load
+                            img.onerror = function() {
+                                console.warn('Profile picture failed to load:', imagePath);
+                                profilePicture.innerHTML = '<i class="fas fa-user" style="font-size: 80px; color: #dc3545;"></i>';
+                            };
+                            
+                            profilePicture.innerHTML = '';
+                            profilePicture.appendChild(img);
+                        }
+                    } else {
+                        // No profile picture - ensure default icon is shown
+                        const profilePicture = document.getElementById('profilePictureDisplay') || document.querySelector('.profile-picture');
+                        if (profilePicture && !profilePicture.querySelector('i')) {
+                            profilePicture.innerHTML = '<i class="fas fa-user" style="font-size: 80px; color: #dc3545;"></i>';
+                        }
+                    }
+                    
+                    console.log('Profile data loaded successfully');
+                } else {
+                    console.error('Failed to load profile:', data.message);
+                    // Fallback to sessionStorage data
+                    if (userName) {
+                        document.getElementById('profileDisplayName').textContent = userName;
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error loading profile:', error);
+                // Fallback to sessionStorage data
+                if (userName) {
+                    document.getElementById('profileDisplayName').textContent = userName;
+                }
+                if (userEmail) {
+                    document.getElementById('email').value = userEmail;
+                }
+            });
+        }
+        
+        // Function to save field to database
+        async function saveFieldToDatabase(fieldName, fieldValue) {
+            try {
+                const updateData = {};
+                updateData[fieldName] = fieldValue;
+                
+                const response = await fetch('../api/update_profile.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(updateData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Update sessionStorage if name fields are updated
+                    if (fieldName === 'first_name' || fieldName === 'last_name') {
+                        // Reload profile to get updated full name
+                        loadUserProfile();
+                    }
+                    return true;
+                } else {
+                    alert('Failed to update: ' + (data.message || 'Unknown error'));
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error saving field:', error);
+                alert('Failed to save changes. Please try again.');
+                return false;
+            }
+        }
+        
+        // Load profile data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserProfile();
+            
+            // Edit icon functionality for form fields (similar to AdminProfile.html)
+            document.querySelectorAll('.input-edit-icon').forEach(function(icon) {
+                icon.addEventListener('click', async function() {
+                    const inputContainer = this.parentElement;
+                    const input = inputContainer.querySelector('.profile-input');
+                    
+                    if (!input) return;
+                    
+                    // Check if input is disabled (for selects) or readOnly (for text inputs)
+                    const isDisabled = input.disabled;
+                    const isReadOnly = input.readOnly;
+                    const isEditable = !isDisabled && !isReadOnly;
+                    
+                    if (!isEditable) {
+                        // Enable editing
+                        if (input.tagName === 'SELECT') {
+                            input.disabled = false;
+                        } else {
+                            input.readOnly = false;
+                        }
+                        input.focus();
+                        this.classList.remove('fa-edit');
+                        this.classList.add('fa-save');
+                        console.log('Editing enabled for field');
+                    } else {
+                        // Save changes
+                        const fieldId = input.id;
+                        let fieldName = '';
+                        let fieldValue = input.value.trim();
+                        
+                        // Map field IDs to database field names
+                        const fieldMapping = {
+                            'firstName': 'first_name',
+                            'lastName': 'last_name',
+                            'middleName': 'middle_name',
+                            'email': 'email',
+                            'phone': 'phone_number',
+                            'address_street': 'address_street',
+                            'address_city': 'address_city',
+                            'address_district': 'address_district',
+                            'address_barangay': 'address_barangay',
+                            'address_postal_code': 'address_postal_code',
+                            'address_region': 'address_region',
+                            'address': 'address'
+                        };
+                        
+                        fieldName = fieldMapping[fieldId];
+                        
+                        if (!fieldName) {
+                            console.error('Unknown field:', fieldId);
+                            return;
+                        }
+                        
+                        // Clean phone number (remove non-digits) before saving
+                        if (fieldName === 'phone_number') {
+                            fieldValue = fieldValue.replace(/\D/g, '');
+                            // Validate phone number length
+                            if (fieldValue.length < 10 || fieldValue.length > 11) {
+                                alert('Please enter a valid phone number (10-11 digits for Philippines)');
+                                // Restore icon state
+                                this.style.opacity = '1';
+                                this.style.pointerEvents = 'auto';
+                                return;
+                            }
+                            // Update the input value with cleaned number
+                            input.value = fieldValue;
+                        }
+                        
+                        // Show loading state
+                        const originalIcon = this.className;
+                        this.style.opacity = '0.5';
+                        this.style.pointerEvents = 'none';
+                        
+                        // Save to database
+                        const success = await saveFieldToDatabase(fieldName, fieldValue);
+                        
+                        // Restore icon state
+                        this.style.opacity = '1';
+                        this.style.pointerEvents = 'auto';
+                        
+                        if (success) {
+                            // Disable editing and show edit icon
+                            if (input.tagName === 'SELECT') {
+                                input.disabled = true;
+                            } else {
+                                input.readOnly = true;
+                            }
+                            this.classList.remove('fa-save');
+                            this.classList.add('fa-edit');
+                            console.log('Changes saved for field:', fieldName);
+                        } else {
+                            // Keep in edit mode if save failed
+                            // Icon will remain as save icon
+                        }
+                    }
+                });
+            });
+            
+            // Initially set all inputs to readonly/disabled
+            document.querySelectorAll('.profile-input').forEach(function(input) {
+                if (input.tagName === 'SELECT') {
+                    input.disabled = true;
+                } else {
+                    input.readOnly = true;
+                }
+            });
+            
+            // Format mobile number input with 11 digit limit (same as Registration)
+            $('#phone').on('input', function() {
+                let value = $(this).val().replace(/\D/g, ''); // Remove non-digits
+                
+                // Limit to 11 digits
+                if (value.length > 11) {
+                    value = value.substring(0, 11);
+                    // Show error message
+                    const errorMsg = 'Mobile number cannot exceed 11 digits';
+                    if (!$('#phoneError').length) {
+                        $(this).after('<small class="text-danger" id="phoneError" style="display: block; margin-top: 4px;">' + errorMsg + '</small>');
+                    }
+                    $(this).css('border-color', '#dc3545');
+                } else {
+                    // Remove error message if it exists
+                    $('#phoneError').remove();
+                    if (value.length >= 10 && value.length <= 11) {
+                        $(this).css('border-color', '#28a745');
+                    } else {
+                        $(this).css('border-color', '');
+                    }
+                }
+                
+                // Update the input value
+                $(this).val(value);
+            });
+            
+            // Validate phone number on blur
+            $('#phone').on('blur', function() {
+                const value = $(this).val().replace(/\D/g, '');
+                if (value.length > 0 && (value.length < 10 || value.length > 11)) {
+                    if (!$('#phoneError').length) {
+                        $(this).after('<small class="text-danger" id="phoneError" style="display: block; margin-top: 4px;">Please enter a valid phone number (10-11 digits for Philippines)</small>');
+                    }
+                    $(this).css('border-color', '#dc3545');
+                } else if (value.length >= 10 && value.length <= 11) {
+                    $('#phoneError').remove();
+                    $(this).css('border-color', '#28a745');
+                }
+            });
+        });
+        
+
+        // Back button functionality
+        function goBack() {
+            // Check if there's history to go back to
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // If no history, go to landing page as default
+                window.location.href = 'MainPage.html';
+            }
+        }
+
+        // Profile functions
+        async function uploadPicture() {
+            // Create file input
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Upload to server
+                    const formData = new FormData();
+                    formData.append('image', file);
+                    formData.append('type', 'profile');
+                    
+                    try {
+                        const response = await fetch('../api/upload_image.php', {
+                            method: 'POST',
+                            credentials: 'include',
+                            body: formData
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            // Update profile picture display
+                            const profilePicture = document.getElementById('profilePictureDisplay') || document.querySelector('.profile-picture');
+                            if (profilePicture) {
+                                // Ensure path doesn't already start with ../ or /
+                                let imagePath = data.file_path;
+                                if (!imagePath.startsWith('../') && !imagePath.startsWith('/') && !imagePath.startsWith('http')) {
+                                    imagePath = '../' + imagePath;
+                                }
+                                
+                                const img = document.createElement('img');
+                                img.src = imagePath;
+                                img.alt = 'Profile Picture';
+                                img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; border-radius: 50%;';
+                                
+                                // Handle image load error
+                                img.onerror = function() {
+                                    console.warn('Profile picture failed to load:', imagePath);
+                                    profilePicture.innerHTML = '<i class="fas fa-user" style="font-size: 80px; color: #dc3545;"></i>';
+                                };
+                                
+                                profilePicture.innerHTML = '';
+                                profilePicture.appendChild(img);
+                            }
+                            alert('Profile picture uploaded successfully!');
+                            // Reload profile to ensure everything is in sync
+                            loadUserProfile();
+                        } else {
+                            alert('Failed to upload picture: ' + (data.message || 'Unknown error'));
+                        }
+                    } catch (error) {
+                        console.error('Upload error:', error);
+                        alert('Failed to upload picture. Please try again.');
+                    }
+                }
+            };
+            input.click();
+        }
+
+        function changePassword() {
+            // Get user_id from sessionStorage to preserve it in the URL
+            const userId = sessionStorage.getItem('user_id');
+            if (userId) {
+                window.location.href = `ForgotPassword.html?from=profile&user_id=${userId}`;
+            } else {
+                window.location.href = 'ForgotPassword.html?from=profile';
+            }
+        }
+
+        function saveProfile() {
+            // Collect form data
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            
+            // In real app, this would send data to server
+            alert('Profile updated successfully!');
+        }
+
+        function cancelChanges() {
+            // Reset form to original values by reloading profile data
+            loadUserProfile();
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear sessionStorage
+                sessionStorage.clear();
+                // Redirect to login page
+                window.location.href = 'Login.html';
+            }
+        }
+    </script>
+    
+    <!-- Navigation Tracker - Handle origin-aware navigation -->
+    <script src="../Customer_assets/js/navigation-tracker.js"></script>
+    
+    <!-- Customer Notifications System -->
+    <script src="../Customer_assets/js/customer-notifications.js"></script>
+    <script src="../Customer_assets/js/customer-notification-center.js"></script>
+    
+    <!-- Customer Notifications Modal -->
+    <div class="modal fade" id="customerNotificationsModal" tabindex="-1" role="dialog" aria-labelledby="customerNotificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customerNotificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="customerNotificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="customerNotificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="customerNotificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllCustomerReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    </main>
+    <!-- Main Content End -->
+    
+    <!-- Enhanced Mobile Navigation -->
+    <script src="../Customer_assets/js/mobile-navigation-enhanced.js"></script>
+    <!-- Sidebar Navigation -->
+    <script src="../Customer_assets/js/sidebar-navigation.js"></script>
+    <!-- Global Sidebar Toggle (Fallback) -->
+    <script src="../Customer_assets/js/sidebar-toggle-global.js"></script>
+    
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="./MainPage.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#products" class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="./OrderSummary.html" class="nav-item">
+            <i class="fas fa-box"></i>
+            <span>Orders</span>
+        </a>
+    </nav>
+    
+    <!-- ========== MOBILE CART DRAWER ========== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-drawer-content">
+            <p class="text-center text-muted">Cart items will load here</p>
+            <p class="text-center"><a href="./Cart.html" class="btn btn-primary-red">View Full Cart</a></p>
+        </div>
+        <div class="cart-drawer-footer">
+            <a href="./Cart.html" class="btn btn-primary-red btn-block">Go to Cart</a>
+        </div>
+    </div>
+    
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    
+</body>
+</html>

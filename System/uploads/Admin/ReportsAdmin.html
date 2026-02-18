@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales and Report Analytics - MATARIX</title>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Link to External CSS File -->
+    <link rel="stylesheet" href="../Admin_assets/css/ReportAdmin.css">
+    <!-- Admin Notification System -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+</head>
+<body>
+    
+    <!-- ==========================================
+         MAIN HEADER SECTION - DEFAULT FOR ALL ADMIN PAGES
+    ========================================== -->
+     <!-- MAIN HEADER SECTION -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <!-- MATARIX LOGO IMAGE -->
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty (Search removed) -->
+                <div class="col-md-4"></div>
+                
+                 <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+
+                       <!-- USER PROFILE ICON BUTTON - Now clickable with href -->
+                        <a href="../Admin/AdminProfile.html" class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+    <!-- ==========================================
+         MAIN LAYOUT CONTAINER
+    ========================================== -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- ==========================================
+                     LEFT SIDEBAR NAVIGATION - DEFAULT FOR ALL ADMIN PAGES
+                ========================================== -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        
+                        <!-- SIDEBAR NAVIGATION LINKS -->
+                        <ul class="nav-links">
+                            <!-- ORDERS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            
+                            <!-- INVENTORY NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            
+                            <!-- DELIVERIES NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            
+                            <!-- ANALYTICS NAVIGATION LINK (ACTIVE) -->
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link active" id="analytics-nav">
+                                    <span>Sales and Reports</span>
+                                </a>
+                            </li>
+                            
+                            <!-- USER MANAGEMENT NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <!-- SIDEBAR FOOTER WITH LOGOUT BUTTON -->
+                    <div class="sidebar-footer">
+                        <!-- LOGOUT BUTTON -->
+                        <button class="logout-button">Logout</button>
+                    </div>
+                </aside>
+                
+                <!-- ==========================================
+                     MAIN CONTENT AREA - SALES AND ANALYTICS PAGE
+                ========================================== -->
+                <main class="col-md-10 main-content">
+                    
+                    <!-- PAGE HEADER SECTION -->
+                    <div class="analytics-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h1 class="analytics-title">Sales and Report</h1>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <!-- VIEW CUSTOMER FEEDBACKS BUTTON -->
+                                <a href="../Admin/CustomerFeedback.html" class="feedback-btn" id="customer-feedback-btn">
+                                    <span>View Customer Feedbacks</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ANALYTICS STATISTICS CARDS -->
+                    <div class="analytics-stats">
+                        <div class="row">
+                            
+                            <!-- TOTAL REVENUE STAT CARD -->
+                            <div class="col-md-3">
+                                <div class="analytics-card">
+                                    <div class="card-header">
+                                        <h4 class="card-label">Total Revenue</h4>
+                                        <p class="card-sublabel">Gross income</p>
+                                    </div>
+                                    <div class="card-value" id="total-revenue">₱0.00</div>
+                                    <div class="card-change positive">
+                                        <span id="revenue-change">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- TOTAL ORDERS STAT CARD -->
+                            <div class="col-md-3">
+                                <div class="analytics-card">
+                                    <div class="card-header">
+                                        <h4 class="card-label">Total Orders</h4>
+                                        <p class="card-sublabel">Number of Orders</p>
+                                    </div>
+                                    <div class="card-value" id="total-orders">0</div>
+                                    <div class="card-change positive">
+                                        <span id="orders-change">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- AVERAGE ORDER VALUE STAT CARD -->
+                            <div class="col-md-3">
+                                <div class="analytics-card">
+                                    <div class="card-header">
+                                        <h4 class="card-label">Avg Order Value</h4>
+                                        <p class="card-sublabel">Average order amount</p>
+                                    </div>
+                                    <div class="card-value" id="avg-order-value">₱0.00</div>
+                                    <div class="card-change positive">
+                                        <span id="avg-order-change">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- NEW CUSTOMERS STAT CARD -->
+                            <div class="col-md-3">
+                                <div class="analytics-card">
+                                    <div class="card-header">
+                                        <h4 class="card-label">New Customers</h4>
+                                        <p class="card-sublabel">New customers this month</p>
+                                    </div>
+                                    <div class="card-value" id="new-customers">0</div>
+                                    <div class="card-change positive">
+                                        <span id="customers-change">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- TOP PERFORMING PRODUCTS SECTION -->
+                    <div class="products-analytics-section">
+                        
+                        <!-- SECTION HEADER -->
+                        <div class="products-header">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h2 class="products-title">Top Performing Products</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="products-filters">
+                                        <!-- LAST 30 DAYS FILTER BUTTON -->
+                                        <button class="filter-btn active" id="last-30-days-btn">Last 30 days</button>
+                                        <!-- ALL CATEGORIES FILTER BUTTON -->
+                                        <button class="filter-btn" id="all-categories-btn">All Categories</button>
+                                        <!-- OVERVIEW FILTER BUTTON -->
+                                        <button class="filter-btn" id="overview-btn">Overview</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- PRODUCTS TABLE -->
+                        <div class="products-table-container">
+                            <div class="table-responsive">
+                                <table class="products-analytics-table table">
+                                    
+                                    <!-- TABLE HEADERS -->
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Revenue</th>
+                                            <th>Units</th>
+                                            <th>Growth</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <!-- TABLE BODY WITH PRODUCT ROWS -->
+                                    <tbody id="products-table-body">
+                                        <!-- Products will be loaded dynamically here -->
+                                        <tr class="product-analytics-row loading-row">
+                                            <td colspan="5" class="text-center">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                <p class="mt-2">Loading products...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- REPORT ACTIONS -->
+                        <div class="report-actions">
+                            <!-- EXPORT REPORT BUTTON -->
+                            <button class="export-report-btn" id="export-report-btn" type="button">
+                                <i class="fas fa-download"></i>
+                                <span>Export Report</span>
+                            </button>
+                            <!-- GENERATE REPORT BUTTON -->
+                            <button class="generate-report-btn" id="generate-report-btn">
+                                <span>Generate Report</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                </main>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==========================================
+         PRODUCT DETAILS MODAL
+    ========================================== -->
+    <div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #dc3545; color: white;">
+                    <h5 class="modal-title" id="productDetailsModalLabel">
+                        <i class="fas fa-box"></i> Product Details
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="productDetailsBody">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-danger" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <p class="mt-3">Loading product details...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==========================================
+         EXPORT OPTIONS MODAL
+    ========================================== -->
+    <div class="modal fade" id="exportOptionsModal" tabindex="-1" role="dialog" aria-labelledby="exportOptionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #dc3545; color: white;">
+                    <h5 class="modal-title" id="exportOptionsModalLabel">
+                        <i class="fas fa-download"></i> Export Report
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center" style="padding: 30px;">
+                    <p class="mb-4" style="font-size: 16px; color: #333;">Choose export format:</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button type="button" class="btn btn-success btn-lg" id="export-excel-btn-modal" style="min-width: 150px;">
+                            <i class="fas fa-file-excel"></i><br>
+                            <span>Excel</span>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-lg" id="export-pdf-btn-modal" style="min-width: 150px;">
+                            <i class="fas fa-file-pdf"></i><br>
+                            <span>PDF</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==========================================
+         REPORT MODAL
+    ========================================== -->
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #dc3545; color: white;">
+                    <h5 class="modal-title" id="reportModalLabel">
+                        <i class="fas fa-chart-bar"></i> Sales Report Summary
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="reportModalBody">
+                    <!-- Report content will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="exportPDFBtn">
+                        <i class="fas fa-file-pdf"></i> Export as PDF
+                    </button>
+                    <button type="button" class="btn btn-success" id="exportExcelBtn">
+                        <i class="fas fa-file-excel"></i> Export as Excel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap 4 JavaScript Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Admin Notification System (load early) -->
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    
+    <!-- Admin Order Notifications - Polls for new order notifications -->
+    <script src="../Admin_assets/js/admin-order-notifications.js"></script>
+    
+    <!-- Admin Notification Center - Mailbox for viewing all notifications -->
+    <script src="../Admin_assets/js/admin-notification-center.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <!-- Admin Authentication Check - MUST load first to verify session -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <script src="../Admin_assets/js/ReportsAdmin.js"></script>
+    
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

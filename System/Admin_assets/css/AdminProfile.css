@@ -1,0 +1,447 @@
+/* AdminProfile.css - Admin Profile Page Styles */
+
+/* ===== BODY STYLES ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* ==========================================
+   2. HEADER STYLES
+========================================== */
+
+/* Main Header Container */
+.main-header {
+    background-color: #444444;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* MATARIX Logo Image */
+.logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Header Actions Container */
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Header Action Buttons */
+.header-action-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.header-action-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+    color: white;
+    text-decoration: none;
+}
+
+/* ==========================================
+   3. SIDEBAR NAVIGATION STYLES
+========================================== */
+
+/* Main Layout Container */
+.main-layout {
+    min-height: calc(100vh - 110px);
+}
+
+/* Sidebar Container */
+.sidebar-container {
+    background-color: #940909;
+    padding: 0;
+    min-height: calc(100vh - 110px);
+    position: relative;
+    width: 100%;
+    max-width: 175px; /* Reduced by 30% from 250px */
+}
+
+/* Navigation Links Container */
+.nav-links {
+    list-style: none;
+    padding: 0; 
+    margin: 0;
+}
+
+.nav-links li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    display: block;
+    padding: 20px 25px;
+    color: #e2e8f0;
+    border-bottom: 0.5px solid #4a5568;
+    transition: background-color 0.3s;
+    text-decoration: underline;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    background-color: rgba(255,255,255,0.2);
+    font-weight: 600;
+    border-left: 4px solid white;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+/* Logout Button */
+.logout-button {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* ===== PROFILE CONTENT STYLES ===== */
+.profile-content {
+    padding: 30px;
+    background-color: white;
+}
+
+/* PROFILE HEADER */
+.profile-header {
+    margin-bottom: 30px;
+}
+
+.profile-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.profile-subtitle {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+/* PROFILE CONTAINER */
+.profile-container {
+    margin-bottom: 40px;
+}
+
+/* ===== SECTION TITLES ===== */
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid #e0e0e0;
+    border-bottom: none;
+}
+
+/* ===== PROFILE PICTURE SECTION ===== */
+.profile-picture-section {
+    background-color: #f8f9fa;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 350px;
+    min-height: 400px;
+}
+
+.profile-picture-container {
+    padding: 30px 25px;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+/* PROFILE PICTURE */
+.profile-picture {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    object-fit: cover;
+    display: block;
+}
+
+/* STATUS INDICATOR - Red Button with Plus Sign */
+.profile-status-indicator {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: #dc3545;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.profile-status-indicator:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+.profile-status-indicator::before {
+    content: '+';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* PROFILE NAME */
+.profile-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* ADMIN BADGE */
+.admin-badge {
+    background-color: #8da2db;
+    color: white;
+    padding: 6px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* EDIT PROFILE BUTTON */
+.edit-profile-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 auto;
+    min-width: 120px;
+}
+
+.edit-profile-btn:hover {
+    background-color: #c82333;
+}
+
+.edit-profile-btn i {
+    font-size: 12px;
+}
+
+/* ===== PROFILE INFORMATION SECTION ===== */
+.profile-information-section {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* PROFILE FORM */
+.profile-form {
+    padding: 30px 20px;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}
+
+/* FORM LABELS */
+.form-label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* INPUT WITH ICON CONTAINER */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* FORM INPUT FIELDS */
+.form-input {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: #b71c1c;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(183, 28, 28, 0.2);
+}
+
+.form-input::placeholder {
+    color: #999;
+    font-size: 13px;
+}
+
+/* INPUT EDIT ICONS */
+.input-edit-icon {
+    position: absolute;
+    right: 15px;
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.input-edit-icon:hover {
+    color: #b71c1c;
+}
+
+/* ===== BOTTOM LOGOUT SECTION ===== */
+.bottom-logout-section {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: underline;
+}
+
+.logout-btn:hover {
+    background-color: #5a6268;
+    color: white;
+    text-decoration: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .profile-content {
+        padding: 15px;
+    }
+
+    .profile-title {
+        font-size: 28px;
+    }
+
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .profile-picture-section,
+    .profile-information-section {
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row .col-md-6 {
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-content {
+        padding: 10px;
+    }
+
+    .profile-title {
+        font-size: 24px;
+    }
+
+    .profile-form {
+        padding: 20px 15px;
+    }
+
+    .profile-picture-container {
+        padding: 20px 15px;
+    }
+}

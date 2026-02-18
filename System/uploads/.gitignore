@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.local
+config/database.local.php
+.DS_Store
+dist/
+build/
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+.cache/

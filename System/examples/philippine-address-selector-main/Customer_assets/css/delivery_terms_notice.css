@@ -1,0 +1,503 @@
+/* ==========================================
+   MATARIX - Delivery Distance & Service Terms
+   Reusable notice + modal styles
+   ========================================== */
+
+:root {
+  --matarix-red: #d32f2f;
+  --matarix-red-dark: #b71c1c;
+  --matarix-text: #333;
+  --matarix-muted: #666;
+  --matarix-border: #e6e6e6;
+  --matarix-soft: rgba(211, 47, 47, 0.08);
+}
+
+/* Inline notice (cart/checkout) */
+.delivery-terms-notice {
+  border: 1px solid var(--matarix-border);
+  border-left: 6px solid var(--matarix-red);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 14px 14px 12px;
+  margin: 0 0 12px;
+}
+
+.delivery-terms-notice__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.delivery-terms-notice__icon {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--matarix-soft);
+  color: var(--matarix-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.delivery-terms-notice__title {
+  margin: 0;
+  color: var(--matarix-text);
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.delivery-terms-notice__subtitle {
+  margin: 2px 0 0;
+  color: var(--matarix-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.delivery-terms-notice__actions {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.delivery-terms-notice__iconbtn {
+  appearance: none;
+  border: 1px solid var(--matarix-border);
+  background: #fff;
+  color: #444;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.delivery-terms-notice__iconbtn:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.delivery-terms-notice__body {
+  margin-top: 10px;
+}
+
+.delivery-terms-notice__bullets {
+  margin: 0 0 10px 0;
+  padding-left: 18px;
+  color: #444;
+  font-size: 12px;
+}
+
+.delivery-terms-notice__bullets li {
+  margin: 3px 0;
+}
+
+.delivery-terms-notice__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.delivery-terms-notice__ack {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 12px;
+  color: #333;
+  user-select: none;
+}
+
+.delivery-terms-notice__ack input {
+  width: 16px;
+  height: 16px;
+}
+
+.delivery-terms-notice__link {
+  font-size: 12px;
+  color: var(--matarix-red);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.delivery-terms-notice__link:hover {
+  color: var(--matarix-red-dark);
+  text-decoration: underline;
+}
+
+.delivery-terms-notice.is-collapsed .delivery-terms-notice__body {
+  display: none;
+}
+
+/* ==========================================
+   MODAL STYLES - Clean Rebuild
+   ========================================== */
+
+/* Modal Header */
+.delivery-terms-modal .modal-header {
+  background: var(--matarix-red);
+  color: #fff;
+  border-bottom: none;
+  padding: 16px 20px;
+}
+
+.delivery-terms-modal .modal-title {
+  font-weight: 800;
+  font-size: 16px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.delivery-terms-modal .modal-header .close {
+  color: #fff;
+  opacity: 0.9;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.delivery-terms-modal .modal-header .close:hover {
+  opacity: 1;
+}
+
+/* Modal Body */
+.delivery-terms-modal .modal-body {
+  padding: 20px;
+  max-height: calc(90vh - 200px);
+  overflow-y: auto;
+}
+
+/* Service Area Badge */
+.delivery-terms-intro {
+  margin-bottom: 20px;
+}
+
+.service-area-badge {
+  background: rgba(211, 47, 47, 0.12);
+  color: var(--matarix-red);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.intro-text {
+  color: var(--matarix-muted);
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+/* Accordion Container */
+.delivery-terms-accordion {
+  margin-bottom: 20px;
+}
+
+/* Delivery Term Cards */
+.delivery-term-card {
+  background: #f8f9fa !important;
+  border: 1px solid var(--matarix-border) !important;
+  border-radius: 8px !important;
+  margin-bottom: 8px !important;
+  overflow: visible !important;
+  transition: all 0.2s ease !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 50px !important;
+}
+
+.delivery-term-card:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-term-header {
+  padding: 0 !important;
+  background: #f8f9fa !important;
+  border-bottom: none !important;
+  display: block !important;
+  visibility: visible !important;
+  width: 100% !important;
+}
+
+.delivery-term-btn {
+  width: 100% !important;
+  padding: 14px 16px !important;
+  background: transparent !important;
+  border: none !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  color: #333 !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.delivery-term-btn:hover {
+  background: rgba(211, 47, 47, 0.05);
+  color: var(--matarix-red);
+  text-decoration: none;
+}
+
+.delivery-term-btn:focus {
+  outline: 2px solid var(--matarix-red);
+  outline-offset: -2px;
+}
+
+.delivery-term-btn i:first-child {
+  color: var(--matarix-red) !important;
+  font-size: 16px !important;
+  width: 20px !important;
+  text-align: center !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+.delivery-term-btn span {
+  flex: 1 !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #333 !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+}
+
+.collapse-icon {
+  color: #999;
+  font-size: 12px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.delivery-term-btn[aria-expanded="true"] .collapse-icon {
+  transform: rotate(90deg);
+}
+
+/* Delivery Term Content */
+.delivery-term-content {
+  padding: 16px;
+  background: #fff;
+  border-top: 1px solid var(--matarix-border);
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.delivery-term-content p {
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.delivery-term-content p:last-child {
+  margin-bottom: 0;
+}
+
+.delivery-term-content ul {
+  margin: 12px 0;
+  padding-left: 20px;
+}
+
+.delivery-term-content li {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.delivery-term-content a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.delivery-term-content a:hover {
+  color: var(--matarix-red);
+}
+
+.delivery-terms-link {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.delivery-terms-link:hover {
+  color: var(--matarix-red);
+}
+
+/* Divider */
+.delivery-terms-divider {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid var(--matarix-border);
+}
+
+/* Checkbox */
+.delivery-terms-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.delivery-terms-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.delivery-terms-checkbox label {
+  margin: 0;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  user-select: none;
+}
+
+/* Modal Footer */
+.delivery-terms-modal .modal-footer {
+  border-top: 1px solid var(--matarix-border);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.delivery-terms-modal .btn-secondary {
+  background: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 600;
+}
+
+.delivery-terms-modal .btn-secondary:hover {
+  background: #5a6268;
+  border-color: #545b62;
+  color: #fff;
+}
+
+.delivery-terms-modal .btn-matarix {
+  background: var(--matarix-red);
+  border-color: var(--matarix-red);
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.delivery-terms-modal .btn-matarix:hover {
+  background: var(--matarix-red-dark);
+  border-color: var(--matarix-red-dark);
+  color: #fff;
+}
+
+.delivery-terms-modal .btn-matarix:disabled {
+  background: #ccc;
+  border-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Modal Dialog & Content */
+.delivery-terms-modal.modal .modal-dialog {
+  max-width: 800px;
+  margin: 1.75rem auto;
+}
+
+.delivery-terms-modal.modal .modal-content {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-terms-modal.modal .modal-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+.delivery-terms-modal .modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.delivery-terms-modal .modal-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.delivery-terms-modal .modal-body::-webkit-scrollbar-thumb {
+  background: rgba(211, 47, 47, 0.5);
+  border-radius: 4px;
+}
+
+.delivery-terms-modal .modal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(211, 47, 47, 0.7);
+}
+
+/* Mobile Responsive */
+@media (max-width: 576px) {
+  .delivery-terms-notice {
+    padding: 12px;
+  }
+  
+  .delivery-terms-notice__title {
+    font-size: 13px;
+  }
+  
+  .delivery-terms-notice__subtitle,
+  .delivery-terms-notice__bullets,
+  .delivery-terms-notice__link,
+  .delivery-terms-notice__ack {
+    font-size: 12px;
+  }
+  
+  .delivery-terms-modal.modal .modal-dialog {
+    margin: 0.5rem;
+    max-width: calc(100% - 1rem);
+  }
+  
+  .delivery-terms-modal .modal-body {
+    padding: 16px;
+    max-height: calc(95vh - 180px);
+  }
+  
+  .delivery-term-btn {
+    padding: 12px;
+    font-size: 13px;
+  }
+  
+  .delivery-term-content {
+    padding: 12px;
+    font-size: 13px;
+  }
+  
+  .delivery-terms-modal .modal-footer {
+    padding: 12px 16px;
+    flex-direction: column;
+  }
+  
+  .delivery-terms-modal .btn-secondary,
+  .delivery-terms-modal .btn-matarix {
+    width: 100%;
+    justify-content: center;
+  }
+}

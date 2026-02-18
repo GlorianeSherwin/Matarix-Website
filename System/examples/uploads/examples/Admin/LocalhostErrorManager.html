@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localhost Error Manager - MATARIX</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .error-manager-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+        }
+        .header-section {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header-section h1 {
+            color: #667eea;
+            margin: 0;
+        }
+        .header-section p {
+            color: #6c757d;
+            margin: 10px 0 0 0;
+        }
+        .action-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .action-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .action-card h5 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        .action-card p {
+            color: #6c757d;
+            font-size: 14px;
+            margin: 0;
+        }
+        .action-card .icon {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .result-section {
+            margin-top: 30px;
+            display: none;
+        }
+        .result-section.show {
+            display: block;
+        }
+        .result-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+        .result-box pre {
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .btn-action {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-action:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-manager-container">
+        <div class="header-section">
+            <h1><i class="fas fa-tools"></i> Localhost Error Manager</h1>
+            <p>Manage database migrations, fix errors, and diagnose system issues</p>
+        </div>
+
+        <div class="row">
+            <!-- Address Migration -->
+            <div class="col-md-6 col-lg-4">
+                <div class="action-card" onclick="runMigration('address')">
+                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h5>Migrate Address Fields</h5>
+                    <p>Add structured address fields (street, city, province, postal code, country) to users table</p>
+                    <div id="address-status"></div>
+                </div>
+            </div>
+
+            <!-- Categories Migration -->
+            <div class="col-md-6 col-lg-4">
+                <div class="action-card" onclick="runMigration('categories')">
+                    <div class="icon"><i class="fas fa-tags"></i></div>
+                    <h5>Migrate Categories</h5>
+                    <p>Create categories table and migrate from ENUM to dynamic categories system</p>
+                    <div id="categories-status"></div>
+                </div>
+            </div>
+
+            <!-- Database Connection Test -->
+            <div class="col-md-6 col-lg-4">
+                <div class="action-card" onclick="testConnection()">
+                    <div class="icon"><i class="fas fa-database"></i></div>
+                    <h5>Test Database Connection</h5>
+                    <p>Verify database connectivity and configuration</p>
+                    <div id="connection-status"></div>
+                </div>
+            </div>
+
+            <!-- Diagnose Database -->
+            <div class="col-md-6 col-lg-4">
+                <div class="action-card" onclick="diagnoseDatabase()">
+                    <div class="icon"><i class="fas fa-stethoscope"></i></div>
+                    <h5>Diagnose Database</h5>
+                    <p>Check database structure and identify potential issues</p>
+                    <div id="diagnose-status"></div>
+                </div>
+            </div>
+
+            <!-- Fix Delivery Status -->
+            <div class="col-md-6 col-lg-4">
+                <div class="action-card" onclick="fixDeliveryStatus()">
+                    <div class="icon"><i class="fas fa-truck"></i></div>
+                    <h5>Fix Delivery Status</h5>
+                    <p>Fix delivery status ENUM values in the database</p>
+                    <div id="delivery-status"></div>
+                </div>
+            </div>
+
+            <!-- View Error Logs -->
+            <div class="col-md-6 col-lg-4">
+                <div class="action-card" onclick="viewErrorLogs()">
+                    <div class="icon"><i class="fas fa-file-alt"></i></div>
+                    <h5>View Error Logs</h5>
+                    <p>Check recent error logs and system messages</p>
+                    <div id="logs-status"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="result-section" id="resultSection">
+            <h4>Results</h4>
+            <div class="result-box" id="resultBox">
+                <pre id="resultContent">Waiting for action...</pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const baseUrl = '../api/';
+        
+        function showLoading(elementId) {
+            document.getElementById(elementId).innerHTML = '<span class="status-badge status-pending">Running... <span class="loading"></span></span>';
+        }
+        
+        function showSuccess(elementId, message) {
+            document.getElementById(elementId).innerHTML = `<span class="status-badge status-success">${message || 'Success'}</span>`;
+        }
+        
+        function showError(elementId, message) {
+            document.getElementById(elementId).innerHTML = `<span class="status-badge status-error">${message || 'Error'}</span>`;
+        }
+        
+        function showResult(data) {
+            const resultSection = document.getElementById('resultSection');
+            const resultContent = document.getElementById('resultContent');
+            resultSection.classList.add('show');
+            resultContent.textContent = JSON.stringify(data, null, 2);
+        }
+        
+        async function runMigration(type) {
+            const statusId = type === 'address' ? 'address-status' : 'categories-status';
+            showLoading(statusId);
+            
+            try {
+                const endpoint = type === 'address' ? 'migrate_address_fields.php' : 'migrate_categories_table.php';
+                const response = await fetch(baseUrl + endpoint);
+                const data = await response.json();
+                
+                if (data.success) {
+                    showSuccess(statusId, 'Migration Complete');
+                    showResult(data);
+                } else {
+                    showError(statusId, 'Migration Failed');
+                    showResult(data);
+                }
+            } catch (error) {
+                showError(statusId, 'Connection Error');
+                showResult({ error: error.message });
+            }
+        }
+        
+        async function testConnection() {
+            showLoading('connection-status');
+            
+            try {
+                const response = await fetch(baseUrl + 'test_db_connection.php');
+                const data = await response.json();
+                
+                if (data.success) {
+                    showSuccess('connection-status', 'Connected');
+                    showResult(data);
+                } else {
+                    showError('connection-status', 'Connection Failed');
+                    showResult(data);
+                }
+            } catch (error) {
+                showError('connection-status', 'Error');
+                showResult({ error: error.message });
+            }
+        }
+        
+        async function diagnoseDatabase() {
+            showLoading('diagnose-status');
+            
+            try {
+                const response = await fetch(baseUrl + 'diagnose_database.php');
+                const data = await response.json();
+                
+                showSuccess('diagnose-status', 'Diagnosis Complete');
+                showResult(data);
+            } catch (error) {
+                showError('diagnose-status', 'Error');
+                showResult({ error: error.message });
+            }
+        }
+        
+        async function fixDeliveryStatus() {
+            showLoading('delivery-status');
+            
+            try {
+                const response = await fetch(baseUrl + 'fix_delivery_status_enum.php');
+                const data = await response.json();
+                
+                if (data.success) {
+                    showSuccess('delivery-status', 'Fixed');
+                    showResult(data);
+                } else {
+                    showError('delivery-status', 'Fix Failed');
+                    showResult(data);
+                }
+            } catch (error) {
+                showError('delivery-status', 'Error');
+                showResult({ error: error.message });
+            }
+        }
+        
+        async function viewErrorLogs() {
+            showLoading('logs-status');
+            
+            try {
+                // Note: This would require a log viewer API endpoint
+                showSuccess('logs-status', 'Logs Loaded');
+                showResult({ 
+                    message: 'Error logs are typically stored in PHP error_log. Check your server configuration for log file location.',
+                    note: 'For XAMPP, logs are usually in: C:\\xampp\\apache\\logs\\error.log'
+                });
+            } catch (error) {
+                showError('logs-status', 'Error');
+                showResult({ error: error.message });
+            }
+        }
+    </script>
+</body>
+</html>
+

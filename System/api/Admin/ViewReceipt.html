@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Receipt - MATARIX Admin</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Admin_assets/css/ViewOrderPageAdmin.css">
+    <link rel="stylesheet" href="../Customer_assets/css/receipt.css">
+    <!-- Admin Notification System -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+</head>
+<body>
+     <!-- MAIN HEADER SECTION -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <!-- MATARIX LOGO IMAGE -->
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty -->
+                <div class="col-md-4"></div>
+                
+                <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- EMAIL/MESSAGES ICON BUTTON -->
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+
+                        <!-- USER PROFILE ICON BUTTON -->
+                        <button class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT CONTAINER -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- LEFT SIDEBAR NAVIGATION -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        
+                        <!-- SIDEBAR NAVIGATION LINKS -->
+                        <ul class="nav-links">
+                            <!-- ORDERS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            
+                            <!-- INVENTORY NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            
+                            <!-- DELIVERIES NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            
+                            <!-- ANALYTICS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav">
+                                    <span>Sales and Reports</span>
+                                </a>
+                            </li>
+                            
+                            <!-- USER MANAGEMENT NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <!-- SIDEBAR FOOTER WITH LOGOUT BUTTON -->
+                    <div class="sidebar-footer">
+                        <button class="logout-button">Logout</button>
+                    </div>
+                </aside>
+
+                <!-- RECEIPT CONTENT SECTION -->
+                <div class="col-md-10 order-details-content">
+                    
+                    <!-- Receipt Header -->
+                    <div class="receipt-header-section">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex align-items-center">
+                                <button class="btn-back" onclick="goBack()">
+                                    <i class="fas fa-arrow-left"></i>
+                                    <span>Back to Order</span>
+                                </button>
+                                <div class="header-text">
+                                    <h1 class="page-title">Payment Receipt</h1>
+                                    <p class="page-subtitle">Transaction details and payment confirmation</p>
+                                </div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn-download" id="downloadReceiptBtn">
+                                    <i class="fas fa-download"></i>
+                                    <span>Download</span>
+                                </button>
+                                <button class="btn-print" id="printReceiptBtn">
+                                    <i class="fas fa-print"></i>
+                                    <span>Print</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RECEIPT CONTAINER -->
+                    <div class="receipt-wrapper">
+                        <!-- COMPANY HEADER -->
+                        <div class="company-header">
+                            <div class="company-left">
+                                <img src="../Customer_assets/images/LOGO.png" alt="MATARIX Logo" class="company-logo">
+                                <div class="company-info">
+                                    <h2 class="company-name">MATARIX Construction Supplies</h2>
+                                    <p class="company-tagline">Official Payment Receipt</p>
+                                </div>
+                            </div>
+                            <div class="company-right">
+                                <span class="payment-badge">
+                                    <i class="fas fa-check-circle"></i>
+                                    Payment Confirmed
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- TRANSACTION INFO SECTION -->
+                        <div class="info-section">
+                            <div class="info-column">
+                                <h3 class="info-heading">Transaction Information</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Order Number:</span>
+                                    <span class="info-value">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Transaction ID:</span>
+                                    <span class="info-value">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Reference Number:</span>
+                                    <span class="info-value">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Payment Method:</span>
+                                    <span class="info-value">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Account Number:</span>
+                                    <span class="info-value">Loading...</span>
+                                </div>
+                            </div>
+
+                            <div class="info-column">
+                                <h3 class="info-heading">Payment Details</h3>
+                                <div class="info-row">
+                                    <span class="info-label">Transaction Date:</span>
+                                    <span class="info-value">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Transaction Time:</span>
+                                    <span class="info-value">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Status:</span>
+                                    <span class="info-value status-pending">Loading...</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Amount Paid:</span>
+                                    <span class="info-value amount-paid">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CUSTOMER DETAILS -->
+                        <div class="customer-section">
+                            <h3 class="section-heading">Customer Details</h3>
+                            <div class="customer-content">
+                                <div class="customer-left">
+                                    <p class="customer-name">Loading...</p>
+                                    <p class="customer-phone">Phone Number: Loading...</p>
+                                </div>
+                                <div class="customer-right">
+                                    <p class="customer-address">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ORDER ITEMS TABLE -->
+                        <div class="order-items-section">
+                            <h3 class="section-heading">Order Items</h3>
+                            <div class="table-responsive">
+                                <table class="items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Variation</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-right">Unit Price</th>
+                                            <th class="text-right">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted">Loading order items...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- PAYMENT SUMMARY -->
+                        <div class="payment-summary-section">
+                            <h3 class="section-heading">Payment Summary</h3>
+                            <div class="summary-box">
+                                <div class="summary-row">
+                                    <span class="summary-label">Subtotal:</span>
+                                    <span class="summary-value">Loading...</span>
+                                </div>
+                                <div class="summary-row" id="deliveryFeeRow">
+                                    <span class="summary-label">Delivery Fee:</span>
+                                    <span class="summary-value" style="color: #28a745; font-weight: 600;">Free Delivery</span>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span class="summary-label">Payment Summary</span>
+                                    <span class="summary-value total-amount">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RECEIPT FOOTER -->
+                        <div class="receipt-footer">
+                            <p class="thank-you">Thank you for your business!</p>
+                            <p class="footer-contact">
+                                For questions about this receipt, contact us at 
+                                <a href="mailto:support1@gmail.com">support1@gmail.com</a> or 
+                                <a href="tel:+6321234567">+63 2 1823 4567</a>
+                            </p>
+                            <p class="footer-tagline">MATARIX Construction Supplies - Building Your Dreams</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- html2pdf library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- Admin Notification System (load early) -->
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    
+    <!-- Admin Authentication Check - MUST load first to verify session -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- Admin Order Notifications - Polls for new order notifications -->
+    <script src="../Admin_assets/js/admin-order-notifications.js"></script>
+    
+    <!-- Admin Notification Center - Mailbox for viewing all notifications -->
+    <script src="../Admin_assets/js/admin-notification-center.js"></script>
+    
+    <!-- Load Admin Receipt -->
+    <script src="../Admin_assets/js/load_admin_receipt.js"></script>
+    
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+

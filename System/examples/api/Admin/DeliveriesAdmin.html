@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Management - MATARIX</title>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- FullCalendar for Delivery Timetable -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
+    <!-- Link to External CSS File -->
+    <link rel="stylesheet" href="../Admin_assets/css/DeliveriesAdmin.css">
+    <!-- OrdersAdmin CSS for matching styles -->
+    <link rel="stylesheet" href="../Admin_assets/css/OrdersAdmin.css">
+    <!-- Admin Notification System -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+    <!-- Mobile Enhancements (for Drivers) -->
+    <link rel="stylesheet" href="../Admin_assets/css/mobile-enhancements.css">
+</head>
+<body class="driver-page">
+    <!-- ==========================================
+         MAIN HEADER SECTION - DEFAULT FOR ALL ADMIN PAGES
+    ========================================== -->
+     <!-- MAIN HEADER SECTION -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <!-- MATARIX LOGO IMAGE -->
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty (Search removed) -->
+                <div class="col-md-4"></div>
+                
+                 <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+
+                       <!-- USER PROFILE ICON BUTTON - Now clickable with href -->
+                        <a href="../Admin/AdminProfile.html" class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         MAIN LAYOUT CONTAINER
+    ========================================== -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+               <!-- LEFT SIDEBAR NAVIGATION -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        
+                        <!-- SIDEBAR NAVIGATION LINKS -->
+                        <ul class="nav-links">
+                            <!-- ORDERS NAVIGATION LINK (ACTIVE) -->
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            
+                            <!-- INVENTORY NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            
+                            <!-- DELIVERIES NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link active" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            
+                            <!-- ANALYTICS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav">
+                                    <span>Sales and Reports</span>
+                                </a>
+                            </li>
+                            
+                            <!-- USER MANAGEMENT NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <!-- SIDEBAR FOOTER WITH LOGOUT BUTTON -->
+                    <div class="sidebar-footer">
+                        <button class="logout-button">Logout</button>
+                    </div>
+
+                </aside>
+                
+                <!-- ==========================================
+                     MAIN CONTENT AREA - DELIVERY MANAGEMENT PAGE
+                ========================================== -->
+                <main class="col-md-10 main-content">
+                    
+                    <!-- PAGE HEADER SECTION -->
+                    <div class="page-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h1 class="page-title" id="deliveriesPageTitle">Delivery Management</h1>
+                                <p class="page-subtitle" id="deliveriesPageSubtitle">Track deliveries, manage drivers and monitor fleet</p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="header-actions-right">
+                                    <!-- FILTER BUTTON -->
+                                    <button class="filter-btn" id="filter-btn">
+                                        <i class="fas fa-filter"></i>
+                                        <span>Filter</span>
+                                    </button>
+                                    <!-- TIMETABLE BUTTON -->
+                                    <button class="export-btn timetable-btn" id="timetable-btn" title="View Delivery Timetable">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Timetable</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- DELIVERY STATISTICS CARDS -->
+                    <div class="order-stats">
+                        <div class="row">
+                            
+                            <!-- TOTAL DELIVERIES STAT CARD -->
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-content">
+                                        <div class="stats-label">Total Deliveries</div>
+                                        <div class="stats-number" id="totalDeliveriesStat">0</div>
+                                    </div>
+                                    <div class="stats-icon">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- OUT FOR DELIVERY STAT CARD -->
+                            <div class="col-md-3">
+                                <div class="stats-card in-progress">
+                                    <div class="stats-content">
+                                        <div class="stats-label">Out for Delivery</div>
+                                        <div class="stats-number" id="outForDeliveryStat">0</div>
+                                    </div>
+                                    <div class="stats-icon">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- COMPLETED DELIVERIES STAT CARD -->
+                            <div class="col-md-3">
+                                <div class="stats-card completed">
+                                    <div class="stats-content">
+                                        <div class="stats-label">Completed</div>
+                                        <div class="stats-number" id="completedDeliveriesStat">0</div>
+                                    </div>
+                                    <div class="stats-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- ACTIVE DRIVERS STAT CARD (hidden for Delivery Driver role) -->
+                            <div class="col-md-3" id="activeDriversStatCard">
+                                <div class="stats-card pending">
+                                    <div class="stats-content">
+                                        <div class="stats-label">Active Drivers</div>
+                                        <div class="stats-number" id="activeDriversStat">0</div>
+                                    </div>
+                                    <div class="stats-icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- DELIVERY STATUS TABS NAVIGATION -->
+                    <div class="order-status-tabs">
+                        <!-- OUT FOR DELIVERY TAB -->
+                        <button class="tab-btn active" id="out-for-delivery-tab" data-tab="out-for-delivery">
+                            <i class="fas fa-shipping-fast"></i> Out for Delivery
+                            <span class="tab-count" id="outForDeliveryCount">0</span>
+                        </button>
+                        <!-- COMPLETED DELIVERY TAB -->
+                        <button class="tab-btn" id="completed-delivery-tab" data-tab="completed-delivery">
+                            <i class="fas fa-check-circle"></i> Completed Delivery
+                            <span class="tab-count" id="completedDeliveryCount">0</span>
+                        </button>
+                    </div>
+                    
+                    <!-- ==========================================
+                         TAB CONTENT SECTIONS
+                    ========================================== -->
+                    
+                    <!-- OUT FOR DELIVERY TAB CONTENT -->
+                    <div class="tab-content active" id="out-for-delivery-content">
+                        <div class="order-status-section">
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <h2 class="section-title">Out for Delivery</h2>
+                                <p class="section-subtitle">Deliveries currently in transit</p>
+                            </div>
+                            
+                            <!-- DELIVERY CARDS CONTAINER -->
+                            <div class="order-cards-container" id="outForDeliveryCards">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p class="text-muted mt-2">Loading deliveries...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- COMPLETED DELIVERY TAB CONTENT -->
+                    <div class="tab-content" id="completed-delivery-content">
+                        <div class="order-status-section">
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <h2 class="section-title">Completed Deliveries</h2>
+                                <p class="section-subtitle">Delivered and completed orders</p>
+                            </div>
+                            
+                            <!-- DELIVERY CARDS CONTAINER -->
+                            <div class="order-cards-container" id="completedDeliveryCards">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p class="text-muted mt-2">Loading deliveries...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- DRIVERS TAB CONTENT -->
+                    <div class="tab-content" id="drivers-content">
+                        <div class="driver-management-section">
+                            
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h2 class="section-title">Driver Management</h2>
+                                        <p class="section-subtitle">Monitor driver performance and driver availability</p>
+                                    </div>
+                                    <div class="col-md-4 text-right">
+                                        <!-- ADD DRIVER BUTTON -->
+                                        <button class="add-driver-btn" id="add-driver-btn">
+                                            <i class="fas fa-plus"></i>
+                                            <span>Add Driver</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- DRIVERS TABLE -->
+                            <div class="drivers-table-container">
+                                <div class="table-responsive">
+                                    <table class="drivers-table table">
+                                        
+                                        <!-- TABLE HEADERS -->
+                                        <thead>
+                                            <tr>
+                                                <th>Driver</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody id="driversTableBody">
+                                            <tr>
+                                                <td colspan="3" class="text-center py-5">
+                                                    <p class="text-muted">Loading drivers...</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FLEET TAB CONTENT -->
+                    <div class="tab-content" id="fleet-content">
+                        <div class="fleet-management-section">
+                            
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h2 class="section-title">Fleet Management</h2>
+                                        <p class="section-subtitle">Monitor vehicle status</p>
+                                    </div>
+                                    <div class="col-md-4 text-right">
+                                        <!-- ADD FLEET BUTTON -->
+                                        <button class="add-fleet-btn" id="add-fleet-btn">
+                                            <i class="fas fa-plus"></i>
+                                            <span>Add Fleet</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- FLEET TABLE - Will be populated dynamically -->
+                            <div class="fleet-table-container">
+                                <div class="table-responsive">
+                                    <table class="fleet-table table">
+                                        <thead>
+                                            <tr>
+                                                <th>Vehicle</th>
+                                                <th>Status</th>
+                                                <th>Capacity</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fleetTableBody">
+                                            <tr>
+                                                <td colspan="4" class="text-center py-5">
+                                                    <p class="text-muted">Loading fleet...</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </main>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- ==========================================
+         DELIVERY DETAILS MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="deliveryDetailsModal" tabindex="-1" role="dialog" aria-labelledby="deliveryDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content delivery-details-modal">
+                
+                <!-- MODAL HEADER -->
+                <div class="modal-header delivery-details-header">
+                    <h2 class="modal-title delivery-details-title" id="deliveryDetailsModalLabel">Delivery Details</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body delivery-details-body">
+                    <div id="deliveryDetailsLoading" class="text-center py-3">
+                        <i class="fas fa-spinner fa-spin"></i> Loading delivery details...
+                    </div>
+                    <div id="deliveryDetailsContent" style="display: none;">
+                        <!-- DELIVERY ID SECTION -->
+                        <div class="details-row">
+                            <span class="detail-label">Delivery ID:</span>
+                            <span class="detail-value" id="modal-delivery-id">-</span>
+                        </div>
+                        
+                        <!-- ORDER ID SECTION -->
+                        <div class="details-row">
+                            <span class="detail-label">Order ID:</span>
+                            <span class="detail-value" id="modal-order-id">-</span>
+                        </div>
+                        
+                        <!-- CUSTOMER SECTION -->
+                        <div class="details-row">
+                            <span class="detail-label">Customer:</span>
+                            <span class="detail-value" id="modal-customer-name">-</span>
+                        </div>
+                        
+                        <!-- DELIVERY ADDRESS SECTION -->
+                        <div class="details-row">
+                            <span class="detail-label">Delivery Address:</span>
+                            <span class="detail-value" id="modal-delivery-address">-</span>
+                        </div>
+                        
+                        <!-- PROGRESS SECTION -->
+                        <div class="details-row">
+                            <span class="detail-label">Status:</span>
+                            <span class="detail-value progress-status" id="modal-progress-status">-</span>
+                        </div>
+                        
+                        <!-- ORDERED PRODUCTS SECTION -->
+                        <div class="ordered-products-section" style="margin-top: 30px; border-top: 2px solid #e9ecef; padding-top: 20px;">
+                            <h5 class="section-title" style="margin-bottom: 15px; font-weight: 600; color: #333;">
+                                <i class="fas fa-box"></i> Ordered Products
+                            </h5>
+                            <div id="modal-ordered-products" class="products-list">
+                                <!-- Products will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="deliveryDetailsError" class="alert alert-danger" style="display: none;"></div>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer delivery-details-footer">
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="btn close-modal-btn" data-dismiss="modal">Close</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         DRIVER PROFILE MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="driverProfileModal" tabindex="-1" role="dialog" aria-labelledby="driverProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content driver-profile-modal">
+                
+                <!-- MODAL HEADER -->
+                <div class="modal-header driver-profile-header">
+                    <h2 class="modal-title driver-profile-title" id="driverProfileModalLabel">Driver Profile</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body driver-profile-body">
+                    
+                    <!-- DRIVER NAME SECTION -->
+                    <div class="details-row">
+                        <span class="detail-label">Name:</span>
+                        <span class="detail-value" id="modal-driver-profile-name">Juan Santos</span>
+                    </div>
+                    
+                    <!-- PHONE NUMBER SECTION -->
+                    <div class="details-row">
+                        <span class="detail-label">Phone:</span>
+                        <span class="detail-value" id="modal-driver-phone">+63 912 345 6789</span>
+                    </div>
+                    
+                    <!-- VEHICLE SECTION -->
+                    <div class="details-row">
+                        <span class="detail-label">Vehicle:</span>
+                        <span class="detail-value" id="modal-driver-vehicle">Truck-001 (ABC-1234)</span>
+                    </div>
+                    
+                    <!-- CURRENT DELIVERY SECTION -->
+                    <div class="details-row">
+                        <span class="detail-label">Current Delivery:</span>
+                        <span class="detail-value" id="modal-driver-delivery">DEL-2025-001</span>
+                    </div>
+                    
+                    <!-- LOCATION SECTION -->
+                    <div class="details-row">
+                        <span class="detail-label">Location:</span>
+                        <span class="detail-value" id="modal-driver-location">Phase 1, Bagong Silang, Caloocan City</span>
+                    </div>
+                    
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer driver-profile-footer">
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="btn close-modal-btn" data-dismiss="modal">Close</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ASSIGN DRIVER MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="assignDriverModal" tabindex="-1" role="dialog" aria-labelledby="assignDriverModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content delivery-details-modal">
+                
+                <!-- MODAL HEADER -->
+                <div class="modal-header delivery-details-header">
+                    <h2 class="modal-title delivery-details-title" id="assignDriverModalLabel">Assign Driver</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body delivery-details-body">
+                    <div class="mb-3">
+                        <p class="text-muted">Delivery: <strong id="assignDriverDeliveryCode"></strong></p>
+                        <p class="text-muted">Customer: <strong id="assignDriverCustomerName"></strong></p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Select Driver(s):</label>
+                        <small class="form-text text-muted d-block mb-2">You can select multiple drivers for this delivery.</small>
+                        <div id="driverCheckboxes" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px;">
+                            <!-- Drivers will be loaded dynamically as checkboxes -->
+                            <p class="text-muted">Loading drivers...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="assignDriverLoading" class="text-center py-3" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Assigning driver...
+                    </div>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer delivery-details-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmAssignDriverBtn">Assign Driver</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ASSIGN VEHICLE MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="assignVehicleModal" tabindex="-1" role="dialog" aria-labelledby="assignVehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content delivery-details-modal">
+                
+                <!-- MODAL HEADER -->
+                <div class="modal-header delivery-details-header">
+                    <h2 class="modal-title delivery-details-title" id="assignVehicleModalLabel">Assign Vehicle</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body delivery-details-body">
+                    <div class="mb-3">
+                        <p class="text-muted">Delivery: <strong id="assignVehicleDeliveryCode"></strong></p>
+                        <p class="text-muted">Customer: <strong id="assignVehicleCustomerName"></strong></p>
+                        <div class="form-group" style="display: none;">
+                            <p class="text-muted mb-0">Order Weight: <strong id="assignVehicleOrderWeight">-</strong></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Capacity Matching Suggestions -->
+                    <div id="capacitySuggestions" class="mb-3"></div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Select Vehicle(s):</label>
+                        <small class="form-text text-muted d-block mb-2">You can select multiple vehicles for this delivery. Vehicles are sorted by capacity suitability.</small>
+                        <div id="vehicleCheckboxes" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px;">
+                            <!-- Vehicles will be loaded dynamically as checkboxes -->
+                            <p class="text-muted">Loading vehicles...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="assignVehicleLoading" class="text-center py-3" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Assigning vehicle...
+                    </div>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer delivery-details-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmAssignVehicleBtn">Assign Vehicle</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ADD DRIVER MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="addDriverModal" tabindex="-1" role="dialog" aria-labelledby="addDriverModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content delivery-details-modal">
+                
+                <!-- MODAL HEADER -->
+                <div class="modal-header delivery-details-header">
+                    <h2 class="modal-title delivery-details-title" id="addDriverModalLabel">Add Delivery Driver</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body delivery-details-body">
+                    <form id="addDriverForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="driverFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="driverFirstName" placeholder="Enter first name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="driverLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="driverLastName" placeholder="Enter last name" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="driverMiddleName" class="form-label">Middle Name (Optional)</label>
+                            <input type="text" class="form-control" id="driverMiddleName" placeholder="Enter middle name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="driverEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="driverEmail" placeholder="Enter email address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="driverPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="driverPassword" placeholder="Enter password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="driverPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="driverPhone" placeholder="Enter phone number" required>
+                        </div>
+                        
+                        <div id="addDriverLoading" class="text-center py-3" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Adding driver...
+                        </div>
+                        
+                        <div id="addDriverError" class="alert alert-danger" style="display: none;"></div>
+                    </form>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer delivery-details-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmAddDriverBtn">Add Driver</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ADD FLEET VEHICLE MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="addFleetModal" tabindex="-1" role="dialog" aria-labelledby="addFleetModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content delivery-details-modal">
+                
+                <!-- MODAL HEADER -->
+                <div class="modal-header delivery-details-header">
+                    <h2 class="modal-title delivery-details-title" id="addFleetModalLabel">Add Fleet Vehicle</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body delivery-details-body">
+                    <form id="addFleetForm">
+                        <div class="form-group">
+                            <label for="vehicleModel" class="form-label">Vehicle Model <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="vehicleModel" placeholder="Enter vehicle model (e.g., Toyota Hiace, Isuzu NHR)" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="vehicleStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                            <select class="form-control" id="vehicleStatus" required>
+                                <option value="Available">Available</option>
+                                <option value="In Use">In Use</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="vehicleCapacity" class="form-label">Capacity <span class="text-danger">*</span></label>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" id="vehicleCapacity" placeholder="Enter capacity" step="0.01" min="0" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control" id="vehicleCapacityUnit" required>
+                                        <option value="kg" selected>kg</option>
+                                        <option value="g">g</option>
+                                        <option value="lb">lb</option>
+                                        <option value="oz">oz</option>
+                                        <option value="ton">ton</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="addFleetLoading" class="text-center py-3" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Adding vehicle...
+                        </div>
+                        
+                        <div id="addFleetError" class="alert alert-danger" style="display: none;"></div>
+                    </form>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer delivery-details-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmAddFleetBtn">Add Vehicle</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         EDIT FLEET VEHICLE MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="editFleetModal" tabindex="-1" role="dialog" aria-labelledby="editFleetModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content delivery-details-modal">
+                
+                <!-- MODAL HEADER -->
+                <div class="modal-header delivery-details-header">
+                    <h2 class="modal-title delivery-details-title" id="editFleetModalLabel">Edit Fleet Vehicle</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body delivery-details-body">
+                    <form id="editFleetForm">
+                        <input type="hidden" id="editVehicleId" value="">
+                        
+                        <div class="form-group">
+                            <label for="editVehicleModel" class="form-label">Vehicle Model <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editVehicleModel" placeholder="Enter vehicle model (e.g., Toyota Hiace, Isuzu NHR)" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="editVehicleStatus" class="form-label">Status <span class="text-danger">*</span></label>
+                            <select class="form-control" id="editVehicleStatus" required>
+                                <option value="Available">Available</option>
+                                <option value="In Use">In Use</option>
+                                <option value="Unavailable">Unavailable</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="editVehicleCapacity" class="form-label">Capacity <span class="text-danger">*</span></label>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" id="editVehicleCapacity" placeholder="Enter capacity" step="0.01" min="0" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control" id="editVehicleCapacityUnit" required>
+                                        <option value="kg" selected>kg</option>
+                                        <option value="g">g</option>
+                                        <option value="lb">lb</option>
+                                        <option value="oz">oz</option>
+                                        <option value="ton">ton</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="editFleetLoading" class="text-center py-3" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Updating vehicle...
+                        </div>
+                        
+                        <div id="editFleetError" class="alert alert-danger" style="display: none;"></div>
+                    </form>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer delivery-details-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmEditFleetBtn">Update Vehicle</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         FILTER DELIVERIES MODAL POPUP
+    ========================================== -->
+    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content delivery-details-modal">
+                
+                <!-- MODAL HEADER -->
+                <div class="modal-header delivery-details-header">
+                    <h2 class="modal-title delivery-details-title" id="filterModalLabel">Filter Deliveries</h2>
+                    <!-- CLOSE BUTTON -->
+                    <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <!-- MODAL BODY -->
+                <div class="modal-body delivery-details-body">
+                    <form id="filterForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="filterStatus" class="form-label">Status</label>
+                                    <select class="form-control" id="filterStatus">
+                                        <option value="all">All Statuses</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Preparing">Preparing</option>
+                                        <option value="Out for Delivery">Out for Delivery</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="filterDriver" class="form-label">Driver</label>
+                                    <select class="form-control" id="filterDriver">
+                                        <option value="all">All Drivers</option>
+                                        <option value="unassigned">Unassigned</option>
+                                        <!-- Drivers will be loaded dynamically -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="filterDateFrom" class="form-label">Date From</label>
+                                    <input type="date" class="form-control" id="filterDateFrom">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="filterDateTo" class="form-label">Date To</label>
+                                    <input type="date" class="form-control" id="filterDateTo">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="filterVehicle" class="form-label">Vehicle</label>
+                                    <select class="form-control" id="filterVehicle">
+                                        <option value="all">All Vehicles</option>
+                                        <option value="unassigned">Unassigned</option>
+                                        <!-- Vehicles will be loaded dynamically -->
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="filterCustomer" class="form-label">Customer Name</label>
+                                    <input type="text" class="form-control" id="filterCustomer" placeholder="Search by customer name">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="filterDeliveryCode" class="form-label">Delivery Code</label>
+                            <input type="text" class="form-control" id="filterDeliveryCode" placeholder="e.g., DEL-000001">
+                        </div>
+                        
+                        <div id="activeFilters" class="mb-3" style="display: none;">
+                            <strong>Active Filters:</strong>
+                            <div id="activeFiltersList" class="mt-2"></div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer delivery-details-footer">
+                    <button type="button" class="btn btn-secondary" id="clearFiltersBtn">Clear All</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="applyFiltersBtn">Apply Filters</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Delivery Timetable Modal -->
+    <div class="modal fade" id="timetableModal" tabindex="-1" role="dialog" aria-labelledby="timetableModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document" style="max-width: 95%;">
+            <div class="modal-content">
+                <div class="modal-header delivery-details-header">
+                    <h5 class="modal-title" id="timetableModalLabel">
+                        <i class="fas fa-calendar-alt mr-2"></i>Delivery Timetable
+                    </h5>
+                    <div class="d-flex align-items-center gap-2">
+                        <small class="text-muted">Uses customer preferred dates</small>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body p-3">
+                    <div id="timetableCalendar"></div>
+                    <div id="timetableEventDetail" class="mt-3 p-3 border rounded" style="display: none; background: #f8f9fa;">
+                        <h6 class="mb-2">Delivery Details</h6>
+                        <div id="timetableEventContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JavaScript Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+    
+    <!-- Admin Notification System (load early) -->
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    
+    <!-- Admin Order Notifications - Polls for new order notifications -->
+    <script src="../Admin_assets/js/admin-order-notifications.js"></script>
+    
+    <!-- Admin Notification Center - Mailbox for viewing all notifications -->
+    <script src="../Admin_assets/js/admin-notification-center.js"></script>
+
+    <!-- Driver Notifications (Delivery Driver role only) -->
+    <script src="../Admin_assets/js/driver-order-notifications.js"></script>
+    <script src="../Admin_assets/js/driver-notification-center.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <!-- Admin Authentication Check - MUST load first to verify session -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Load Deliveries from Database -->
+    <script src="../Admin_assets/js/load_deliveries.js"></script>
+    
+    <!-- Deliveries Admin UI Interactions -->
+    <script src="../Admin_assets/js/DeliveriesAdmin.js"></script>
+    
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== DRIVER MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="driver-bottom-nav" aria-label="Driver Mobile Navigation">
+        <a href="../Admin/DeliveriesAdmin.html" class="nav-item">
+            <i class="fas fa-truck"></i>
+            <span>Deliveries</span>
+        </a>
+        <button class="nav-item" id="driverNotificationsBtn" title="Notifications">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+            <span class="nav-badge" id="driverNotificationBadge" style="display: none;">0</span>
+        </button>
+        <a href="../Admin/AdminProfile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+    
+    <!-- ========== DRIVER BACK TO TOP BUTTON ========== -->
+    <button class="driver-back-to-top" id="driverBackToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    
+    <!-- Driver Mobile Navigation Script -->
+    <script>
+        // Driver bottom navigation active state
+        (function() {
+            if (window.innerWidth <= 767) {
+                const currentPath = window.location.pathname;
+                const navItems = document.querySelectorAll('.driver-bottom-nav .nav-item');
+                
+                navItems.forEach(item => {
+                    const href = item.getAttribute('href');
+                    if (href && currentPath.includes(href.split('/').pop())) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                // Notifications button click handler
+                const notificationsBtn = document.getElementById('driverNotificationsBtn');
+                if (notificationsBtn) {
+                    notificationsBtn.addEventListener('click', function() {
+                        const notificationsModal = document.getElementById('notificationsModal');
+                        if (notificationsModal && typeof jQuery !== 'undefined') {
+                            jQuery(notificationsModal).modal('show');
+                        }
+                    });
+                }
+                
+                // Sync notification badge
+                const driverBadge = document.getElementById('driverNotificationBadge');
+                const adminBadge = document.getElementById('notificationBadge');
+                if (driverBadge && adminBadge) {
+                    function syncBadge() {
+                        driverBadge.textContent = adminBadge.textContent;
+                        driverBadge.style.display = adminBadge.style.display;
+                    }
+                    // Sync on load
+                    syncBadge();
+                    // Watch for changes
+                    const observer = new MutationObserver(syncBadge);
+                    observer.observe(adminBadge, { childList: true, attributes: true, attributeFilter: ['style'] });
+                }
+            }
+        })();
+        
+        // Back to top functionality
+        (function() {
+            const backToTopBtn = document.getElementById('driverBackToTop');
+            if (!backToTopBtn) return;
+            
+            function toggleBackToTop() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            }
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            window.addEventListener('scroll', toggleBackToTop);
+            toggleBackToTop();
+        })();
+    </script>
+    
+</body>
+</html>

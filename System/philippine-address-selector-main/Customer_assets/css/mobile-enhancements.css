@@ -1,0 +1,1610 @@
+/* ========== MOBILE ENHANCEMENTS - BOOTSTRAP 4 RESPONSIVE ========== */
+/* Works WITH Bootstrap 4 grid system - enhances, doesn't break */
+
+/* TEST: If you see this in page source, CSS is loading! */
+
+/* ========== GLOBAL MOBILE SETTINGS ========== */
+:root {
+    --mobile-touch-target: 44px;
+    --mobile-spacing: 15px;
+    --mobile-font-base: 16px;
+    /* Ensure color variables are available */
+    --primary-red: #940909;
+    --orange: #FF9800;
+}
+
+/* Prevent text size adjustment on iOS */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* ========== BOOTSTRAP ENHANCEMENTS FOR MOBILE ========== */
+
+/* Ensure Bootstrap containers work properly on mobile */
+@media (max-width: 575.98px) {
+    .container {
+        padding-left: var(--mobile-spacing);
+        padding-right: var(--mobile-spacing);
+    }
+    
+    /* Prevent horizontal overflow */
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+}
+
+/* ========== MOBILE HEADER LAYOUT ========== */
+/* Order: Logo > Search Bar (center) > Notification > Cart > Profile > Hamburger Menu */
+
+/* Show hamburger menu on ALL mobile devices - portrait and landscape */
+/* Use multiple breakpoints to ensure visibility */
+@media (max-width: 991.98px) {
+    /* Header container - ensure proper flex layout */
+    .header .container-fluid,
+    .navbar-custom .container-fluid,
+    .matarix-header .container-fluid {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+        padding: 12px 15px !important;
+    }
+    
+    /* Logo - Left, smaller on mobile */
+    .header .logo,
+    .navbar-brand {
+        flex-shrink: 0 !important;
+        order: 1 !important;
+        margin-right: 0 !important;
+        width: auto !important;
+    }
+    
+    .header .logo img,
+    .navbar-brand img {
+        width: 80px !important;
+        height: 80px !important;
+        max-width: 80px !important;
+        object-fit: contain !important;
+    }
+    
+    /* Search Bar - Center, more prominent and accessible (only on MainPage) */
+    .header .search-box,
+    .header .search-container,
+    .navbar-custom .search-container,
+    .matarix-header .search-container {
+        flex: 1 1 auto !important;
+        order: 2 !important;
+        max-width: none !important;
+        margin: 0 6px !important;
+        min-width: 120px !important;
+        display: flex !important;
+        position: relative !important;
+    }
+    
+    /* Hide search bar on pages without it */
+    .header:not(:has(.search-container)) .header-icons,
+    .matarix-header:not(:has(.search-container)) .header-icons {
+        margin-left: auto !important;
+    }
+    
+    .header .search-box form,
+    .header .search-container form,
+    .navbar-custom .search-container form,
+    .matarix-header .search-container form {
+        width: 100% !important;
+        position: relative !important;
+        display: flex !important;
+    }
+    
+    .header .search-box input,
+    .header .search-container input,
+    .navbar-custom .search-container input,
+    .matarix-header .search-container input {
+        width: 100% !important;
+        font-size: 15px !important;
+        padding: 10px 45px 10px 12px !important;
+        border: none !important;
+        border-radius: 6px !important;
+        background: white !important;
+        min-height: 40px !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+    
+    .header .search-box input:focus,
+    .header .search-container input:focus,
+    .navbar-custom .search-container input:focus,
+    .matarix-header .search-container input:focus {
+        outline: 2px solid rgba(255,255,255,0.5) !important;
+        outline-offset: 2px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+    }
+    
+    .header .search-box .search-btn,
+    .header .search-container .search-btn,
+    .navbar-custom .search-container .search-btn,
+    .matarix-header .search-container .search-btn {
+        position: absolute !important;
+        right: 4px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        padding: 8px 12px !important;
+        font-size: 0.9rem !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+        border-radius: 4px !important;
+        background: var(--primary-red, #940909) !important;
+        border: none !important;
+        color: white !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .header .search-box .search-btn:hover,
+    .header .search-container .search-btn:hover,
+    .navbar-custom .search-container .search-btn:hover,
+    .matarix-header .search-container .search-btn:hover {
+        background: var(--secondary-red, #BE3030) !important;
+    }
+    
+    /* Icons Container - Right, compact */
+    .header .header-icons,
+    .navbar-custom .nav-icons,
+    .matarix-header .header-icons {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        flex-shrink: 0 !important;
+        order: 3 !important;
+        overflow: visible !important;
+        margin-left: auto !important;
+    }
+    
+    /* When no search bar, icons come right after logo */
+    .header .container-fluid:not(:has(.search-box)):not(:has(.search-container)) .header-icons,
+    .matarix-header .container-fluid:not(:has(.search-container)) .header-icons {
+        order: 2 !important;
+    }
+    
+    /* Force hamburger menu to be visible - override any d-lg-none classes */
+    .d-lg-none#sidebarToggle,
+    button.d-lg-none#sidebarToggle,
+    .navbar-icons.d-lg-none#sidebarToggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    /* Ensure hamburger menu is never hidden in icons container */
+    .header .header-icons #sidebarToggle,
+    .header .header-icons .mobile-menu-toggle,
+    .navbar-custom .nav-icons #sidebarToggle,
+    .matarix-header .header-icons #sidebarToggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Individual Icons - smaller but still touchable */
+    .header .header-icons a,
+    .header .header-icons button,
+    .navbar-custom .nav-icons a,
+    .navbar-custom .nav-icons button,
+    .matarix-header .header-icons a,
+    .matarix-header .header-icons button {
+        min-width: 40px !important;
+        min-height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.15rem !important;
+        padding: 8px !important;
+        border-radius: 4px !important;
+        transition: background-color 0.2s ease !important;
+    }
+    
+    .header .header-icons a:active,
+    .header .header-icons button:active,
+    .navbar-custom .nav-icons a:active,
+    .navbar-custom .nav-icons button:active,
+    .matarix-header .header-icons a:active,
+    .matarix-header .header-icons button:active {
+        background-color: rgba(255,255,255,0.15) !important;
+    }
+    
+    /* Notification icon - order 1 */
+    .header .header-icons a[href*="notification"],
+    .header .header-icons #customerNotificationsBtn,
+    .navbar-custom .nav-icons #customerNotificationsBtn,
+    .matarix-header .header-icons #customerNotificationsBtn,
+    .matarix-header .header-icons a[href*="notification"] {
+        order: 1 !important;
+    }
+    
+    /* Cart icon - order 2 */
+    .header .header-icons a[href*="Cart"],
+    .header .header-icons .cart-btn,
+    .navbar-custom .nav-icons .cart-btn,
+    .matarix-header .header-icons a[href*="Cart"] {
+        order: 2 !important;
+    }
+    
+    /* Profile icon - order 3 */
+    .header .header-icons a[href*="Profile"],
+    .header .header-icons a[href*="user"],
+    .header .header-icons .login-btn,
+    .navbar-custom .nav-icons .login-btn,
+    .matarix-header .header-icons a[href*="Profile"],
+    .matarix-header .header-icons a[href*="user"] {
+        order: 3 !important;
+    }
+    
+    /* Hamburger menu - Rightmost, order 4 - ALWAYS VISIBLE ON MOBILE */
+    .header .header-icons #sidebarToggle,
+    .header .header-icons .mobile-menu-toggle,
+    .header .header-icons .mobile-menu-toggle#sidebarToggle,
+    .navbar-custom .nav-icons #sidebarToggle,
+    .matarix-header .header-icons #sidebarToggle,
+    .matarix-header .header-icons .navbar-toggler#sidebarToggle,
+    .matarix-header .header-icons .navbar-toggler[id="sidebarToggle"] {
+        order: 4 !important;
+        margin-left: 0 !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        padding: 8px !important;
+        position: relative !important;
+        pointer-events: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: none !important;
+        border: none !important;
+        color: white !important;
+        font-size: 1.2rem !important;
+        cursor: pointer !important;
+        z-index: 1050 !important;
+    }
+    
+    /* Ensure hamburger menu icon (fa-bars) is visible */
+    .header .header-icons #sidebarToggle i,
+    .header .header-icons .mobile-menu-toggle i,
+    .navbar-custom .nav-icons #sidebarToggle i,
+    .matarix-header .header-icons #sidebarToggle i {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: white !important;
+    }
+}
+
+/* Extra small screens - optimize further */
+@media (max-width: 575.98px) {
+    .header .container-fluid,
+    .navbar-custom .container-fluid,
+    .matarix-header .container-fluid {
+        gap: 6px !important;
+        padding: 10px 12px !important;
+    }
+    
+    .header .logo img,
+    .navbar-brand img {
+        width: 80px !important;
+        height: 80px !important;
+        max-width: 80px !important;
+        object-fit: contain !important;
+    }
+    
+    .header .search-box input,
+    .header .search-container input,
+    .navbar-custom .search-container input,
+    .matarix-header .search-container input {
+        font-size: 14px !important;
+        padding: 9px 40px 9px 10px !important;
+        min-height: 38px !important;
+    }
+    
+    .header .header-icons a,
+    .header .header-icons button,
+    .navbar-custom .nav-icons a,
+    .navbar-custom .nav-icons button,
+    .matarix-header .header-icons a,
+    .matarix-header .header-icons button {
+        min-width: 38px !important;
+        min-height: 38px !important;
+        font-size: 1.1rem !important;
+        padding: 6px !important;
+    }
+    
+    /* Ensure hamburger menu is visible on extra small screens */
+    #sidebarToggle,
+    button#sidebarToggle,
+    .mobile-menu-toggle#sidebarToggle,
+    .navbar-toggler#sidebarToggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        min-width: 38px !important;
+        min-height: 38px !important;
+    }
+}
+
+/* ========== NAVBAR - BOOTSTRAP RESPONSIVE (NO HAMBURGER) ========== */
+/* Keep navigation visible, just scale it down */
+
+/* Show hamburger menu on ALL mobile devices - portrait and landscape */
+/* Use multiple breakpoints to ensure visibility on all screen sizes */
+@media (max-width: 991.98px) {
+    /* Show sidebar toggle button for hamburger menu - HIGHEST PRIORITY - OVERRIDE ALL OTHER RULES */
+    [id="sidebarToggle"],
+    button[id="sidebarToggle"],
+    #sidebarToggle,
+    button#sidebarToggle,
+    .mobile-menu-toggle[id="sidebarToggle"],
+    .mobile-menu-toggle#sidebarToggle,
+    .navbar-toggler[id="sidebarToggle"],
+    .navbar-toggler#sidebarToggle,
+    button.mobile-menu-toggle[id="sidebarToggle"],
+    button.navbar-toggler[id="sidebarToggle"],
+    .header-icons #sidebarToggle,
+    .header-icons .mobile-menu-toggle,
+    .nav-icons #sidebarToggle,
+    .matarix-header .header-icons #sidebarToggle,
+    .matarix-header .header-icons .navbar-toggler#sidebarToggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        padding: 8px !important;
+        margin: 0 !important;
+        position: relative !important;
+        left: auto !important;
+        pointer-events: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: none !important;
+        border: none !important;
+        color: white !important;
+        font-size: 1.2rem !important;
+        cursor: pointer !important;
+        z-index: 1050 !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(255,255,255,0.3) !important;
+    }
+}
+
+/* Additional breakpoint for larger phones/tablets in portrait */
+@media (max-width: 1199.98px) and (orientation: portrait) {
+    /* Ensure hamburger is visible on tablets in portrait */
+    #sidebarToggle,
+    button#sidebarToggle,
+    .mobile-menu-toggle#sidebarToggle,
+    .navbar-toggler#sidebarToggle,
+    .header-icons #sidebarToggle,
+    .nav-icons #sidebarToggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Force visibility on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    #sidebarToggle,
+    button#sidebarToggle,
+    .mobile-menu-toggle#sidebarToggle,
+    .navbar-toggler#sidebarToggle,
+    .header-icons #sidebarToggle,
+    .nav-icons #sidebarToggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+    
+    /* Style for mobile-menu-toggle button (used in Cart, ProductDetails, etc.) */
+    .mobile-menu-toggle[id="sidebarToggle"],
+    .mobile-menu-toggle#sidebarToggle,
+    button.mobile-menu-toggle[id="sidebarToggle"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        padding: 8px !important;
+        margin: 0 10px 0 0 !important;
+        position: relative !important;
+        left: auto !important;
+        pointer-events: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: none !important;
+        border: none !important;
+        color: white !important;
+        font-size: 1.2rem !important;
+        cursor: pointer !important;
+        z-index: 1050 !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: rgba(255,255,255,0.3) !important;
+    }
+    
+    /* Hide other hamburger menus (but not sidebar toggle) */
+    .navbar-toggler:not([id="sidebarToggle"]):not(#sidebarToggle),
+    button.navbar-toggler:not([id="sidebarToggle"]):not(#sidebarToggle),
+    .navbar-custom .navbar-toggler:not([id="sidebarToggle"]):not(#sidebarToggle),
+    button[data-toggle="collapse"]:not([id="sidebarToggle"]):not(#sidebarToggle),
+    .navbar-toggler-icon,
+    .navbar-toggler span:not([id="sidebarToggle"]),
+    button[type="button"].navbar-toggler:not([id="sidebarToggle"]):not(#sidebarToggle),
+    .mobile-menu-toggle:not([id="sidebarToggle"]):not(#sidebarToggle) {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+        pointer-events: none !important;
+    }
+    
+    /* Keep navbar always expanded - override Bootstrap collapse */
+    .navbar-collapse,
+    .navbar-collapse.collapse,
+    .navbar-collapse.collapsing,
+    #navbarNav {
+        display: flex !important;
+        flex-basis: auto !important;
+        visibility: visible !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+    
+    /* Override Bootstrap's collapse behavior */
+    .navbar-collapse.show {
+        display: flex !important;
+    }
+    
+    /* Navbar container - allow wrapping */
+    .navbar-custom .container {
+        flex-wrap: wrap;
+        padding: 0.5rem var(--mobile-spacing);
+    }
+    
+    /* Left group adjustments */
+    .navbar-left-group {
+        flex: 1 1 auto;
+        min-width: 0;
+        gap: 10px;
+    }
+    
+    /* Logo - appropriately sized on mobile */
+    .navbar-brand img {
+        width: 80px;
+        height: 80px;
+        max-width: 80px;
+        object-fit: contain;
+    }
+    
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    /* Navigation links - inline with logo */
+    .navbar-nav-inline {
+        display: flex !important;
+    }
+    
+    .navbar-nav-inline .navbar-nav {
+        display: flex !important;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0;
+        gap: 4px;
+    }
+    
+    .navbar-nav-inline .navbar-nav .nav-link {
+        padding: 4px 6px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        margin: 0 4px;
+    }
+    
+    /* Search bar - always visible, full width on small screens */
+    .navbar-custom .search-container.d-none,
+    .navbar-custom .search-container.d-lg-block,
+    .navbar-custom .search-container.d-none.d-lg-block,
+    .navbar-custom .search-container {
+        display: flex !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 8px 0 !important;
+        order: 3;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .search-container form {
+        width: 100%;
+        position: relative;
+        display: flex;
+    }
+    
+    .search-container .search-input {
+        font-size: 0.8rem;
+        padding: 6px 30px 6px 10px;
+        width: 100%;
+        height: 32px;
+    }
+    
+    .search-container .search-btn {
+        position: absolute;
+        right: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 4px 8px;
+        font-size: 0.75rem;
+        background: var(--primary-red);
+        border: none;
+        color: white;
+        border-radius: 3px;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        cursor: pointer;
+        height: 26px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Nav icons - always visible on right */
+    .nav-icons.d-none,
+    .nav-icons.d-lg-flex,
+    .nav-icons.d-none.d-lg-flex,
+    .navbar-custom .nav-icons,
+    .nav-icons {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 6px;
+        /* Keep icons on the far-right in the top row */
+        margin-left: auto !important;
+        margin-right: 0 !important;
+        justify-content: flex-end !important;
+        order: 3 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .nav-icons a {
+        min-width: 32px;
+        min-height: 32px;
+        padding: 4px;
+        font-size: 0.85rem;
+    }
+    
+    .nav-icons a.nav-link {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        margin: 0 2px;
+    }
+}
+
+/* Extra small screens - compact layout */
+@media (max-width: 575.98px) {
+    .navbar-custom {
+        padding: 0.5rem 0;
+    }
+    
+    .navbar-custom .container {
+        flex-wrap: wrap;
+        padding: 0 10px;
+    }
+    
+    .navbar-left-group {
+        gap: 6px;
+    }
+    
+    .navbar-brand {
+        margin-bottom: 0;
+    }
+    
+    .navbar-brand img {
+        width: 80px;
+        height: 80px;
+        max-width: 80px;
+        object-fit: contain;
+    }
+    
+    .navbar-nav-inline .navbar-nav {
+        gap: 2px;
+    }
+    
+    .navbar-nav-inline .navbar-nav .nav-link {
+        padding: 3px 5px;
+        font-size: 0.7rem;
+        margin: 0 2px;
+    }
+    
+    .nav-icons {
+        gap: 4px;
+    }
+    
+    .nav-icons a {
+        min-width: 30px;
+        min-height: 30px;
+        padding: 3px;
+        font-size: 0.8rem;
+    }
+    
+    .nav-icons a.nav-link {
+        font-size: 0.65rem;
+        padding: 3px 6px;
+        margin: 0;
+    }
+    
+    .search-container {
+        order: 3;
+        margin: 4px 0 !important;
+    }
+    
+    .search-container .search-input {
+        font-size: 0.75rem;
+        padding: 5px 28px 5px 8px;
+        height: 30px;
+    }
+    
+    .search-container .search-btn {
+        padding: 3px 6px;
+        font-size: 0.7rem;
+        height: 24px;
+        right: 2px;
+    }
+}
+
+/* ===== GLOBAL NAV ALIGNMENT OVERRIDES (Customer) =====
+   Ensures the top nav icons stay on the right even when other CSS sets margin: 0.
+*/
+/* Default: sticky. Pages can opt into fixed via .is-fixed */
+.navbar-custom {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1030 !important;
+}
+
+/* Fixed navbar option (so Categories dropdown is always available while scrolling) */
+.navbar-custom.is-fixed {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1030 !important;
+}
+
+/* Offset page content so it doesn't hide under fixed navbar */
+:root {
+    --fixed-navbar-offset: 120px;
+}
+
+@media (max-width: 991.98px) {
+    :root { --fixed-navbar-offset: 110px; }
+}
+
+@media (max-width: 575.98px) {
+    :root { --fixed-navbar-offset: 105px; }
+}
+
+body.has-fixed-navbar {
+    padding-top: var(--fixed-navbar-offset);
+}
+
+.navbar-custom .navbar-top-row {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+}
+
+.navbar-custom .navbar-top-row .navbar-brand {
+    order: 1 !important;
+}
+
+.navbar-custom .navbar-top-row .search-container {
+    order: 2 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+}
+
+.navbar-custom .navbar-top-row .nav-icons {
+    order: 3 !important;
+    margin-left: auto !important;
+    justify-content: flex-end !important;
+}
+
+/* Pages that use the simpler .header layout (Cart, Checkout, ProductDetails, etc.) */
+.header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1030 !important;
+}
+
+.header .header-icons {
+    margin-left: auto !important;
+    justify-content: flex-end !important;
+}
+
+/* ========== PRODUCT CARDS - BOOTSTRAP GRID ENHANCEMENT ========== */
+/* Works with Bootstrap col-* classes */
+
+@media (max-width: 767.98px) {
+    /* Product cards in 2 columns (Bootstrap col-6) */
+    .products-section .row {
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+    
+    .products-section .row > [class*="col-"] {
+        padding-left: 8px;
+        padding-right: 8px;
+        margin-bottom: 16px;
+    }
+    
+    /* Product card styling */
+    .product-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    
+    .product-image {
+        height: 140px;
+        overflow: hidden;
+    }
+    
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .product-info {
+        padding: 10px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .product-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+        margin-bottom: 6px;
+        min-height: 2.4em;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .product-price {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary-red);
+        margin-bottom: 8px;
+    }
+    
+    .add-to-cart-btn,
+    .btn-add-to-cart {
+        width: 100%;
+        min-height: 36px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        margin-top: auto;
+    }
+}
+
+@media (max-width: 575.98px) {
+    /* Keep 2 columns even on very small screens */
+    .products-section .row > [class*="col-"] {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    .product-image {
+        height: 130px;
+    }
+    
+    .product-title {
+        font-size: 0.8rem;
+    }
+}
+
+/* ========== CATEGORY CARDS - SHOPEE/LAZADA STYLE ========== */
+/* Compact, 3-4 columns on mobile */
+
+@media (max-width: 767.98px) {
+    .categories-section {
+        padding: 20px 0 !important;
+    }
+    
+    .categories-section .section-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* 3 columns using Bootstrap grid */
+    .categories-section .row {
+        margin-left: -6px;
+        margin-right: -6px;
+    }
+    
+    .categories-section .row > [class*="col-"] {
+        padding-left: 6px;
+        padding-right: 6px;
+        margin-bottom: 12px;
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    
+    .category-card {
+        height: auto !important;
+        min-height: 90px !important;
+        max-height: 100px !important;
+        padding: 12px 8px !important;
+        border-radius: 8px;
+    }
+    
+    .category-icon {
+        width: 35px !important;
+        height: 35px !important;
+        margin-bottom: 6px !important;
+    }
+    
+    .category-icon i {
+        font-size: 1.2rem !important;
+    }
+    
+    .category-title {
+        font-size: 0.7rem !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .categories-section .row > [class*="col-"] {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    
+    .category-card {
+        min-height: 85px !important;
+        padding: 10px 6px !important;
+    }
+    
+    .category-icon {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .category-title {
+        font-size: 0.65rem !important;
+    }
+}
+
+/* ========== HERO SECTION - BOOTSTRAP RESPONSIVE ========== */
+
+@media (max-width: 767.98px) {
+    .hero-section {
+        min-height: 60vh;
+        padding: 40px 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+        padding: 0 15px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 15px;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .floating-contact-btn {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+    }
+    
+    .floating-contact-btn i {
+        font-size: 0.65rem !important;
+        margin-right: 3px !important;
+    }
+}
+
+/* ========== BUTTONS - THUMB-FRIENDLY ========== */
+
+@media (max-width: 767.98px) {
+    .btn {
+        min-height: var(--mobile-touch-target);
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .btn-lg {
+        min-height: 48px;
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+    
+    .btn-sm {
+        min-height: 36px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ========== FORMS - BOOTSTRAP RESPONSIVE ========== */
+
+@media (max-width: 767.98px) {
+    .form-control {
+        font-size: var(--mobile-font-base);
+        padding: 10px 12px;
+        min-height: var(--mobile-touch-target);
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .input-group {
+        flex-wrap: wrap;
+    }
+    
+    .input-group-prepend,
+    .input-group-append {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+}
+
+/* ========== CARDS - BOOTSTRAP ENHANCEMENT ========== */
+
+@media (max-width: 767.98px) {
+    .card {
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .card-header {
+        padding: 15px;
+        font-size: 1rem;
+    }
+}
+
+/* ========== TABLES - BOOTSTRAP RESPONSIVE ========== */
+
+@media (max-width: 767.98px) {
+    .table-responsive {
+        border: none;
+    }
+    
+    .table {
+        font-size: 0.85rem;
+    }
+    
+    .table th,
+    .table td {
+        padding: 8px 4px;
+    }
+}
+
+/* ========== MODALS - BOOTSTRAP RESPONSIVE ========== */
+
+@media (max-width: 767.98px) {
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .modal-content {
+        border-radius: 8px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 15px;
+    }
+}
+
+/* ========== SPACING - BOOTSTRAP UTILITIES ENHANCEMENT ========== */
+
+@media (max-width: 767.98px) {
+    section {
+        padding: 30px 0;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .products-section,
+    .categories-section {
+        padding: 20px 0;
+    }
+}
+
+/* ========== FOOTER - BOOTSTRAP GRID ========== */
+
+@media (max-width: 767.98px) {
+    .footer {
+        padding: 30px 0 15px;
+    }
+    
+    .footer .row > [class*="col-"] {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .footer h5 {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+    }
+}
+
+/* ========== UTILITY CLASSES ========== */
+
+/* Global fix for horizontal scrolling */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    position: relative;
+}
+
+@media (max-width: 767.98px) {
+    /* Prevent squishing */
+    img, video, iframe {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Text wrapping */
+    p, h1, h2, h3, h4, h5, h6 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* No horizontal scroll - ensure all elements respect container */
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Ensure containers don't overflow */
+    .container,
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+        max-width: 100%;
+    }
+    
+    /* Fix for tables and wide content */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Ensure rows don't overflow */
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    
+    .row > [class*="col-"] {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+/* ========== TOUCH OPTIMIZATIONS ========== */
+
+@media (hover: none) and (pointer: coarse) {
+    a, button, input, select, textarea {
+        -webkit-tap-highlight-color: rgba(148, 9, 9, 0.2);
+    }
+    
+    .btn:active,
+    a:active,
+    button:active {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+}
+
+/* ========== MOBILE BOTTOM NAVIGATION BAR ========== */
+/* Only visible on mobile, hidden on desktop */
+
+@media (max-width: 767.98px) {
+    .mobile-bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 2px solid #e0e0e0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+    .mobile-bottom-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 12px;
+        color: #666;
+        text-decoration: none;
+        font-size: 0.7rem;
+        min-width: 60px;
+        min-height: 44px;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+    
+    .mobile-bottom-nav a i {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+    }
+    
+    .mobile-bottom-nav a.active {
+        color: var(--primary-red);
+    }
+    
+    .mobile-bottom-nav a:active {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+    
+    /* Badge on bottom nav items */
+    .mobile-bottom-nav .nav-badge {
+        position: absolute;
+        top: 2px;
+        right: 8px;
+        background: var(--orange);
+        color: white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 0.65rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        line-height: 1;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Add padding to body to prevent content from being hidden behind bottom nav */
+    body {
+        padding-bottom: 60px;
+    }
+    
+    /* Hide bottom nav on specific pages where it's not needed */
+    .no-bottom-nav .mobile-bottom-nav {
+        display: none;
+    }
+    
+    .no-bottom-nav body {
+        padding-bottom: 0;
+    }
+}
+
+/* Hide bottom nav on desktop */
+@media (min-width: 768px) {
+    .mobile-bottom-nav {
+        display: none !important;
+    }
+    
+    body {
+        padding-bottom: 0 !important;
+    }
+}
+
+/* ========== FORCE HAMBURGER MENU VISIBILITY ON TOUCH DEVICES ========== */
+/* This ensures hamburger menu is ALWAYS visible on mobile devices in both portrait and landscape */
+@media (hover: none) and (pointer: coarse) {
+    /* Target all touch devices (phones, tablets) - regardless of orientation */
+    #sidebarToggle,
+    button#sidebarToggle,
+    [id="sidebarToggle"],
+    button[id="sidebarToggle"],
+    .mobile-menu-toggle#sidebarToggle,
+    .mobile-menu-toggle[id="sidebarToggle"],
+    .navbar-toggler#sidebarToggle,
+    .navbar-toggler[id="sidebarToggle"],
+    .header-icons #sidebarToggle,
+    .header-icons .mobile-menu-toggle,
+    .nav-icons #sidebarToggle,
+    .matarix-header .header-icons #sidebarToggle,
+    .navbar-icons#sidebarToggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        padding: 8px !important;
+        margin: 0 !important;
+        position: relative !important;
+        left: auto !important;
+        pointer-events: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: none !important;
+        border: none !important;
+        color: white !important;
+        font-size: 1.2rem !important;
+        cursor: pointer !important;
+        z-index: 1050 !important;
+    }
+    
+    /* Ensure the hamburger icon (fa-bars) is visible */
+    #sidebarToggle i,
+    button#sidebarToggle i,
+    .mobile-menu-toggle#sidebarToggle i,
+    .navbar-toggler#sidebarToggle i,
+    .header-icons #sidebarToggle i,
+    .nav-icons #sidebarToggle i {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: white !important;
+    }
+}
+
+/* ========== STICKY NAVBAR ON MOBILE ========== */
+
+@media (max-width: 767.98px) {
+    .navbar-custom {
+        position: sticky;
+        top: 0;
+        z-index: 1001;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* Ensure search bar is always accessible */
+    .search-container {
+        position: relative;
+    }
+    
+    /* Ensure hamburger button is above navbar */
+    #sidebarToggle,
+    button#sidebarToggle,
+    .mobile-menu-toggle#sidebarToggle,
+    .navbar-toggler#sidebarToggle {
+        z-index: 1002 !important;
+        position: relative !important;
+    }
+}
+
+/* ========== MOBILE CART DRAWER ========== */
+
+@media (max-width: 767.98px) {
+    .cart-drawer {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 85%;
+        max-width: 400px;
+        height: 100vh;
+        height: 100dvh; /* Dynamic viewport height for mobile browsers */
+        background: white;
+        z-index: 2000;
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .cart-drawer.open {
+        right: 0;
+    }
+    
+    .cart-drawer-header {
+        padding: 15px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--primary-red);
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+    
+    .cart-drawer-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    
+    .cart-drawer-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
+    
+    .cart-drawer-close:active {
+        background: rgba(255,255,255,0.2);
+    }
+    
+    .cart-drawer-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+    }
+    
+    .cart-drawer-footer {
+        padding: 15px;
+        border-top: 1px solid #e0e0e0;
+        background: white;
+        position: sticky;
+        bottom: 0;
+    }
+    
+    .cart-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1999;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .cart-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+}
+
+/* Hide cart drawer on desktop */
+@media (min-width: 768px) {
+    .cart-drawer,
+    .cart-overlay {
+        display: none !important;
+    }
+}
+
+/* ========== MOBILE BACK TO TOP BUTTON ========== */
+
+@media (max-width: 767.98px) {
+    .back-to-top {
+        position: fixed;
+        bottom: 80px;
+        left: 15px;
+        background: var(--primary-red);
+        color: white;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 998;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 1.2rem;
+    }
+    
+    .back-to-top.visible {
+        display: flex;
+    }
+    
+    .back-to-top:active {
+        transform: scale(0.9);
+    }
+}
+
+@media (min-width: 768px) {
+    .back-to-top {
+        display: none !important;
+    }
+}
+
+/* ========== IMPROVED MOBILE NAVIGATION ========== */
+
+@media (max-width: 767.98px) {
+    /* Better spacing for navbar on mobile */
+    .navbar-bottom-row {
+        padding: 8px 0;
+    }
+    
+    .navbar-bottom-row .navbar-nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    
+    .navbar-bottom-row .navbar-nav .nav-link {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Dropdown menu improvements for mobile */
+    .dropdown-menu {
+        max-height: 70vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 12px;
+        margin-top: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    
+    .dropdown-item {
+        padding: 12px 20px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* ========== SKIP TO CONTENT LINK (ACCESSIBILITY) ========== */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-red);
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    z-index: 10000;
+    font-weight: 600;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid #fff;
+    outline-offset: -3px;
+}
+
+/* ========== MOBILE PRODUCT CARD IMPROVEMENTS ========== */
+
+@media (max-width: 767.98px) {
+    /* Better touch targets for product cards */
+    .product-card {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(148, 9, 9, 0.1);
+    }
+    
+    /* Quick action buttons on product cards */
+    .product-card-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+    }
+    
+    .product-card-actions .btn {
+        flex: 1;
+        min-height: 40px;
+    }
+}
+
+/* ========== MOBILE FORM IMPROVEMENTS ========== */
+
+@media (max-width: 767.98px) {
+    /* Better input focus on mobile */
+    .form-control:focus {
+        border-color: var(--primary-red);
+        box-shadow: 0 0 0 0.2rem rgba(148, 9, 9, 0.15);
+    }
+    
+    /* Larger checkbox and radio buttons */
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+    }
+    
+    /* Better select dropdowns */
+    select.form-control {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 40px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+}
+
+/* ========== PRINT STYLES ========== */
+
+@media print {
+    .navbar,
+    .floating-contact-btn,
+    .nav-icons,
+    .mobile-bottom-nav,
+    .back-to-top,
+    .cart-drawer,
+    .cart-overlay {
+        display: none !important;
+    }
+    
+    body {
+        padding-bottom: 0 !important;
+    }
+}

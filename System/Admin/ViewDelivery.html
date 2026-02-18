@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Details - MATARIX</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../Admin_assets/css/DeliveriesAdmin.css">
+    <link rel="stylesheet" href="../Admin_assets/css/ViewDelivery.css">
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+    <link rel="stylesheet" href="../Admin_assets/css/mobile-enhancements.css">
+    <link rel="stylesheet" href="../Admin_assets/css/admin-sidebar-fixed.css">
+</head>
+<body class="driver-page view-delivery-page">
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+                        <a href="../Admin/AdminProfile.html" class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        <ul class="nav-links">
+                            <li><a href="../Admin/OrdersAdmin.html" class="nav-link" id="orders-nav"><span>Orders</span></a></li>
+                            <li><a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav"><span>Inventory</span></a></li>
+                            <li><a href="../Admin/DeliveriesAdmin.html" class="nav-link active" id="deliveries-nav"><span>Deliveries</span></a></li>
+                            <li><a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav"><span>Sales and Reports</span></a></li>
+                            <li><a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav"><span>User Management</span></a></li>
+                        </ul>
+                    </nav>
+                    <div class="sidebar-footer">
+                        <button class="logout-button">Logout</button>
+                    </div>
+                </aside>
+
+                <main class="col-md-10 main-content">
+                    <div class="page-header">
+                        <a href="#" class="back-link" id="viewDeliveryBackBtn" title="Back to previous page">
+                            <i class="fas fa-arrow-left mr-2"></i>Back
+                        </a>
+                        <h1 class="page-title">Delivery Details</h1>
+                        <p class="page-subtitle">View delivery information and complete or cancel the delivery</p>
+                    </div>
+
+                    <div id="deliveryLoading" class="text-center py-5">
+                        <i class="fas fa-spinner fa-spin fa-2x"></i>
+                        <p class="mt-2 text-muted">Loading delivery details...</p>
+                    </div>
+
+                    <div id="deliveryError" class="alert alert-danger" style="display: none;">
+                        <i class="fas fa-exclamation-triangle mr-2"></i><span id="deliveryErrorText"></span>
+                        <a href="#" class="btn btn-sm btn-danger ml-3" id="viewDeliveryErrorBackBtn">Back</a>
+                    </div>
+
+                    <div id="deliveryContent" style="display: none;">
+                        <div class="card delivery-summary-card">
+                            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <span class="order-id"><i class="fas fa-truck mr-2"></i>Order <span id="orderIdDisplay">-</span></span>
+                                    <span class="badge status-badge ml-2" id="statusBadge">-</span>
+                                </div>
+                                <span class="amount" id="amountDisplay">₱0.00</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="info-grid">
+                                    <div class="info-block">
+                                        <h6><i class="fas fa-user mr-1"></i>Customer</h6>
+                                        <div class="info-line"><i class="fas fa-user"></i><span><strong id="customerName">-</strong></span></div>
+                                        <div class="info-line"><i class="fas fa-phone"></i><span id="customerPhone">-</span></div>
+                                        <div class="info-line"><i class="fas fa-map-marker-alt"></i><span id="customerAddress">-</span></div>
+                                    </div>
+                                    <div class="info-block">
+                                        <h6><i class="fas fa-info-circle mr-1"></i>Delivery info</h6>
+                                        <div class="info-line"><i class="fas fa-calendar"></i><span>Order date: <span id="orderDate">-</span></span></div>
+                                        <div class="info-line"><i class="fas fa-clock"></i><span>Available: <span id="availabilityDate">-</span></span></div>
+                                        <div class="info-line"><i class="fas fa-user-tie"></i><span>Driver: <span id="driverName">-</span></span></div>
+                                        <div class="info-line"><i class="fas fa-truck"></i><span>Vehicle: <span id="vehicleModel">-</span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card delivery-items-card">
+                            <div class="card-header"><i class="fas fa-box-open mr-2"></i>Items in this delivery</div>
+                            <div class="card-body">
+                                <table class="delivery-items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th class="text-center">Qty</th>
+                                            <th class="text-right">Unit price</th>
+                                            <th class="text-right">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="deliveryItemsBody">
+                                        <tr><td colspan="4" class="text-center text-muted py-4">No items</td></tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="delivery-total-row">
+                                            <td colspan="3" class="text-right">Order total</td>
+                                            <td class="text-right" id="deliveryItemsTotal">₱0.00</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card delivery-actions-card">
+                            <div class="actions-wrap">
+                                <button type="button" class="btn btn-success order-card-btn delivered-btn" id="completeDeliveryBtn" style="display: none;" data-delivery-id="" data-order-id="" data-customer-name="">
+                                    <i class="fas fa-check-circle mr-2"></i>Complete Delivery
+                                </button>
+                                <button type="button" class="btn btn-danger order-card-btn cancel-delivery-btn" id="cancelDeliveryBtn" style="display: none;" data-delivery-id="" data-order-id="" data-customer-name="">
+                                    <i class="fas fa-times-circle mr-2"></i>Cancel Delivery
+                                </button>
+                                <a href="../Admin/ViewReceipt.html" id="viewReceiptLink" class="btn btn-outline-primary mr-2" style="display: none;">
+                                    <i class="fas fa-receipt mr-2"></i>View Receipt
+                                </a>
+                                <a href="../Admin/ViewOrderAccept.html" id="viewFullOrderLink" class="btn btn-outline-secondary" style="display: none;">
+                                    <i class="fas fa-external-link-alt mr-2"></i>View full order details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    <script src="../Admin_assets/js/load_deliveries.js"></script>
+    <script src="../Admin_assets/js/load_delivery_details.js"></script>
+    <script>
+        (function () {
+            function goBack(e) { e.preventDefault(); history.back(); return false; }
+            document.getElementById('viewDeliveryBackBtn') && document.getElementById('viewDeliveryBackBtn').addEventListener('click', goBack);
+            document.getElementById('viewDeliveryErrorBackBtn') && document.getElementById('viewDeliveryErrorBackBtn').addEventListener('click', goBack);
+        })();
+    </script>
+</body>
+</html>

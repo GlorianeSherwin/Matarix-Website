@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Product Detail - Coco Lumber</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Customer_assets/css/ProductDetails.css">
+    <!-- Notifications System CSS - MUST load before scripts -->
+    <link href="../Customer_assets/css/notifications.css" rel="stylesheet">
+    <!-- Mobile Enhancements -->
+    <link href="../Customer_assets/css/mobile-enhancements.css" rel="stylesheet">
+    <!-- Minimum Order Notice -->
+    <link rel="stylesheet" href="../Customer_assets/css/min-order-notice.css">
+</head>
+<body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Header -->
+    <div class="header">
+        <div class="container-fluid">
+            <!-- Logo - Left -->
+            <div class="logo">
+                <a href="./MainPage.html">
+                    <img src="../Customer_assets/images/LOGO.png" alt="MATARIX Logo">
+                </a>
+            </div>
+            <!-- Icons - Right -->
+            <div class="header-icons">
+                <a href="notifications.html" style="color: white; text-decoration: none;">
+                    <i class="far fa-bell"></i>
+                </a>
+                <a href="../Customer/Cart.html" style="color: white; text-decoration: none;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" style="display: none;">0</span>
+                </a>
+                <a href="OrderSummary.html" style="color: white; text-decoration: none;" title="Order Summary">
+                    <i class="fas fa-clipboard-list"></i>
+                </a>
+                <a href="./CustomerProfile.html" style="color: white; text-decoration: none;">
+                    <i class="far fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay (for mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Start -->
+    <main id="main-content">
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="./MainPage.html" class="sidebar-item"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="./Quotation.html" class="sidebar-item"><i class="fas fa-cubes"></i> Materials</a></li>
+                <li><a href="./OrderSummary.html" class="sidebar-item"><i class="fas fa-box"></i> Orders</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Back Button -->
+            <div class="product-back-header mb-3">
+                <button type="button" class="btn-back" id="productDetailsBackBtn">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            
+            <!-- Product Detail Content -->
+            <div class="product-content">
+                <div class="row">
+                    <!-- Product Images Section -->
+                    <div class="col-12 col-md-4 mb-4 mb-md-0">
+                        <!-- Main Product Image -->
+                        <div class="main-product-image">
+                            <img src="../Customer_assets/images/PreviewMain.png" alt="Coco Lumber Main Image" class="img-fluid product-main-img">
+                        </div>
+                        
+                        <!-- Thumbnail Images -->
+                        <div class="thumbnail-images mt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="../Customer_assets/images/prev1.png" alt="Thumbnail 1" class="img-fluid thumbnail-img">
+                                </div>
+                                <div class="col-6">
+                                    <img src="../Customer_assets/images/prev2.png" alt="Thumbnail 2" class="img-fluid thumbnail-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Information Section -->
+                    <div class="col-12 col-md-8">
+                        <!-- Product Title -->
+                        <h2 class="product-title">Coco Lumber (Coconut Wood)</h2>
+                        
+                        <!-- Product Price -->
+                        <div class="product-price mb-4">
+                            <span class="price">₱165.00</span>
+                        </div>
+
+                        <!-- Minimum order notice (plain red text) -->
+                        <p class="min-order-notice min-order-notice--text" id="minOrderNoticeProduct" role="status" aria-live="polite">There's a minimum order of ₱<span id="minOrderAmountProduct">—</span> for FREE delivery.</p>
+
+                        <!-- Size Options (will be populated dynamically) -->
+                        <div class="size-options mb-4" id="sizeOptionsSection" style="display: none;">
+                            <div class="row" id="sizeOptionsContainer">
+                                <!-- Size options will be loaded dynamically here -->
+                            </div>
+                        </div>
+
+                        <!-- Length Options (will be populated dynamically) -->
+                        <div class="length-options mb-4" id="lengthOptionsSection" style="display: none;">
+                            <label class="option-label">Length Options:</label>
+                            <div class="length-buttons" id="lengthButtonsContainer">
+                                <!-- Length options will be loaded dynamically here -->
+                            </div>
+                        </div>
+
+                        <!-- Quantity Section -->
+                        <div class="quantity-section mb-4">
+                            <label class="option-label">Quantity:</label>
+                            
+                            <!-- Quantity Dropdown -->
+                            <div class="quantity-dropdown-container mb-3">
+                                <select class="quantity-dropdown" id="quantityDropdown">
+                                    <option value="1">1</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="250">250</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Manual Input (always visible for custom quantity) -->
+                            <div class="quantity-controls" id="manualQuantityControls">
+                                <!-- Decrease Quantity Button -->
+                                <button class="quantity-btn" type="button">-</button>
+                                
+                                <!-- Quantity Input Field -->
+                                <input type="number" class="quantity-input" id="quantityInput" value="1" min="1">
+                                
+                                <!-- Increase Quantity Button -->
+                                <button class="quantity-btn" type="button">+</button>
+                            </div>
+                            
+                            <!-- Stock Available -->
+                            <div class="stock-info mb-2">
+                                <span class="stock-available">520 stocks available</span>
+                            </div>
+                            
+                            <!-- Smart Quantity Suggestions -->
+                            <div class="smart-quantity-suggestions" id="smartQuantitySuggestions" style="display: none;">
+                                <div class="suggestions-header">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <strong>Suggested Quantities:</strong>
+                                </div>
+                                <div class="suggestions-list" id="suggestionsList">
+                                    <!-- Suggestions will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons mb-4">
+                            <!-- Add to Cart Button -->
+                            <a href="../Customer/Cart.html" class="btn btn-add-cart add-to-cart-btn" id="addToCartBtn">Add to Cart</a>
+                            
+                            <!-- Buy Now Button -->
+                        </div>
+
+                        <!-- Tab Navigation and Content Container -->
+                        <div class="product-tabs-container">
+                            <!-- Tab Navigation -->
+                            <ul class="nav nav-tabs custom-tabs" role="tablist">
+                                <!-- Description Tab -->
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#description">Description</a>
+                                </li>
+                                
+                                <!-- Specifications Tab -->
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab Content Container -->
+                            <div class="tab-content-container">
+                                <div class="tab-content">
+                                    <!-- Description Tab Content -->
+                                    <div class="tab-pane fade show active" id="description">
+                                        <div class="description-content">
+                                            <h5>Product Description</h5>
+                                            <p>Coco Lumber, also known as coconut wood or coconut palm lumber, is an innovative and sustainable building material made from coconut palm trees. This eco-friendly alternative to traditional hardwood offers excellent strength, durability, and workability for various construction and carpentry applications.</p>
+                                            
+                                            <p>Our coco lumber is sourced from mature coconut palms that have reached the end of their productive life cycle, making it a truly sustainable choice. The wood is properly seasoned, treated, and graded to ensure consistent quality and performance in construction applications.</p>
+
+                                            <h6>Key Features:</h6>
+                                            <ul>
+                                                <li>100% sustainable and renewable resource</li>
+                                                <li>High strength-to-weight ratio</li>
+                                                <li>Excellent workability and machinability</li>
+                                                <li>Natural resistance to pests and decay</li>
+                                                <li>Consistent grain pattern and density</li>
+                                                <li>Kiln-dried to optimal moisture content (12-15%)</li>
+                                                <li>Treated for enhanced durability</li>
+                                            </ul>
+
+                                            <h6>Applications:</h6>
+                                            <ul>
+                                                <li>Structural framing and construction</li>
+                                                <li>Concrete formwork and scaffolding</li>
+                                                <li>Furniture making and cabinetry</li>
+                                                <li>Flooring and decking applications</li>
+                                                <li>Interior and exterior trim work</li>
+                                                <li>Custom millwork and architectural elements</li>
+                                                <li>Temporary construction structures</li>
+                                            </ul>
+
+                                            <h6>Quality Assurance</h6>
+                                            <p>Each piece of coco lumber undergoes rigorous quality control including moisture content testing, strength grading, and visual inspection. Our lumber meets Philippine National Standards for structural applications and is suitable for both indoor and outdoor use when properly maintained.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Specifications Tab Content -->
+                                    <div class="tab-pane fade" id="specifications">
+                                        <div class="specifications-content">
+                                            <p>Specifications content will be loaded here...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+    <!-- Main Content End -->
+
+    <!-- Bootstrap 4 JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Notifications System - MUST load before auth_check.js for modal support -->
+    <script src="../Customer_assets/js/notifications.js"></script>
+    
+    <!-- Customer Authentication Check - MUST load first to verify session -->
+    <script src="../Customer_assets/js/customer_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Navigation Tracker - Handle origin-aware navigation -->
+    <script src="../Customer_assets/js/navigation-tracker.js"></script>
+    <!-- Cart Manager - Must load for cart functionality -->
+    <script src="../Customer_assets/js/cart_manager.js"></script>
+    
+    <!-- Minimum Order Notice: fetch amount from store settings -->
+    <script>
+        (function() {
+            var notice = document.getElementById('minOrderNoticeProduct');
+            var amountEl = document.getElementById('minOrderAmountProduct');
+            if (!notice || !amountEl) return;
+            fetch('../api/get_order_settings.php?t=' + Date.now())
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (!data.success || !data.settings) return;
+                    var disabled = data.settings.disable_minimum_order_value === true;
+                    var minVal = parseFloat(data.settings.min_order_value) || 0;
+                    if (disabled || minVal <= 0) return;
+                    var formatted = minVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    amountEl.textContent = formatted;
+                    notice.classList.add('is-visible');
+                })
+                .catch(function() {});
+        })();
+    </script>
+    
+    <!-- Load Product Details from Database -->
+    <script src="../Customer_assets/js/load_product_details.js"></script>
+    
+    <!-- Mobile Navigation Handler -->
+    <script src="../Customer_assets/js/mobile-navigation.js"></script>
+    
+    <!-- Product Details Back Button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backBtn = document.getElementById('productDetailsBackBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Go back to Quotation/Materials page, or use history if available
+                    if (document.referrer && document.referrer.includes('Quotation')) {
+                        window.location.href = 'Quotation.html';
+                    } else if (window.history.length > 1) {
+                        window.history.back();
+                    } else {
+                        window.location.href = 'Quotation.html';
+                    }
+                });
+            }
+        });
+    </script>
+    
+    <!-- Enhanced Mobile Navigation -->
+    <script src="../Customer_assets/js/mobile-navigation-enhanced.js"></script>
+    
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="./MainPage.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#products" class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="./OrderSummary.html" class="nav-item">
+            <i class="fas fa-box"></i>
+            <span>Orders</span>
+        </a>
+    </nav>
+    
+    <!-- ========== MOBILE CART DRAWER ========== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-drawer-content">
+            <p class="text-center text-muted">Cart items will load here</p>
+            <p class="text-center"><a href="./Cart.html" class="btn btn-primary-red">View Full Cart</a></p>
+        </div>
+        <div class="cart-drawer-footer">
+            <a href="./Cart.html" class="btn btn-primary-red btn-block">Go to Cart</a>
+        </div>
+    </div>
+    
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Sidebar Navigation -->
+    <script src="../Customer_assets/js/sidebar-navigation.js"></script>
+    <!-- Global Sidebar Toggle (Fallback) -->
+    <script src="../Customer_assets/js/sidebar-toggle-global.js"></script>
+    
+</body>
+</html>

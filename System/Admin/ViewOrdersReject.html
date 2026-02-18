@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATARIX Admin - View Orders (Reject)</title>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Admin_assets/css/ViewOrdersReject.css">
+    <!-- Admin Notification System -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+    <link rel="stylesheet" href="../Admin_assets/css/admin-sidebar-fixed.css">
+</head>
+<body>
+    
+    <!-- ==========================================
+         MAIN HEADER SECTION - DEFAULT FOR ALL ADMIN PAGES
+    ========================================== -->
+     <!-- MAIN HEADER SECTION -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <!-- MATARIX LOGO IMAGE -->
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty (Search removed) -->
+                <div class="col-md-4"></div>
+                
+                <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- EMAIL/MESSAGES ICON BUTTON -->
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+
+                        <!-- USER PROFILE ICON BUTTON -->
+                        <button class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+    <!-- ==========================================
+         MAIN LAYOUT CONTAINER
+    ========================================== -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- LEFT SIDEBAR NAVIGATION -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        
+                        <!-- SIDEBAR NAVIGATION LINKS -->
+                        <ul class="nav-links">
+                            <!-- ORDERS NAVIGATION LINK (ACTIVE) -->
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link active" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            
+                            <!-- INVENTORY NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            
+                            <!-- DELIVERIES NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            
+                            <!-- ANALYTICS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav">
+                                    <span>Sales and Reports</span>
+                                </a>
+                            </li>
+                            
+                            <!-- USER MANAGEMENT NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <!-- SIDEBAR FOOTER WITH LOGOUT BUTTON -->
+                    <div class="sidebar-footer">
+                        <button class="logout-button">Logout</button>
+                    </div>
+                </aside>
+                
+                <!-- ==========================================
+                     MAIN CONTENT AREA - ORDER DETAILS PAGE
+                ========================================== -->
+                <main class="col-md-10 main-content">
+                    
+                    <!-- CUSTOMER INFORMATION SECTION -->
+                    <div class="customer-info">
+                        <div class="customer-header">
+                            <div>
+                                <!-- CUSTOMER NAME AND VIEW PROFILE BUTTON -->
+                                <h2 class="customer-name">
+                                    Carla Mendoza 
+                                    <button class="view-profile-btn" id="view-profile-btn">View Profile</button>
+                                </h2>
+                                <!-- CUSTOMER ADDRESS AND PHONE -->
+                                <div class="customer-details">
+                                    <div>Blk 12 Daguipan St, Camarin, Caloocan City</div>
+                                    <div>09123456789</div>
+                                </div>
+                            </div>
+                            <!-- DELIVERY INFORMATION -->
+                            <div class="delivery-info">
+                                <div class="delivery-label">Estimated Delivery</div>
+                                <div class="delivery-date">June 5, 2025<br>10:00 AM</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUCTS TABLE SECTION -->
+                    <div class="products-table">
+                        <!-- TABLE HEADER -->
+                        <div class="table-header">
+                            <div class="row">
+                                <div class="col-md-3">Product Name</div>
+                                <div class="col-md-2 text-center">Quantity</div>
+                                <div class="col-md-2 text-center">Variation</div>
+                                <div class="col-md-2 text-center">Price</div>
+                                <div class="col-md-3 text-right">Total</div>
+                            </div>
+                        </div>
+                        
+                        <!-- PRODUCT ROW 1 - HOLLOW BLOCK -->
+                        <div class="product-row">
+                            <div class="row align-items-center">
+                                <!-- PRODUCT IMAGE AND NAME -->
+                                <div class="col-md-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="C:\Users\TUF GAMING\OneDrive\Desktop\MATARIX Website UI\MATARIX styles\HollowBlock.png" alt="Hollow Block" class="product-image mr-3">
+                                        <span class="product-name">Hollow Block</span>
+                                    </div>
+                                </div>
+                                <!-- QUANTITY -->
+                                <div class="col-md-2">
+                                    <div class="product-details">300</div>
+                                </div>
+                                <!-- VARIATION -->
+                                <div class="col-md-2">
+                                    <div class="product-details">190cm x 390cm</div>
+                                </div>
+                                <!-- PRICE -->
+                                <div class="col-md-2">
+                                    <div class="product-details">₱10.50</div>
+                                </div>
+                                <!-- TOTAL -->
+                                <div class="col-md-3">
+                                    <div class="price-detail">₱3,150.00</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- PRODUCT ROW 2 - MILD STEEL -->
+                        <div class="product-row">
+                            <div class="row align-items-center">
+                                <!-- PRODUCT IMAGE AND NAME -->
+                                <div class="col-md-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="C:\Users\TUF GAMING\OneDrive\Desktop\MATARIX Website UI\MATARIX styles\MildSteel.png" alt="Mild Steel" class="product-image mr-3">
+                                        <span class="product-name">Mild Steel</span>
+                                    </div>
+                                </div>
+                                <!-- QUANTITY -->
+                                <div class="col-md-2">
+                                    <div class="product-details">50</div>
+                                </div>
+                                <!-- VARIATION -->
+                                <div class="col-md-2">
+                                    <div class="product-details">6mmx4mx8ft</div>
+                                </div>
+                                <!-- PRICE -->
+                                <div class="col-md-2">
+                                    <div class="product-details">₱320</div>
+                                </div>
+                                <!-- TOTAL -->
+                                <div class="col-md-3">
+                                    <div class="price-detail">₱16,000.00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- TOTAL AMOUNT SECTION -->
+                    <div class="total-section">
+                                                        <div class="total-amount">₱19,150.00</div>
+                    </div>
+                    
+                     <!-- PAYMENT STATUS AND REJECT SECTION -->
+                    <div class="payment-status">
+                        <div class="payment-status-content">
+                            <div class="payment-info">
+                                <div class="payment-not-received">PAYMENT NOT RECEIVED</div>
+                                <div class="contact-customer">Contact Customer</div>
+                            </div>
+                            <!-- REJECT ORDER BUTTON -->
+                            <button class="reject-order-btn" id="reject-order-btn">Reject Order</button>
+                        </div>
+                    </div>
+                    
+                </main>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Admin Notification System (load early) -->
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    
+    <!-- Admin Order Notifications - Polls for new order notifications -->
+    <script src="../Admin_assets/js/admin-order-notifications.js"></script>
+    
+    <!-- Admin Notification Center - Mailbox for viewing all notifications -->
+    <script src="../Admin_assets/js/admin-notification-center.js"></script>
+    
+    <!-- Admin Authentication Check - MUST load first to verify session -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hide Reject Order for Admin and Store Employee -->
+    <script>
+        (function() {
+            var role = (sessionStorage.getItem('user_role') || '').trim();
+            if (role === 'Admin' || role === 'Store Employee') {
+                var btn = document.getElementById('reject-order-btn');
+                if (btn) btn.style.display = 'none';
+            }
+        })();
+    </script>
+</body>
+</html>

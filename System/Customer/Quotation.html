@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Request for Quotation - MATARIX Construction Supply</title>
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Customer_assets/css/Quotation.css">
+    <!-- Mobile Enhancements CSS -->
+    <link href="../Customer_assets/css/mobile-enhancements.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Main Content Start -->
+    <main id="main-content">
+    <!-- Header -->
+    <div class="header">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="./MainPage.html">
+                    <img src="../Customer_assets/images/LOGO.png" alt="MATARIX Logo">
+                </a>
+            </div>
+            <div class="search-box search-container">
+                <form onsubmit="return false;">
+                    <input type="text" class="search-input" placeholder="Search products...">
+                    <button type="button" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <div class="header-icons">
+                <a href="notifications.html" style="color: white; text-decoration: none;">
+                    <i class="far fa-bell"></i>
+                </a>
+                <a href="../Customer/Cart.html" style="color: white; text-decoration: none;">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="./CustomerProfile.html" style="color: white; text-decoration: none;">
+                    <i class="far fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="./MainPage.html" class="sidebar-item"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="./Quotation.html" class="sidebar-item active"><i class="fas fa-cubes"></i> Materials</a></li>
+                <li><a href="./OrderSummary.html" class="sidebar-item"><i class="fas fa-box"></i> Orders</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Breadcrumb Navigation -->
+            <div class="breadcrumb-nav">
+                <a href="#" id="homeLink" class="home-nav-link">Home</a> > Request for Quotation
+            </div>
+            
+            <h1 class="page-title">Request for Quotation</h1>
+            <div class="products-header">AVAILABLE PRODUCTS</div>
+
+            <!-- Products Wrapper -->
+            <div id="products">
+                <!-- Products will be loaded dynamically from the database -->
+            </div> <!-- Close products wrapper -->
+
+            <!-- Cart Summary Section -->
+            <div class="cart-summary-section">
+                <h2 class="cart-summary-title">
+                    <i class="fas fa-shopping-cart"></i> Selected Items for Quotation
+                </h2>
+                
+                <div class="cart-items-container" id="cartItemsContainer">
+                    <!-- Cart items will be dynamically inserted here -->
+                    <div class="empty-cart-message">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>No items selected yet. Click on products above to add them to your quotation request.</p>
+                    </div>
+                </div>
+
+                <div class="cart-totals">
+                    <div class="cart-summary-row">
+                        <span>Subtotal:</span>
+                        <span class="cart-subtotal">₱0.00</span>
+                    </div>
+                    <div class="cart-summary-row cart-total-row">
+                        <span>Total:</span>
+                        <span class="cart-total">₱0.00</span>
+                    </div>
+                </div>
+                
+                <!-- Download Quotation Button -->
+                <div class="quotation-actions" style="margin-top: 20px; text-align: center;">
+                    <button id="downloadQuotationBtn" class="btn btn-primary" style="background-color: #dc3545; border-color: #dc3545; padding: 12px 30px; font-size: 16px; font-weight: 600; border-radius: 5px; cursor: pointer; display: none;">
+                        <i class="fas fa-file-pdf mr-2"></i>Download Quotation PDF
+                    </button>
+                </div>
+            </div>
+        
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>matarixconstruction@gmail.com</span>
+                </div>
+                <div class="footer-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Pioneer St, Bgy. Kapitolyo, Pasig City, Metro Manila</span>
+                </div>
+                <div class="logo">
+                    <img src="../Customer_assets/images/LOGO.png" alt="MATARIX Logo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Authentication Check - MUST load first to verify session -->
+    <script src="../Customer_assets/js/customer_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Load Products from Database -->
+    <script src="../Customer_assets/js/load_quotation_products.js"></script>
+    
+    <!-- MATARIX Search System -->
+    <script src="../Customer_assets/js/Search.js"></script>
+    
+    <!-- Navigation Tracker - Handle origin-aware navigation -->
+    <script src="../Customer_assets/js/navigation-tracker.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Update Materials link to use origin-aware navigation
+            $('#materialsLink, .materials-nav-link').on('click', function(e) {
+                e.preventDefault();
+                if (window.NavigationTracker) {
+                    window.NavigationTracker.goToMaterials();
+                } else {
+                    // Fallback
+                    const origin = sessionStorage.getItem('navigationOrigin');
+                    if (origin === 'landing') {
+                        window.location.href = 'LandingPage.html#products';
+                    } else {
+                        window.location.href = 'MainPage.html#products';
+                    }
+                }
+            });
+            
+            // Update Home link to use origin-aware navigation
+            $('#homeLink, .home-nav-link').on('click', function(e) {
+                e.preventDefault();
+                if (window.NavigationTracker) {
+                    window.NavigationTracker.goHome();
+                } else {
+                    // Fallback
+                    const origin = sessionStorage.getItem('navigationOrigin');
+                    if (origin === 'landing') {
+                        window.location.href = 'LandingPage.html';
+                    } else {
+                        window.location.href = 'MainPage.html';
+                    }
+                }
+            });
+        });
+    </script>
+    </main>
+    <!-- Main Content End -->
+    
+    <!-- Enhanced Mobile Navigation -->
+    <script src="../Customer_assets/js/mobile-navigation-enhanced.js"></script>
+    
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="./MainPage.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#products" class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="./OrderSummary.html" class="nav-item">
+            <i class="fas fa-box"></i>
+            <span>Orders</span>
+        </a>
+    </nav>
+    
+    <!-- ========== MOBILE CART DRAWER ========== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-drawer-content">
+            <p class="text-center text-muted">Cart items will load here</p>
+            <p class="text-center"><a href="./Cart.html" class="btn btn-primary-red">View Full Cart</a></p>
+        </div>
+        <div class="cart-drawer-footer">
+            <a href="./Cart.html" class="btn btn-primary-red btn-block">Go to Cart</a>
+        </div>
+    </div>
+    
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    
+</body>
+</html>

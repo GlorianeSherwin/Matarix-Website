@@ -1,0 +1,200 @@
+/**
+ * Booking History Styles
+ */
+
+.booking-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.booking-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.booking-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.booking-header {
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.booking-order-number {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.booking-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-approved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-processing {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+.status-completed {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #842029;
+}
+
+.status-rejected {
+    background: #f8d7da;
+    color: #842029;
+}
+
+.booking-amount {
+    font-size: 20px;
+    color: #333;
+}
+
+.booking-body {
+    padding: 20px;
+}
+
+.booking-slot {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.booking-slot.preferred-slot {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+
+.booking-slot.alternative-slot {
+    background: white;
+    border: 1px solid #e9ecef;
+    font-size: 14px;
+}
+
+.slot-details {
+    flex: 1;
+}
+
+.slot-details strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.slot-date-time {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+.slot-date-time i {
+    color: #007bff;
+}
+
+.booking-alternatives {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e9ecef;
+}
+
+.booking-alternatives small {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.booking-actions {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.booking-footer {
+    padding: 12px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.booking-history-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.booking-history-empty i {
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .booking-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .booking-amount {
+        font-size: 18px;
+    }
+
+    .slot-date-time {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .booking-actions {
+        flex-direction: column;
+    }
+
+    .booking-actions .btn {
+        width: 100%;
+    }
+}
+

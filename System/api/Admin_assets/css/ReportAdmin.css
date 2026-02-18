@@ -1,0 +1,1314 @@
+/* ==========================================
+   MATARIX ADMIN DASHBOARD STYLES
+   File: reports-admin.css
+========================================== */
+
+/* ==========================================
+   1. GLOBAL STYLES
+========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* ==========================================
+   2. MAIN HEADER STYLES - DEFAULT FOR ALL ADMIN PAGES
+========================================== */
+
+/* Main Header Container */
+.main-header {
+    background-color: #444444;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* MATARIX Logo Image */
+.logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Header Actions Container */
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Header Action Buttons */
+.header-action-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.header-action-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   3. SIDEBAR NAVIGATION STYLES - DEFAULT FOR ALL ADMIN PAGES
+========================================== */
+
+/* Main Layout Container */
+.main-layout {
+    min-height: calc(100vh - 80px);
+}
+
+/* Sidebar Container */
+.sidebar-container {
+    background-color: #940909;
+    padding: 0;
+    min-height: calc(100vh - 80px);
+    position: relative;
+    width: 100%;
+    max-width: 175px; /* Reduced by 30% from 250px */
+}
+
+/* Navigation Links Container */
+.nav-links {
+    list-style: none;
+    padding: 0; 
+    margin: 0;
+}
+
+.nav-links li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    display: block;
+    padding: 30px 25px;
+    color: #e2e8f0;
+    border-bottom: 0.5px solid #4a5568;
+    transition: background-color 0.3s;
+    text-decoration: underline;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    background-color: rgba(255,255,255,0.2);
+    font-weight: 600;
+    border-left: 4px solid white;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+/* Logout Button */
+.logout-button {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* ==========================================
+   4. MAIN CONTENT STYLES
+========================================== */
+
+/* Main Content Container */
+.main-content {
+    background-color: #ffffff;
+    min-height: calc(100vh - 110px);
+    padding: 30px;
+}
+
+/* ==========================================
+   5. SALES AND ANALYTICS STYLES
+========================================== */
+
+/* Analytics Header */
+.analytics-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.analytics-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Analytics header actions container */
+.analytics-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Report period dropdown */
+.report-period-select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.report-period-select-wrapper .period-label {
+    font-size: 14px;
+    color: #6c757d;
+    margin: 0;
+}
+
+.report-period-select {
+    padding: 10px 16px;
+    border: 1px solid #e0e4e8;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #2c3e50;
+    background: white;
+    cursor: pointer;
+    min-width: 140px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.report-period-select:hover {
+    border-color: #adb5bd;
+}
+
+.report-period-select:focus {
+    outline: none;
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+/* View Customer Feedbacks button - MATARIX color scheme */
+.feedback-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #940909 0%, #BE3030 38%, #BC3131 68%, #911616 100%);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(148, 9, 9, 0.35);
+    transition: all 0.25s ease;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.feedback-btn:hover {
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(148, 9, 9, 0.45);
+}
+
+.feedback-btn i {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+/* Analytics Statistics Cards */
+.analytics-stats {
+    margin-bottom: 40px;
+}
+
+.analytics-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.analytics-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.card-header {
+    margin-bottom: 15px;
+}
+
+.card-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 4px 0;
+}
+
+.card-sublabel {
+    font-size: 12px;
+    color: #6c757d;
+    margin: 0;
+}
+
+.card-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 12px;
+}
+
+.card-change {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.card-change.positive {
+    color: #28a745;
+}
+
+.card-change.negative {
+    color: #dc3545;
+}
+
+/* Products Analytics Section */
+.products-analytics-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+}
+
+.products-header {
+    padding: 25px 30px 20px 30px;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.products-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.products-filters {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.products-filters .filter-btn {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #6c757d;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.products-filters .filter-btn.active {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.products-filters .filter-btn:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.products-filters .filter-btn.active:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+}
+
+/* Products Analytics Table */
+.products-subtitle {
+    font-size: 13px;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+.products-table-container {
+    padding: 0;
+}
+
+.products-analytics-table {
+    width: 100%;
+    margin-bottom: 0;
+    background-color: transparent;
+}
+
+.products-analytics-table thead th {
+    background-color: #f8f9fa;
+    border-top: none;
+    border-bottom: 2px solid #e9ecef;
+    padding: 18px 25px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.products-analytics-table tbody td {
+    padding: 20px 25px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.product-analytics-row {
+    transition: background-color 0.2s ease;
+}
+
+.product-analytics-row:hover {
+    background-color: #f8f9fa;
+}
+
+.product-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.revenue-amount {
+    font-weight: 600;
+    color: #2c3e50;
+    font-family: 'Courier New', monospace;
+}
+
+.units-sold {
+    color: #495057;
+    font-weight: 500;
+}
+
+.growth-percentage {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.growth-percentage.positive {
+    color: #28a745;
+}
+
+.growth-percentage.negative {
+    color: #dc3545;
+}
+
+.details-btn {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #495057;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.details-btn:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    color: #2c3e50;
+}
+
+.details-btn i {
+    font-size: 11px;
+}
+
+/* Report Actions */
+.report-actions {
+    padding: 25px 30px;
+    border-top: 1px solid #f1f3f4;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.export-report-btn, .generate-report-btn {
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.export-report-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.export-report-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.export-report-btn .fa-chevron-down {
+    font-size: 10px;
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+}
+
+/* Export Options Modal */
+#exportOptionsModal .modal-body .btn-lg {
+    padding: 20px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#exportOptionsModal .modal-body .btn-lg:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+#exportOptionsModal .modal-body .btn-lg i {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.generate-report-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.generate-report-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   6. RESPONSIVE DESIGN
+========================================== */
+
+/* Tablet Styles */
+@media (max-width: 992px) {
+    .main-content {
+        padding: 20px;
+    }
+    
+    .analytics-title {
+        font-size: 28px;
+    }
+    
+    .analytics-header .row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .analytics-header-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .report-period-select {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .analytics-card {
+        margin-bottom: 20px;
+    }
+    
+    .products-header .row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .products-filters {
+        justify-content: flex-start;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .sidebar-container {
+        position: fixed;
+        left: -250px;
+        top: 110px;
+        height: calc(100vh - 110px);
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+    
+    .sidebar-container.active {
+        left: 0;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+    
+    .analytics-title {
+        font-size: 24px;
+    }
+    
+    .analytics-card {
+        padding: 20px 15px;
+        margin-bottom: 15px;
+    }
+    
+    .card-value {
+        font-size: 24px;
+    }
+    
+    .products-analytics-table {
+        font-size: 12px;
+        min-width: 600px;
+    }
+    
+    .products-table-container {
+        overflow-x: auto;
+    }
+    
+    .products-analytics-table thead th,
+    .products-analytics-table tbody td {
+        padding: 12px 8px;
+    }
+    
+    .report-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .export-report-btn, .generate-report-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 576px) {
+    .logo-image {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .header-action-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+    
+    .nav-link {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    
+    .analytics-title {
+        font-size: 20px;
+    }
+    
+    .analytics-card {
+        padding: 15px;
+    }
+    
+    .card-value {
+        font-size: 20px;
+    }
+    
+    .products-title {
+        font-size: 18px;
+    }
+    
+    .products-filters {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .products-filters .filter-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ==========================================
+   10. REPORT MODAL STYLES
+========================================== */
+
+/* Bond Paper Size: 8.5" x 11" Portrait (816px x 1056px at 96dpi) */
+.report-summary {
+    padding: 0;
+    background: white;
+    width: 8.5in;
+    max-width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+@media print {
+    @page {
+        size: letter portrait;
+        margin: 0.5in;
+    }
+    
+    .report-summary {
+        width: 100%;
+        max-width: 100%;
+        min-height: auto;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    #reportModal .modal-dialog {
+        max-width: 100%;
+        margin: 0;
+        width: 100%;
+    }
+    
+    #reportModal .modal-content {
+        border: none;
+        box-shadow: none;
+        width: 100%;
+    }
+    
+    #reportModal .modal-header,
+    #reportModal .modal-footer {
+        display: none;
+    }
+    
+    #reportModal .modal-body {
+        padding: 0;
+        overflow: visible;
+        width: 100%;
+    }
+    
+    .report-header {
+        padding: 10px 15px;
+        margin-bottom: 10px;
+    }
+    
+    .sales-report-table {
+        font-size: 9px;
+    }
+    
+    .sales-report-table thead th,
+    .sales-report-table tbody td {
+        padding: 4px 3px;
+    }
+}
+
+/* Report Header */
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    border-bottom: 3px solid #dc3545;
+    margin-bottom: 12px;
+}
+
+.report-header-left {
+    flex: 1;
+}
+
+.report-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #dc3545;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.company-info {
+    margin-top: 5px;
+}
+
+.company-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.company-details {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.report-header-right {
+    text-align: right;
+}
+
+.report-dates {
+    background: white;
+    border: 2px solid #dc3545;
+    border-radius: 4px;
+    padding: 10px 12px;
+    min-width: 160px;
+    max-width: 180px;
+}
+
+.date-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 5px;
+}
+
+.date-range {
+    font-size: 11px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.date-range div {
+    font-weight: 500;
+}
+
+/* Report Sections */
+.report-section {
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.report-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #dc3545;
+}
+
+.section-header i {
+    color: #dc3545;
+    font-size: 20px;
+}
+
+.section-badge {
+    margin-left: auto;
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Table Label and Value Styles */
+.table-label {
+    font-weight: 600;
+    color: #495057;
+    padding: 12px 20px;
+    background-color: #f8f9fa;
+    width: 40%;
+    vertical-align: middle;
+}
+
+.table-label i {
+    color: #dc3545;
+    margin-right: 8px;
+    width: 20px;
+}
+
+.table-value {
+    padding: 12px 20px;
+    color: #333;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+/* Table Styles */
+.table-container {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #e9ecef;
+}
+
+.report-table {
+    width: 100%;
+    margin: 0;
+    background: white;
+    border-collapse: collapse;
+}
+
+.report-table thead {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+}
+
+.report-table thead th {
+    padding: 15px 20px;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+    border: none;
+}
+
+.report-table thead th i {
+    margin-right: 8px;
+    opacity: 0.9;
+}
+
+.report-table tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s ease;
+}
+
+.report-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.report-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.report-table tbody td {
+    padding: 15px 20px;
+    font-size: 14px;
+    color: #333;
+    vertical-align: middle;
+}
+
+/* Sales Report Table - Detailed Format */
+.sales-report-table {
+    width: 100%;
+    margin: 0;
+    background: white;
+    border-collapse: collapse;
+    font-size: 10px;
+    table-layout: fixed;
+}
+
+.sales-report-table thead {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+}
+
+.sales-report-table thead th {
+    padding: 6px 4px;
+    font-weight: 600;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    text-align: left;
+    border: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sales-report-table thead th:nth-child(1) { width: 9%; } /* Month */
+.sales-report-table thead th:nth-child(2) { width: 10%; } /* Date */
+.sales-report-table thead th:nth-child(3) { width: 10%; } /* Cost */
+.sales-report-table thead th:nth-child(4) { width: 11%; } /* Invoice # */
+.sales-report-table thead th:nth-child(5) { width: 12%; } /* Sales Rep */
+.sales-report-table thead th:nth-child(6) { width: 12%; } /* Total */
+.sales-report-table thead th:nth-child(7) { width: 12%; } /* Paid */
+.sales-report-table thead th:nth-child(8) { width: 12%; } /* Balance Due */
+
+.sales-report-table tbody tr {
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.15s ease;
+}
+
+.sales-report-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.sales-report-table tbody tr:hover {
+    background-color: #fff5f5;
+}
+
+.sales-report-table tbody td {
+    padding: 5px 4px;
+    color: #333;
+    vertical-align: middle;
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sales-report-table tbody td:first-child {
+    font-weight: 500;
+    color: #495057;
+}
+
+.month-total-row {
+    background-color: #fff5f5 !important;
+    border-top: 2px solid #dc3545;
+    border-bottom: 2px solid #dc3545;
+}
+
+.month-total-row td {
+    padding: 6px 4px;
+    font-size: 10px;
+}
+
+.month-total-row:hover {
+    background-color: #ffe5e5 !important;
+}
+
+/* Info table (no header) */
+.report-table:not(:has(thead)) tbody tr {
+    border-bottom: 1px solid #e9ecef;
+}
+
+.report-table:not(:has(thead)) tbody tr:last-child {
+    border-bottom: none;
+}
+
+.product-name-cell {
+    font-weight: 500;
+    color: #333;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.rank-badge {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.rank-badge.rank-gold {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #333;
+}
+
+.rank-badge.rank-silver {
+    background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+    color: #333;
+}
+
+.rank-badge.rank-bronze {
+    background: linear-gradient(135deg, #cd7f32 0%, #e8a87c 100%);
+    color: white;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Modal Header & Footer */
+#reportModal .modal-header {
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    padding: 20px 25px;
+}
+
+#reportModal .modal-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#reportModal .modal-body {
+    padding: 15px;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+}
+
+#reportModal .modal-footer {
+    border-top: 2px solid #dc3545;
+    padding: 15px 25px;
+    background-color: #fff5f5;
+}
+
+#reportModal .modal-content {
+    border: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .sales-report-table {
+        font-size: 12px;
+    }
+    
+    .sales-report-table thead th,
+    .sales-report-table tbody td {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .report-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .report-header-right {
+        text-align: left;
+    }
+    
+    .table-label,
+    .table-value {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .report-table thead th,
+    .report-table tbody td {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+    
+    .table-label {
+        width: 35%;
+    }
+    
+    .sales-report-table {
+        font-size: 11px;
+    }
+    
+    .sales-report-table thead th,
+    .sales-report-table tbody td {
+        padding: 6px 8px;
+    }
+    
+    #reportModal .modal-dialog {
+        margin: 10px;
+    }
+}
+
+/* ==========================================
+   11. PRODUCT DETAILS MODAL STYLES
+========================================== */
+
+.product-details-container {
+    padding: 0;
+}
+
+.product-header-section {
+    padding: 20px;
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    border-bottom: 2px solid #dc3545;
+    margin-bottom: 20px;
+}
+
+.product-name-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #dc3545;
+    margin-bottom: 12px;
+}
+
+.product-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+}
+
+.product-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.product-meta i {
+    color: #dc3545;
+}
+
+.product-category {
+    color: #666;
+}
+
+.product-price {
+    font-weight: 600;
+    color: #333;
+}
+
+.product-analytics-section,
+.product-section {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.product-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #dc3545;
+}
+
+.section-title i {
+    color: #dc3545;
+    margin-right: 8px;
+}
+
+.analytics-card-small {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.analytics-card-small:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.analytics-card-small .card-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.analytics-card-small .card-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.analytics-card-small .card-change {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#productDetailsModal .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#productDetailsModal .table {
+    font-size: 13px;
+}
+
+#productDetailsModal .table thead {
+    background-color: #f8f9fa;
+}
+
+#productDetailsModal .table thead th {
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #dc3545;
+    font-size: 12px;
+    text-transform: uppercase;
+}

@@ -1,0 +1,27 @@
+/* ==========================================
+   Minimum Order Value Notice
+   Noticeable but minimal (main page & product details)
+   ========================================== */
+
+.min-order-notice {
+    display: none; /* Shown by JS when min order value > 0 */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #940909; /* Brand red */
+    line-height: 1.4;
+    margin: 0 0 0.75rem 0;
+}
+
+.min-order-notice.is-visible {
+    display: block;
+}
+
+/* Text variant: subtle background + accent so it stands out */
+.min-order-notice--text {
+    background: rgba(148, 9, 9, 0.06);
+    border-left: 4px solid #940909;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 1px 3px rgba(148, 9, 9, 0.08);
+}

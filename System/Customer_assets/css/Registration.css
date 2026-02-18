@@ -1,0 +1,382 @@
+/* AdminRegistration.css - Registration Form Styles */
+
+/* ===== BODY STYLES ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* ===== BACKGROUND SECTION ===== */
+/* BACKGROUND CONTAINER with placeholder image */
+.background-container {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('../images/BackgroundLoginRegistration.png'); /* Background image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #4a4a4a; /* Fallback gray color matching reference */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ===== REGISTRATION FORM CONTAINER ===== */
+.registration-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 25px 35px;
+    max-width: 650px;
+    width: 90%;
+    max-height: 96vh;
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
+    margin: 15px auto;
+    box-sizing: border-box;
+}
+
+/* ===== LOGO SECTION ===== */
+.logo-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* LOGO IMAGE - Replace with your actual logo */
+.logo-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* ===== FORM TITLE ===== */
+.form-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #0B1046;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+/* ===== FORM SECTION ===== */
+.registration-form {
+    width: 100%;
+}
+
+.form-row {
+    margin-bottom: 12px;
+}
+
+.form-row.row {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.form-row.row > [class*="col-"] {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* FORM LABELS */
+.form-label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+/* PASSWORD INPUT WRAPPER */
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* FORM INPUT FIELDS */
+.form-input {
+    width: 100%;
+    padding: 9px 11px;
+    border: 2px solid #e0e0e0;
+    border-radius: 7px;
+    font-size: 13px;
+    background-color: #f5f5f5; /* Light gray background matching reference */
+    transition: all 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+    line-height: 1.4;
+}
+
+/* Password input fields need extra right padding for toggle button */
+.password-input-wrapper .form-input {
+    padding-right: 40px;
+}
+
+/* PASSWORD TOGGLE BUTTON */
+.password-toggle-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 8px;
+    color: #666;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    outline: none;
+    z-index: 10;
+}
+
+.password-toggle-btn:hover {
+    color: #d32f2f;
+}
+
+.password-toggle-btn:focus {
+    color: #d32f2f;
+    outline: none;
+}
+
+.password-toggle-btn i {
+    pointer-events: none;
+}
+
+/* INPUT FIELD FOCUS STATE */
+.form-input:focus {
+    border-color: #d32f2f; /* Red border on focus */
+    background-color: white;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.2);
+}
+
+.form-input::placeholder {
+    color: #999;
+    font-size: 13px;
+}
+
+/* Password helper text */
+.password-help-text {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+    line-height: 1.3;
+}
+
+.password-match-text {
+    display: block;
+    font-size: 11px;
+    margin-top: 4px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.password-match-text.match {
+    color: #28a745;
+}
+
+.password-match-text.mismatch {
+    color: #dc3545;
+}
+
+.form-input.password-mismatch {
+    border-color: #dc3545;
+}
+
+.form-input.password-match {
+    border-color: #28a745;
+}
+
+/* FULL WIDTH ADDRESS FIELD */
+.address-field {
+    grid-column: span 2;
+}
+
+/* ===== SIGN UP BUTTON ===== */
+.signup-button {
+    background-color: #d32f2f; /* Red color matching reference */
+    color: white;
+    border: none;
+    padding: 9px 32px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 18px auto 12px;
+    min-width: 140px;
+}
+
+/* SIGN UP BUTTON HOVER EFFECT */
+.signup-button:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+}
+
+/* ===== LOGIN LINK SECTION ===== */
+.login-link-section {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.login-text {
+    color: #666;
+    font-size: 14px;
+}
+
+/* LOGIN LINK */
+.login-link {
+    color: #d32f2f;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.login-link:hover {
+    color: #b71c1c;
+    text-decoration: underline;
+}
+
+/* ===== TERMS OF SERVICE LINK SECTION ===== */
+.terms-link-section {
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+/* TERMS OF SERVICE LINK */
+.terms-link {
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.terms-link:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (min-width: 1200px) {
+    .registration-container {
+        max-width: 700px;
+        padding: 28px 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .registration-container {
+        max-width: 600px;
+        padding: 25px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .background-container {
+        padding: 15px;
+    }
+    
+    .registration-container {
+        padding: 22px 20px;
+        margin: 10px;
+        max-height: 98vh;
+    }
+
+    .form-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .logo-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .form-row {
+        margin-bottom: 11px;
+    }
+
+    .form-row .col-md-6 {
+        margin-bottom: 11px;
+    }
+    
+    .form-label {
+        font-size: 11px;
+        margin-bottom: 3px;
+    }
+    
+    .form-input {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    
+    .signup-button {
+        padding: 8px 28px;
+        font-size: 13px;
+        margin: 15px auto 12px;
+    }
+    
+    .login-link-section {
+        font-size: 12px;
+    }
+    
+    .terms-link-section {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .background-container {
+        padding: 10px;
+    }
+    
+    .registration-container {
+        padding: 20px 15px;
+        max-height: 99vh;
+    }
+
+    .form-title {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+    
+    .logo-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .form-row {
+        margin-bottom: 10px;
+    }
+    
+    .form-label {
+        font-size: 10px;
+    }
+    
+    .form-input {
+        padding: 7px 9px;
+        font-size: 11px;
+    }
+    
+    .signup-button {
+        padding: 7px 25px;
+        font-size: 12px;
+    }
+}

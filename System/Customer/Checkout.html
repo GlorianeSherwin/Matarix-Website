@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>MATARIX - Checkout</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../Customer_assets/css/Checkout.css" rel="stylesheet">
+    <!-- Notification System CSS -->
+    <link href="../Customer_assets/css/notifications.css" rel="stylesheet">
+    <!-- Calendar Scheduler CSS -->
+    <link href="../Customer_assets/css/calendar-scheduler.css" rel="stylesheet">
+    <!-- Mobile Enhancements -->
+    <link href="../Customer_assets/css/mobile-enhancements.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- HEADER NAVIGATION -->
+    <nav class="navbar navbar-expand-lg matarix-header">
+        <div class="container-fluid">
+            <!-- LOGO - Left -->
+            <a class="navbar-brand" href="MainPage.html">
+                <img src="../Customer_assets/images/LOGO.png" alt="MATARIX Logo" height="50" class="logo-img d-none d-md-inline">
+                <span class="d-md-none">MATARIX</span>
+            </a>
+            
+            <!-- HEADER ICONS - Right -->
+            <div class="ml-auto header-icons">
+                <a href="#" class="navbar-icons">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <a href="./Cart.html" class="navbar-icons">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="OrderSummary.html" class="navbar-icons" title="Order Summary">
+                    <i class="fas fa-clipboard-list"></i>
+                </a>
+                <a href="./CustomerProfile.html" class="navbar-icons">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay (for mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Start -->
+    <main id="main-content">
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="./MainPage.html" class="sidebar-item"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="./Quotation.html" class="sidebar-item"><i class="fas fa-cubes"></i> Materials</a></li>
+                <li><a href="./OrderSummary.html" class="sidebar-item"><i class="fas fa-box"></i> Orders</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- MAIN CONTENT AREA -->
+            <div class="main-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1 class="checkout-title mb-0">Checkout</h1>
+                    <button class="btn btn-outline-secondary" onclick="window.history.back()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- DELIVERY INFORMATION -->
+                        <div class="card matarix-card">
+                            <div class="matarix-card-header">
+                                <h5><i class="fas fa-truck mr-2"></i>Delivery Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="delivery-info">
+                                        <p class="customer-name">Loading...</p>
+                                        <p class="customer-address">Loading address...</p>
+                                        <p class="customer-phone"><i class="fas fa-phone mr-2"></i>Loading phone...</p>
+                                    </div>
+                                    <button class="btn btn-outline-danger btn-sm" id="editProfileBtn">
+                                        <i class="fas fa-edit mr-1"></i>Edit
+                                    </button>
+                                </div>
+                                
+                                <!-- Delivery method (read-only; set on Cart) -->
+                                <div class="delivery-method-display mb-3 p-2 rounded" style="background: #f8f9fa;">
+                                    <strong>Delivery method:</strong> <span id="checkoutDeliveryMethodText">—</span>
+                                    <a href="Cart.html" class="ml-2 small">Change (back to Cart)</a>
+                                </div>
+                                
+                                <!-- Calendar: Delivery date and time (Standard Delivery and Pick Up) -->
+                                <div class="mt-3" id="calendarDeliverySection">
+                                    <h5 class="mb-3" id="calendarSectionTitle">
+                                        <i class="fas fa-calendar-check mr-2"></i><span id="calendarTitleText">Select Delivery Date</span>
+                                        <span class="text-danger">*</span>
+                                    </h5>
+                                    
+                                    <!-- Calendar View Container -->
+                                    <div id="calendarViewContainer" style="margin-bottom: 20px;">
+                                        <div id="deliveryCalendar"></div>
+                                    </div>
+                                    
+                                    <!-- Selected Date Display -->
+                                    <div id="selectedDateDisplay" class="selected-date-display" style="display: none;">
+                                        <div class="alert alert-info mb-2">
+                                            <i class="fas fa-calendar-check mr-2"></i>
+                                            <strong><span id="selectedDateLabel">Selected Date:</span></strong> <span id="selectedDateText"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Time Window Selector (Delivery and Pick Up) -->
+                                    <div id="timeWindowContainer" class="time-window-container" style="display: none;">
+                                        <h6 class="mb-2"><i class="fas fa-clock mr-2"></i><span id="timeWindowTitleText">Select Delivery Time Window</span> <span class="text-danger">*</span></h6>
+                                        <div class="time-window-buttons">
+                                            <button type="button" class="btn btn-outline-secondary time-window-btn" data-window="morning" id="timeWindowMorning">
+                                                <i class="fas fa-sun mr-1"></i> Morning (8 AM – 12 PM)
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary time-window-btn" data-window="afternoon" id="timeWindowAfternoon">
+                                                <i class="fas fa-cloud-sun mr-1"></i> Afternoon (12 PM – 5 PM)
+                                            </button>
+                                        </div>
+                                        <small class="text-muted d-block mt-1" id="timeWindowHintText">Select your preferred delivery window.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ORDER ITEMS -->
+                        <div class="card matarix-card">
+                            <div class="matarix-card-header">
+                                <h5><i class="fas fa-list mr-2"></i>Order Items</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th class="text-center">Quantity</th>
+                                                <th class="text-center">Price</th>
+                                                <th class="text-center">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Order items will be loaded dynamically here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!-- ORDER SUMMARY -->
+                        <div class="order-summary">
+                            <h4 class="summary-title">Order Summary</h4>
+                            
+                            <div class="summary-row">
+                                <span class="summary-label">Subtotal:</span>
+                                <span class="summary-value">₱0.00</span>
+                            </div>
+                            
+                            <div class="summary-row" id="deliveryFeeRow">
+                                <span class="summary-label">Delivery Fee:</span>
+                                <span class="summary-value text-success">Free</span>
+                            </div>
+                            
+                            <div class="summary-row total-row">
+                                <span class="summary-label">Total:</span>
+                                <span class="summary-value">₱0.00</span>
+                            </div>
+                            
+                            <!-- Payment Method Selection -->
+                            <div class="payment-method-checkout mt-3 mb-3">
+                                <h6 class="mb-2"><i class="fas fa-wallet mr-2"></i>Payment Method <span class="text-danger">*</span></h6>
+                                <div class="payment-options-checkout" id="paymentOptionsCheckout">
+                                    <!-- Standard Delivery: GCash + COD | Pick Up: GCash + On-Site -->
+                                    <div class="payment-option-checkout" data-method="GCash" id="pm-gcash">
+                                        <i class="fab fa-google-pay"></i>
+                                        <span>GCash</span>
+                                        <small>Pay now via QR code</small>
+                                    </div>
+                                    <div class="payment-option-checkout" data-method="Cash on Delivery" id="pm-cod">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                        <span>Cash on Delivery</span>
+                                        <small>Pay when order arrives</small>
+                                    </div>
+                                    <div class="payment-option-checkout" data-method="On-Site" id="pm-onsite" style="display: none;">
+                                        <i class="fas fa-handshake"></i>
+                                        <span>Pay On-Site</span>
+                                        <small>Pay when you pick up</small>
+                                    </div>
+                                </div>
+                                <small class="text-muted d-block mt-1">Select how you would like to pay for your order.</small>
+                            </div>
+                            
+                            <!-- Terms and Conditions Acceptance -->
+                            <div class="terms-acceptance mt-3 mb-3">
+                              <label class="terms-checkbox-label" style="display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none;">
+                                <input type="checkbox" id="acceptTermsCheckout" style="width: 18px; height: 18px; cursor: pointer; flex-shrink: 0;">
+                                <span style="font-size: 14px; color: #333;">
+                                  I accept the 
+                                  <a href="TermsOfService.html" target="_blank" style="color: #d32f2f; text-decoration: underline; font-weight: 600;">Terms and Conditions</a>
+                                </span>
+                              </label>
+                            </div>
+
+                            <button class="btn btn-matarix mt-4" id="proceedToPayment">
+                                <i class="fas fa-credit-card mr-2"></i>Place Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GCash Payment Modal (popup when Place Order clicked with GCash selected) -->
+    <div class="modal fade" id="gcashPaymentModal" tabindex="-1" role="dialog" aria-labelledby="gcashPaymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered gcash-modal-dialog" role="document">
+            <div class="modal-content gcash-modal-content">
+                <div class="modal-header gcash-modal-header">
+                    <h5 class="modal-title" id="gcashPaymentModalLabel">
+                        <i class="fab fa-google-pay gcash-modal-icon mr-2"></i>Complete GCash Payment
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body gcash-modal-body">
+                    <p class="gcash-modal-instructions">Scan the QR code to pay, then upload your proof of payment.</p>
+                    <div class="gcash-modal-centered">
+                        <div class="gcash-amount-box" id="gcashModalAmount">₱0.00</div>
+                        <div class="gcash-qr-wrapper">
+                            <img src="../QRCode.jpg" alt="GCash QR" class="gcash-qr-img">
+                        </div>
+                    </div>
+                    <div class="gcash-proof-preview" id="gcashModalProofPreview">
+                        <img id="gcashModalProofImg" src="" alt="Proof" class="gcash-proof-img">
+                        <button type="button" class="gcash-proof-remove" id="gcashModalRemoveProof">Remove</button>
+                    </div>
+                    <div class="gcash-proof-status" id="gcashModalProofStatus">
+                        <i class="fas fa-check-circle"></i> Proof uploaded
+                    </div>
+                    <input type="file" id="gcashModalProofInput" accept="image/*">
+                </div>
+                <div class="modal-footer gcash-modal-footer">
+                    <label for="gcashModalProofInput" class="gcash-upload-btn">
+                        <i class="fas fa-cloud-upload-alt mr-2"></i>Upload Proof
+                    </label>
+                    <button type="button" class="btn btn-outline-secondary gcash-cancel-btn" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-matarix gcash-confirm-btn" id="gcashModalConfirmOrder">
+                        <i class="fas fa-check mr-2"></i>Confirm & Place Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delivery Method Selection Modal -->
+    <div class="modal fade" id="deliveryMethodModal" tabindex="-1" role="dialog" aria-labelledby="deliveryMethodModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deliveryMethodModalLabel">
+                        <i class="fas fa-truck mr-2"></i>Select Delivery Method
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-4">How would you like to receive your order?</p>
+                    <div class="delivery-options">
+                        <div class="delivery-option-card" data-method="Standard Delivery">
+                            <div class="option-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h6>Standard Delivery</h6>
+                            <p class="text-muted small">We'll deliver your order to your address</p>
+                        </div>
+                        <div class="delivery-option-card" data-method="Pick Up">
+                            <div class="option-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <h6>Pick Up</h6>
+                            <p class="text-muted small">Pick up your order from our store</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-matarix" id="confirmDeliveryMethod" disabled>
+                        Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Notification System - Must load first -->
+    <script src="../Customer_assets/js/notifications.js"></script>
+    
+    <script>
+
+        // SIDEBAR TOGGLE - Handled by mobile-navigation.js
+        // Mobile navigation script will handle sidebar toggle
+
+        // CALENDAR APPOINTMENT MANAGEMENT
+        let selectedDeliveryDate = null;
+        let selectedTimeWindow = null; // 'morning' | 'afternoon' | null (Standard Delivery and Pick Up)
+        let minAdvanceDays = 3; // Default minimum advance notice
+        let maxAdvanceDays = 30; // Default maximum advance notice
+        
+        // Get minimum advance notice from settings
+        async function getAdvanceNoticeSettings() {
+            try {
+                const response = await fetch('../api/get_order_settings.php', {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                if (data.success && data.settings) {
+                    const rawSettings = data.raw_settings || {};
+                    const rawMin = rawSettings.min_advance_notice_days ?? data.settings.min_advance_notice_days;
+                    const parsedMin = parseInt(rawMin, 10);
+                    minAdvanceDays = (!isNaN(parsedMin) && parsedMin >= 0) ? parsedMin : 3;
+                    const rawMax = rawSettings.max_advance_notice_days ?? data.settings.max_advance_notice_days;
+                    const parsedMax = parseInt(rawMax, 10);
+                    maxAdvanceDays = (!isNaN(parsedMax) && parsedMax >= 0) ? parsedMax : 30;
+                }
+            } catch (error) {
+                console.error('Error fetching advance notice settings:', error);
+            }
+        }
+        
+        // Delivery method is set on Cart; read-only on Checkout (change via Cart)
+        let selectedDeliveryMethod = sessionStorage.getItem('matarix_delivery_method') || 'Standard Delivery';
+        if (selectedDeliveryMethod !== 'Pick Up' && selectedDeliveryMethod !== 'Standard Delivery') {
+            selectedDeliveryMethod = 'Standard Delivery';
+        }
+        
+        // Payment method selected at checkout (GCash, Cash on Delivery, or On-Site for Pick Up)
+        let selectedPaymentMethod = null;
+        let checkoutProofUploaded = null;
+        
+        function updateGcashModalAmount() {
+            const totalEl = document.querySelector('.summary-row.total-row .summary-value');
+            const modalAmountEl = document.getElementById('gcashModalAmount');
+            if (totalEl && modalAmountEl) {
+                modalAmountEl.textContent = totalEl.textContent || '₱0.00';
+            }
+        }
+        
+        // Update payment options visibility based on delivery method
+        function updatePaymentOptionsForDelivery() {
+            const pmCod = document.getElementById('pm-cod');
+            const pmOnsite = document.getElementById('pm-onsite');
+            const deliveryFeeRow = document.getElementById('deliveryFeeRow');
+            if (pmCod && pmOnsite) {
+                if (selectedDeliveryMethod === 'Pick Up') {
+                    pmCod.style.display = 'none';
+                    pmOnsite.style.display = 'flex';
+                } else {
+                    pmCod.style.display = 'flex';
+                    pmOnsite.style.display = 'none';
+                }
+            }
+            // Hide delivery fee row for Pick Up (no shipping)
+            if (deliveryFeeRow) {
+                deliveryFeeRow.style.display = selectedDeliveryMethod === 'Pick Up' ? 'none' : '';
+            }
+            // Clear selection when delivery method changes
+            selectedPaymentMethod = null;
+            document.querySelectorAll('.payment-option-checkout').forEach(el => {
+                el.classList.remove('selected');
+            });
+        }
+        
+        // Initialize calendar scheduler
+        $(document).ready(async function() {
+            // Show delivery method (read-only)
+            document.getElementById('checkoutDeliveryMethodText').textContent = selectedDeliveryMethod;
+            
+            // Show calendar and time for both Standard Delivery and Pick Up
+            const calendarSection = document.getElementById('calendarDeliverySection');
+            if (calendarSection) {
+                calendarSection.style.display = 'block';
+            }
+            const calendarTitleEl = document.getElementById('calendarTitleText');
+            const timeWindowTitleEl = document.getElementById('timeWindowTitleText');
+            const timeWindowHintEl = document.getElementById('timeWindowHintText');
+            if (calendarTitleEl) {
+                calendarTitleEl.textContent = selectedDeliveryMethod === 'Pick Up' ? 'Select Pick Up Date' : 'Select Delivery Date';
+            }
+            if (timeWindowTitleEl) {
+                timeWindowTitleEl.textContent = selectedDeliveryMethod === 'Pick Up' ? 'Select Pick Up Time Window' : 'Select Delivery Time Window';
+            }
+            if (timeWindowHintEl) {
+                timeWindowHintEl.textContent = selectedDeliveryMethod === 'Pick Up' ? 'Select your preferred pick up window.' : 'Select your preferred delivery window.';
+            }
+            const selectedDateLabelEl = document.getElementById('selectedDateLabel');
+            if (selectedDateLabelEl) {
+                selectedDateLabelEl.textContent = selectedDeliveryMethod === 'Pick Up' ? 'Desired Pick Up Date:' : 'Selected Delivery Date:';
+            }
+            
+            // Setup payment options based on delivery method
+            updatePaymentOptionsForDelivery();
+            
+            // Payment option click handlers
+            document.querySelectorAll('.payment-option-checkout').forEach(el => {
+                el.addEventListener('click', function() {
+                    if (this.style.display === 'none') return;
+                    document.querySelectorAll('.payment-option-checkout').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedPaymentMethod = this.getAttribute('data-method');
+                });
+            });
+
+            // GCash modal: proof upload (inside popup)
+            const gcashModalProofInput = document.getElementById('gcashModalProofInput');
+            if (gcashModalProofInput) gcashModalProofInput.addEventListener('change', async function(e) {
+                const file = e.target.files[0];
+                if (!file || !file.type.startsWith('image/')) return;
+                if (file.size > 5 * 1024 * 1024) {
+                    window.showToast && window.showToast('File must be under 5MB', 'warning', 3000);
+                    return;
+                }
+                const formData = new FormData();
+                formData.append('image', file);
+                formData.append('type', 'proof_of_payment');
+                try {
+                    const r = await fetch('../api/upload_image.php', { method: 'POST', credentials: 'include', body: formData });
+                    const d = await r.json();
+                    if (d.success) {
+                        checkoutProofUploaded = (d.file_path || '').replace(/\\\\/g, '/');
+                        const imgEl = document.getElementById('gcashModalProofImg');
+                        const previewEl = document.getElementById('gcashModalProofPreview');
+                        const statusEl = document.getElementById('gcashModalProofStatus');
+                        if (imgEl) imgEl.src = checkoutProofUploaded.startsWith('uploads/') ? '../' + checkoutProofUploaded : '../uploads/' + checkoutProofUploaded;
+                        if (previewEl) previewEl.classList.add('is-visible');
+                        if (statusEl) statusEl.classList.add('is-visible');
+                    } else {
+                        window.showToast && window.showToast(d.message || 'Upload failed', 'error', 3000);
+                    }
+                } catch (err) {
+                    window.showToast && window.showToast('Upload failed', 'error', 3000);
+                }
+            });
+            const gcashModalRemoveBtn = document.getElementById('gcashModalRemoveProof');
+            if (gcashModalRemoveBtn) gcashModalRemoveBtn.addEventListener('click', function() {
+                checkoutProofUploaded = null;
+                const input = document.getElementById('gcashModalProofInput');
+                const preview = document.getElementById('gcashModalProofPreview');
+                const status = document.getElementById('gcashModalProofStatus');
+                if (input) input.value = '';
+                if (preview) preview.classList.remove('is-visible');
+                if (status) status.classList.remove('is-visible');
+            });
+
+            // GCash modal: reset state when modal is shown/hidden
+            $('#gcashPaymentModal').on('show.bs.modal', function() {
+                updateGcashModalAmount();
+                checkoutProofUploaded = null;
+                const input = document.getElementById('gcashModalProofInput');
+                const preview = document.getElementById('gcashModalProofPreview');
+                const status = document.getElementById('gcashModalProofStatus');
+                if (input) input.value = '';
+                if (preview) preview.classList.remove('is-visible');
+                if (status) status.classList.remove('is-visible');
+            });
+
+            // GCash modal: Confirm & Place Order
+            document.getElementById('gcashModalConfirmOrder').addEventListener('click', function() {
+                if (!checkoutProofUploaded) {
+                    window.showToast && window.showToast('Please upload your proof of payment first.', 'warning', 4000);
+                    return;
+                }
+                $('#gcashPaymentModal').modal('hide');
+                createOrder();
+            });
+            
+            await getAdvanceNoticeSettings();
+            
+            // Pick Up: same-day allowed, no max-orders-per-day limit. Standard Delivery: fetch unavailable dates.
+            let unavailableDates = [];
+            const calendarMinAdvanceDays = selectedDeliveryMethod === 'Pick Up' ? 0 : minAdvanceDays;
+            if (selectedDeliveryMethod === 'Standard Delivery') {
+                try {
+                    const response = await fetch('../api/get_unavailable_dates.php?delivery_method=Standard+Delivery', {
+                        credentials: 'include'
+                    });
+                    const data = await response.json();
+                    if (data.success && data.unavailable_dates) {
+                        unavailableDates = data.unavailable_dates.map(item => 
+                            typeof item === 'string' ? { date: item } : { date: item.date, reason: item.reason || 'This date is unavailable' }
+                        );
+                    }
+                } catch (error) {
+                    console.error('Error loading unavailable dates:', error);
+                }
+            }
+            
+            // When past morning (12 PM) for same-day Pick Up: show only Afternoon option
+            function updateTimeWindowButtonsForDate(dateStr) {
+                const morningBtn = document.getElementById('timeWindowMorning');
+                const afternoonBtn = document.getElementById('timeWindowAfternoon');
+                if (!morningBtn || !afternoonBtn) return;
+                const now = new Date();
+                const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+                const isSameDay = dateStr === todayStr;
+                const isPastMorningCutoff = now.getHours() >= 12; // Morning window ends at 12 PM
+                const onlyAfternoon = selectedDeliveryMethod === 'Pick Up' && isSameDay && isPastMorningCutoff;
+                // Hide Morning, show only Afternoon when past morning cutoff
+                morningBtn.style.display = onlyAfternoon ? 'none' : '';
+                afternoonBtn.style.display = '';
+                if (onlyAfternoon) {
+                    if (selectedTimeWindow === 'morning') {
+                        selectedTimeWindow = null;
+                        morningBtn.classList.remove('active', 'btn-primary');
+                        morningBtn.classList.add('btn-outline-secondary');
+                    }
+                }
+            }
+            
+            // Initialize calendar scheduler for Standard Delivery and Pick Up
+            if ((selectedDeliveryMethod === 'Standard Delivery' || selectedDeliveryMethod === 'Pick Up') && window.CalendarScheduler && document.getElementById('deliveryCalendar')) {
+                const calendar = new CalendarScheduler('deliveryCalendar', {
+                    minAdvanceDays: calendarMinAdvanceDays,
+                    maxAdvanceDays: maxAdvanceDays,
+                    deliveryMethod: selectedDeliveryMethod,
+                    deliveryHours: { start: 7, end: 18 },
+                    unavailableSlots: unavailableDates,
+                    onDateSelect: function(dateStr) {
+                        selectedDeliveryDate = dateStr;
+                        selectedTimeWindow = null; // Clear time when date changes
+                        
+                        // Grey out Morning for same-day Pick Up if past 12 PM
+                        updateTimeWindowButtonsForDate(dateStr);
+                        
+                        // Show selected date display
+                        const display = document.getElementById('selectedDateDisplay');
+                        const dateText = document.getElementById('selectedDateText');
+                        if (display && dateText) {
+                            // Format date directly from string to avoid timezone issues
+                            const [year, month, day] = dateStr.split('-').map(Number);
+                            
+                            // Use a Date object created in local timezone to get day of week
+                            // Create at noon to avoid any timezone edge cases
+                            const localDate = new Date(year, month - 1, day, 12, 0, 0);
+                            const dayOfWeek = localDate.getDay(); // 0=Sunday, 1=Monday, etc.
+                            
+                            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                            
+                            // Verify the date components match (to ensure no timezone shift occurred)
+                            if (localDate.getFullYear() === year && localDate.getMonth() === month - 1 && localDate.getDate() === day) {
+                                // Use the original day value from the string
+                                const formattedDate = `${dayNames[dayOfWeek]}, ${monthNames[month - 1]} ${day}, ${year}`;
+                                dateText.textContent = formattedDate;
+                            } else {
+                                // Fallback: use the date from the Date object if there was a shift
+                                const formattedDate = `${dayNames[dayOfWeek]}, ${monthNames[localDate.getMonth()]} ${localDate.getDate()}, ${localDate.getFullYear()}`;
+                                dateText.textContent = formattedDate;
+                            }
+                            display.style.display = 'block';
+                        }
+                        
+                        // Show time window selector for both Standard Delivery and Pick Up
+                        const timeWindowContainer = document.getElementById('timeWindowContainer');
+                        if (timeWindowContainer) {
+                            timeWindowContainer.style.display = 'block';
+                            document.querySelectorAll('.time-window-btn').forEach(btn => {
+                                btn.classList.remove('active', 'btn-primary');
+                                btn.classList.add('btn-outline-secondary');
+                            });
+                            updateTimeWindowButtonsForDate(dateStr);
+                        }
+                    }
+                });
+            }
+            
+            // Time window button handlers (Standard Delivery and Pick Up)
+            document.querySelectorAll('.time-window-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const window = this.getAttribute('data-window');
+                    selectedTimeWindow = window;
+                    document.querySelectorAll('.time-window-btn').forEach(b => {
+                        b.classList.remove('active', 'btn-primary');
+                        b.classList.add('btn-outline-secondary');
+                    });
+                    this.classList.remove('btn-outline-secondary');
+                    this.classList.add('active', 'btn-primary');
+                });
+            });
+        });
+
+        // Terms and Conditions checkbox handler
+        const termsCheckbox = $('#acceptTermsCheckout');
+        const proceedBtn = $('#proceedToPayment');
+        
+        if (termsCheckbox.length && proceedBtn.length) {
+            // Update button state when checkbox changes
+            termsCheckbox.on('change', function() {
+                if ($(this).is(':checked')) {
+                    proceedBtn.prop('disabled', false).removeClass('btn-disabled');
+                } else {
+                    proceedBtn.prop('disabled', true).addClass('btn-disabled');
+                }
+            });
+            
+            // Initially disable if unchecked
+            if (!termsCheckbox.is(':checked')) {
+                proceedBtn.prop('disabled', true).addClass('btn-disabled');
+            }
+        }
+
+        // PROCEED TO PAYMENT (Place Order) - Terms + date validated; delivery method set on Cart
+        $('#proceedToPayment').click(function() {
+            const termsCheckboxEl = document.getElementById('acceptTermsCheckout');
+            if (!termsCheckboxEl || !termsCheckboxEl.checked) {
+                if (typeof window.showToast === 'function') {
+                    window.showToast('Please accept the Terms and Conditions to proceed.', 'error', 3000);
+                } else {
+                    alert('Please accept the Terms and Conditions to proceed.');
+                }
+                if (termsCheckboxEl) {
+                    termsCheckboxEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    termsCheckboxEl.focus();
+                }
+                return;
+            }
+            if (!selectedPaymentMethod) {
+                if (typeof window.showToast === 'function') {
+                    window.showToast('Please select a payment method (GCash, Cash on Delivery, or Pay On-Site).', 'warning', 5000);
+                } else {
+                    alert('Please select a payment method.');
+                }
+                return;
+            }
+            // Calendar and time validation for Standard Delivery and Pick Up
+            const dateLabel = selectedDeliveryMethod === 'Pick Up' ? 'pick up' : 'delivery';
+            if (!selectedDeliveryDate) {
+                if (typeof window.showToast === 'function') {
+                    window.showToast(`Please select a ${dateLabel} date from the calendar.`, 'warning', 5000);
+                } else {
+                    alert(`Please select a ${dateLabel} date from the calendar.`);
+                }
+                return;
+            }
+            if (!selectedTimeWindow) {
+                if (typeof window.showToast === 'function') {
+                    window.showToast(`Please select a ${dateLabel} time window (Morning or Afternoon).`, 'warning', 5000);
+                } else {
+                    alert(`Please select a ${dateLabel} time window (Morning or Afternoon).`);
+                }
+                const timeContainer = document.getElementById('timeWindowContainer');
+                if (timeContainer) timeContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            // GCash: show popup to upload proof; COD/On-Site: place order directly
+            if (selectedPaymentMethod === 'GCash') {
+                $('#gcashPaymentModal').modal('show');
+            } else {
+                createOrder();
+            }
+        });
+        
+        // Convert weight to kilograms (same as in load_cart.js)
+        function convertToKg(weight, unit) {
+            if (!weight || weight === 0) return 0;
+            const weightValue = parseFloat(weight);
+            if (isNaN(weightValue)) return 0;
+            switch (unit?.toLowerCase()) {
+                case 'kg': return weightValue;
+                case 'g': return weightValue / 1000;
+                case 'lb': return weightValue * 0.453592;
+                case 'oz': return weightValue * 0.0283495;
+                case 'ton': return weightValue * 1000;
+                default: return weightValue;
+            }
+        }
+        
+        // Format weight
+        function formatWeight(weightInKg) {
+            return parseFloat(weightInKg).toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ' kg';
+        }
+        
+        // Get minimum order settings
+        async function getMinOrderSettings() {
+            try {
+                const response = await fetch('../api/get_order_settings.php', {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                if (data.success) {
+                    return data.settings;
+                }
+            } catch (error) {
+                console.error('Error fetching minimum order settings:', error);
+            }
+            return { min_order_weight_kg: 200, min_order_value: 0, allow_heavy_single_items: true };
+        }
+        
+        // Check minimum order requirements
+        async function validateMinOrder(cart) {
+            const settings = await getMinOrderSettings();
+            const disableMinWeight = settings.disable_minimum_weight === true || settings.disable_minimum_weight === '1';
+            const disableMinValue = settings.disable_minimum_order_value === true || settings.disable_minimum_order_value === '1';
+            const minWeight = disableMinWeight ? 0 : (settings.min_order_weight_kg ?? 200);
+            const minValue = disableMinValue ? 0 : (settings.min_order_value ?? 0);
+            const allowHeavySingleItems = settings.allow_heavy_single_items !== false;
+            
+            // Calculate total weight and value
+            let totalWeightKg = 0;
+            let totalAmount = 0;
+            const productDetailsMap = new Map();
+            
+            for (const item of cart) {
+                totalAmount += item.price * item.quantity;
+                
+                // Fetch product details for weight
+                try {
+                    const response = await fetch(`../api/get_product_customer.php?product_id=${item.product_id}`);
+                    const data = await response.json();
+                    if (data.success && data.product) {
+                        const product = data.product;
+                        productDetailsMap.set(item.product_id, product);
+                        
+                        if (product.weight) {
+                            const weightKg = convertToKg(product.weight, product.weight_unit);
+                            totalWeightKg += weightKg * item.quantity;
+                        }
+                    }
+                } catch (error) {
+                    console.error(`Error fetching product ${item.product_id}:`, error);
+                }
+            }
+            
+            // If both minimums are disabled, order always meets requirement
+            if (disableMinWeight && disableMinValue) {
+                return { valid: true };
+            }
+            
+            // Check if single heavy item exceeds minimum (only when weight is enforced)
+            if (!disableMinWeight && allowHeavySingleItems && cart.length === 1) {
+                const rawMinWeight = settings.min_order_weight_kg ?? 200;
+                const item = cart[0];
+                const product = productDetailsMap.get(item.product_id);
+                if (product && product.weight) {
+                    const itemWeightKg = convertToKg(product.weight, product.weight_unit) * item.quantity;
+                    if (itemWeightKg >= rawMinWeight) {
+                        return { valid: true, reason: 'heavy_single_item' };
+                    }
+                }
+            }
+            
+            // Check weight and value requirements (only consider ACTIVE requirements)
+            const weightActive = minWeight > 0;
+            const valueActive = minValue > 0;
+            const meetsWeight = totalWeightKg >= minWeight;
+            const meetsValue = totalAmount >= minValue;
+            // Order meets minimum if it meets at least one ACTIVE requirement (OR logic)
+            const meetsMinimum = (weightActive && meetsWeight) || (valueActive && meetsValue);
+            
+            if (!meetsMinimum) {
+                let errorMsg = `Minimum order requirement not met. `;
+                if (!meetsWeight && minWeight > 0) {
+                    errorMsg += `Minimum weight is ${formatWeight(minWeight)}. Your order is ${formatWeight(totalWeightKg)}. `;
+                    errorMsg += `Add ${formatWeight(minWeight - totalWeightKg)} more to proceed.`;
+                }
+                if (!meetsValue && minValue > 0) {
+                    const neededValue = (minValue - totalAmount).toLocaleString('en-US', {minimumFractionDigits: 2});
+                    errorMsg += `Or minimum order value is ₱${minValue.toLocaleString('en-US', {minimumFractionDigits: 2})}. `;
+                    errorMsg += `Add ₱${neededValue} more to proceed.`;
+                }
+                return { valid: false, message: errorMsg, currentWeight: totalWeightKg, minWeight: minWeight };
+            }
+            
+            return { valid: true };
+        }
+        
+        // CREATE ORDER FUNCTION - Delivery method set on Cart (read-only here)
+        async function createOrder() {
+            // Delivery method comes from sessionStorage (set on Cart)
+            if (!selectedDeliveryMethod) {
+                selectedDeliveryMethod = sessionStorage.getItem('matarix_delivery_method') || 'Standard Delivery';
+            }
+            // Get checked items from sessionStorage (set by cart page)
+            let checkedItems = [];
+            try {
+                const checkedItemsData = sessionStorage.getItem('matarix_checked_cart_items');
+                if (checkedItemsData) {
+                    checkedItems = JSON.parse(checkedItemsData);
+                    // Clear it after reading (will be cleared after successful order creation)
+                }
+            } catch (e) {
+                console.error('Error reading checked items from sessionStorage:', e);
+            }
+            
+            // If no checked items, fall back to full cart (for backward compatibility)
+            let cart = [];
+            if (checkedItems.length === 0) {
+                if (window.CartManager && typeof window.CartManager.getCart === 'function') {
+                    cart = window.CartManager.getCart() || [];
+                }
+                
+                // If cart is still empty, try to get it directly from localStorage as fallback
+                if (cart.length === 0) {
+                    try {
+                        const cartData = localStorage.getItem('matarix_cart');
+                        if (cartData) {
+                            cart = JSON.parse(cartData);
+                        }
+                    } catch (e) {
+                        console.error('Error reading cart from localStorage:', e);
+                    }
+                }
+                
+                // Convert cart to checked items format
+                checkedItems = cart.map(item => ({
+                    product_id: item.product_id,
+                    quantity: item.quantity,
+                    price: item.price
+                }));
+            }
+            
+            // Debug: log checked items
+            console.log('Checked items for order:', checkedItems);
+            
+            if (!checkedItems || checkedItems.length === 0) {
+                window.showToast('No items selected for checkout! Please select items from your cart.', 'warning', 5000);
+                return;
+            }
+            
+            // Convert checked items back to cart format for validation
+            const cartForValidation = checkedItems.map(item => ({
+                product_id: item.product_id,
+                quantity: item.quantity,
+                price: item.price
+            }));
+            
+            // Do not block checkout when below minimum for Standard Delivery — delivery fee is already applied, so they can place the order.
+            
+            // Validate date/time for both Standard Delivery and Pick Up
+            const dateLabel2 = selectedDeliveryMethod === 'Pick Up' ? 'pick up' : 'delivery';
+            if (!selectedDeliveryDate) {
+                window.showToast(`Please select a ${dateLabel2} date from the calendar.`, 'warning', 5000);
+                return;
+            }
+            if (!selectedTimeWindow) {
+                window.showToast(`Please select a ${dateLabel2} time window (Morning or Afternoon).`, 'warning', 5000);
+                return;
+            }
+            // Pick Up same-day: reject Morning if current time is past 12 PM
+            if (selectedDeliveryMethod === 'Pick Up' && selectedTimeWindow === 'morning') {
+                const now = new Date();
+                const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+                if (selectedDeliveryDate === todayStr && now.getHours() >= 12) {
+                    window.showToast('Morning pick up (8 AM – 12 PM) has passed for today. Please select Afternoon.', 'warning', 5000);
+                    return;
+                }
+            }
+            if (!selectedPaymentMethod) {
+                window.showToast('Please select a payment method (GCash, Cash on Delivery, or Pay On-Site).', 'warning', 5000);
+                return;
+            }
+            if (selectedPaymentMethod === 'GCash' && !checkoutProofUploaded) {
+                window.showToast('Please upload your proof of payment before placing the order.', 'warning', 5000);
+                $('#gcashPaymentModal').modal('show');
+                return;
+            }
+            
+            // Prepare availability slots
+            // Standard Delivery and Pick Up: use selected date + time window (Morning 08:00, Afternoon 12:00)
+            const slotDate = selectedDeliveryDate;
+            const timeValue = selectedTimeWindow
+                ? (selectedTimeWindow === 'morning' ? '08:00:00' : '12:00:00')
+                : null;
+            const availabilitySlots = [{
+                slot_number: 1,
+                date: slotDate,
+                time: timeValue,
+                is_preferred: true
+            }];
+            
+            // Show confirmation modal before creating order
+            const paymentDesc = selectedPaymentMethod === 'GCash' ? 'You will pay via GCash (QR code)' : 
+                selectedPaymentMethod === 'Cash on Delivery' ? 'You will pay when your order is delivered' : 
+                'You will pay when you pick up your order';
+            const confirmed = await window.showConfirm({
+                title: 'Confirm Order',
+                message: `Submit this order? ${paymentDesc}.`,
+                icon: 'info',
+                confirmText: 'Confirm Order',
+                cancelText: 'Cancel',
+                confirmClass: 'btn-danger',
+                showLoading: true,
+                onConfirm: async () => {
+                    // Show loading
+                    window.showLoading('Creating your order...');
+                    
+                    // Prepare cart items for API (use checked items, include variations and variation_id for hybrid stock)
+                    const cartItems = checkedItems.map(item => {
+                        const payload = { product_id: item.product_id, quantity: item.quantity, price: item.price, variations: item.variations || null };
+                        // Extract primary variation_id (first one found) for hybrid stock validation/deduction
+                        if (item.variations && typeof item.variations === 'object') {
+                            for (const k of Object.keys(item.variations)) {
+                                const v = item.variations[k];
+                                if (v && (v.variation_id != null || v.variationId != null)) {
+                                    payload.variation_id = v.variation_id ?? v.variationId;
+                                    break;
+                                }
+                            }
+                        }
+                        return payload;
+                    });
+                    
+                    try {
+                        const response = await fetch('../api/create_order.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            credentials: 'include',
+                            body: JSON.stringify({
+                                cart_items: cartItems,
+                                availability_slots: availabilitySlots,
+                                delivery_method: selectedDeliveryMethod,
+                                payment_method: selectedPaymentMethod,
+                                delivery_fee: parseFloat(sessionStorage.getItem('matarix_delivery_fee') || '0') || 0
+                            })
+                        });
+                        
+                        // Check for 401 Unauthorized
+                        if (response.status === 401) {
+                            window.hideLoading();
+                            alert('Your session has expired. Please log in again.');
+                            sessionStorage.clear();
+                            window.location.href = '../Customer/Login.html';
+                            return;
+                        }
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            const orderId = data.order_id;
+                            const isGCash = selectedPaymentMethod === 'GCash';
+                            
+                            if (isGCash && checkoutProofUploaded) {
+                                try {
+                                    const payResp = await fetch('../api/process_payment.php', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        credentials: 'include',
+                                        body: JSON.stringify({
+                                            order_id: orderId,
+                                            payment_method: 'GCash',
+                                            proof_of_payment: checkoutProofUploaded
+                                        })
+                                    });
+                                    const payData = await payResp.json();
+                                    if (!payData.success) {
+                                        window.hideLoading();
+                                        window.showToast(payData.message || 'Payment processing failed. Your order was created. Please contact support if you need assistance.', 'error', 6000);
+                                        window.location.href = 'OrderSummary.html';
+                                        return;
+                                    }
+                                } catch (payErr) {
+                                    window.hideLoading();
+                                    window.showToast('Payment could not be processed. Your order was created. Please contact support if you need assistance.', 'warning', 5000);
+                                    window.location.href = 'OrderSummary.html';
+                                    return;
+                                }
+                            }
+                            
+                            window.CartManager.clearCart();
+                            sessionStorage.removeItem('matarix_checked_cart_items');
+                            sessionStorage.removeItem('matarix_delivery_fee');
+                            window.hideLoading();
+                            await new Promise(resolve => setTimeout(resolve, 100));
+                            
+                            if (isGCash) {
+                                await window.showSuccessModal({
+                                    title: 'Order Placed Successfully!',
+                                    message: 'Your payment has been received. Your order is being processed.',
+                                    details: `
+                                        <div class="order-details">
+                                            <p><strong>Order ID:</strong> ORD-${String(orderId).padStart(4, '0')}</p>
+                                            <p class="mb-0"><small>View your order and track delivery.</small></p>
+                                        </div>
+                                    `,
+                                    buttonText: 'View My Orders',
+                                    buttonClass: 'btn-danger',
+                                    onClose: () => { window.location.href = 'OrderSummary.html'; }
+                                });
+                            } else {
+                                await window.showSuccessModal({
+                                    title: 'Order Placed Successfully!',
+                                    message: selectedPaymentMethod === 'Cash on Delivery' 
+                                        ? 'Your order is confirmed. Pay when your order is delivered.'
+                                        : 'Your order is confirmed. Pay when you pick up your order.',
+                                    details: `
+                                        <div class="order-details">
+                                            <p><strong>Order ID:</strong> ORD-${String(data.order_id).padStart(4, '0')}</p>
+                                            <p class="mb-0"><small>View your order details and track delivery.</small></p>
+                                        </div>
+                                    `,
+                                    buttonText: 'View My Orders',
+                                    buttonClass: 'btn-danger',
+                                    onClose: () => {
+                                        window.location.href = 'OrderSummary.html';
+                                    }
+                                });
+                            }
+                        } else {
+                            window.hideLoading();
+                            // Check if it's an authentication error
+                            if (data.message && (data.message.toLowerCase().includes('not authenticated') || data.message.toLowerCase().includes('log in'))) {
+                                alert('Your session has expired. Please log in again.');
+                                sessionStorage.clear();
+                                window.location.href = '../Customer/Login.html';
+                            } else {
+                                window.showToast('Failed to create order: ' + (data.message || 'Unknown error'), 'error', 7000);
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Create order error:', error);
+                        window.hideLoading();
+                        window.showToast('Connection error. Please check your internet connection and try again.', 'error', 7000);
+                    }
+                }
+            });
+        }
+
+        // KEYBOARD NAVIGATION
+        $(document).keydown(function(e) {
+            // Handle keyboard navigation if needed
+        });
+
+        // PREVENT POPUP CONTENT CLICKS FROM CLOSING POPUP
+        $('.popup-content').click(function(e) {
+            e.stopPropagation();
+        });
+        
+    </script>
+    
+    <!-- Cart Manager - Must load for cart functionality -->
+    <script src="../Customer_assets/js/cart_manager.js"></script>
+    
+    <!-- Customer Authentication Check - MUST load first to verify session -->
+    <script src="../Customer_assets/js/customer_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Load Checkout Data -->
+    <script src="../Customer_assets/js/load_checkout.js"></script>
+    
+    <!-- Calendar Scheduler - Load after notifications -->
+    <script src="../Customer_assets/js/calendar-scheduler.js"></script>
+    
+    <!-- Navigation Tracker - Handle origin-aware navigation -->
+    <script src="../Customer_assets/js/navigation-tracker.js"></script>
+    <!-- Mobile Navigation Handler -->
+    <script src="../Customer_assets/js/mobile-navigation.js"></script>
+    <!-- Enhanced Mobile Navigation -->
+    <script src="../Customer_assets/js/mobile-navigation-enhanced.js"></script>
+    
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="./MainPage.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#products" class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="./OrderSummary.html" class="nav-item">
+            <i class="fas fa-box"></i>
+            <span>Orders</span>
+        </a>
+    </nav>
+    
+    <!-- ========== MOBILE CART DRAWER ========== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-drawer-close" id="cartDrawerClose" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-drawer-content">
+            <p class="text-center text-muted">Cart items will load here</p>
+            <p class="text-center"><a href="./Cart.html" class="btn btn-primary-red">View Full Cart</a></p>
+        </div>
+        <div class="cart-drawer-footer">
+            <a href="./Cart.html" class="btn btn-primary-red btn-block">Go to Cart</a>
+        </div>
+    </div>
+        </div>
+    </div>
+    
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Sidebar Navigation -->
+    <script src="../Customer_assets/js/sidebar-navigation.js"></script>
+    <!-- Global Sidebar Toggle (Fallback) -->
+    <script src="../Customer_assets/js/sidebar-toggle-global.js"></script>
+    
+    </main>
+    <!-- Main Content End -->
+</body>
+</html>

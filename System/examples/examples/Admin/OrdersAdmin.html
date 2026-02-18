@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Status Management - MATARIX</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Admin_assets/css/OrdersAdmin.css">
+    <!-- Admin Notification System -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+</head>
+<body>
+    <!-- MAIN HEADER SECTION -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <!-- MATARIX LOGO IMAGE -->
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty (Search removed) -->
+                <div class="col-md-4"></div>
+                
+                <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+
+                       <!-- USER PROFILE ICON BUTTON - Now clickable with href -->
+                        <a href="../Admin/AdminProfile.html" class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+    <!-- MAIN LAYOUT CONTAINER -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- LEFT SIDEBAR NAVIGATION -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        
+                        <!-- SIDEBAR NAVIGATION LINKS -->
+                        <ul class="nav-links">
+                            <!-- ORDERS NAVIGATION LINK (ACTIVE) -->
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link active" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            
+                            <!-- INVENTORY NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            
+                            <!-- DELIVERIES NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            
+                            <!-- ANALYTICS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav">
+                                    <span>Sales and Reports</span>
+                                </a>
+                            </li>
+                            
+                            <!-- USER MANAGEMENT NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <!-- SIDEBAR FOOTER WITH LOGOUT BUTTON -->
+                    <div class="sidebar-footer">
+                        <button class="logout-button">Logout</button>
+                    </div>
+
+                </aside>
+
+                <!-- ORDER MANAGEMENT CONTENT SECTION -->
+                <div class="col-md-10 order-content">
+                    
+                    <!-- Page Header with Search and Add Button -->
+                    <div class="page-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h1 class="page-title">Order Status Management</h1>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="header-controls">
+                                    <!-- ORDER SETTINGS BUTTON -->
+                                    <button class="btn btn-outline-primary mr-2" id="orderSettingsBtn" style="margin-right: 10px;">
+                                        <i class="fas fa-cog"></i> Order Settings
+                                    </button>
+                                    <!-- SEARCH ORDERS INPUT FIELD -->
+                                    <div class="search-orders-container">
+                                        <i class="fas fa-search search-orders-icon"></i>
+                                        <input type="text" class="search-orders-input" placeholder="Search orders" id="searchOrders">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Statistics Cards -->
+                    <div class="stats-cards-container">
+                        <div class="row">
+                            
+                            <!-- TOTAL ORDERS CARD -->
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div class="stats-content">
+                                        <div class="stats-label">Total Orders</div>
+                                        <div class="stats-number" id="totalOrders">7</div>
+                                    </div>
+                                    <div class="stats-icon">
+                                        <i class="fas fa-cube"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PENDING PAYMENTS CARD -->
+                            <div class="col-md-3">
+                                <div class="stats-card pending">
+                                    <div class="stats-content">
+                                        <div class="stats-label">Pending Payments</div>
+                                        <div class="stats-number" id="pendingPayments">2</div>
+                                    </div>
+                                    <div class="stats-icon">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- IN PROGRESS CARD -->
+                            <div class="col-md-3">
+                                <div class="stats-card in-progress">
+                                    <div class="stats-content">
+                                        <div class="stats-label">In Progress</div>
+                                        <div class="stats-number" id="inProgress">4</div>
+                                    </div>
+                                    <div class="stats-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- COMPLETED CARD -->
+                            <div class="col-md-3">
+                                <div class="stats-card completed">
+                                    <div class="stats-content">
+                                        <div class="stats-label">Ready</div>
+                                        <div class="stats-number" id="completed">1</div>
+                                    </div>
+                                    <div class="stats-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ORDER STATUS TABS NAVIGATION -->
+                    <div class="order-status-tabs">
+                        <!-- WAITING PAYMENT TAB -->
+                        <button class="tab-btn active" id="waiting-payment-tab" data-tab="waiting-payment">
+                            <i class="fas fa-money-bill-wave"></i> Waiting Payment
+                            <span class="tab-count" id="waitingPaymentCount">0</span>
+                        </button>
+                        <!-- PROCESSING TAB -->
+                        <button class="tab-btn" id="processing-tab" data-tab="processing">
+                            <i class="fas fa-cog"></i> Processing
+                            <span class="tab-count" id="processingCount">0</span>
+                        </button>
+                        <!-- READY TAB -->
+                        <button class="tab-btn" id="ready-tab" data-tab="ready">
+                            <i class="fas fa-check-circle"></i> Ready
+                            <span class="tab-count" id="readyCount">0</span>
+                        </button>
+                        <!-- REJECTED TAB -->
+                        <button class="tab-btn" id="rejected-tab" data-tab="rejected">
+                            <i class="fas fa-times-circle"></i> Rejected
+                            <span class="tab-count" id="rejectedCount">0</span>
+                        </button>
+                    </div>
+                    
+                    <!-- ==========================================
+                         TAB CONTENT SECTIONS
+                    ========================================== -->
+                    
+                    <!-- WAITING PAYMENT TAB CONTENT -->
+                    <div class="tab-content active" id="waiting-payment-content">
+                        <div class="order-status-section">
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <h2 class="section-title">Waiting Payment Orders</h2>
+                                <p class="section-subtitle">Orders awaiting customer payment</p>
+                            </div>
+                            
+                            <!-- ORDER CARDS CONTAINER -->
+                            <div class="order-cards-container" id="waitingPaymentCards">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p class="text-muted mt-2">Loading orders...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PROCESSING TAB CONTENT -->
+                    <div class="tab-content" id="processing-content">
+                        <div class="order-status-section">
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <h2 class="section-title">Processing Orders</h2>
+                                <p class="section-subtitle">Orders currently being processed</p>
+                            </div>
+                            
+                            <!-- ORDER CARDS CONTAINER -->
+                            <div class="order-cards-container" id="processingCards">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p class="text-muted mt-2">Loading orders...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- READY TAB CONTENT -->
+                    <div class="tab-content" id="ready-content">
+                        <div class="order-status-section">
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <h2 class="section-title">Ready Orders</h2>
+                                <p class="section-subtitle">Orders ready for delivery</p>
+                            </div>
+                            
+                            <!-- ORDER CARDS CONTAINER -->
+                            <div class="order-cards-container" id="readyCards">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p class="text-muted mt-2">Loading orders...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- REJECTED TAB CONTENT -->
+                    <div class="tab-content" id="rejected-content">
+                        <div class="order-status-section">
+                            <!-- SECTION HEADER -->
+                            <div class="section-header">
+                                <h2 class="section-title">Rejected Orders</h2>
+                                <p class="section-subtitle">Orders that have been rejected</p>
+                            </div>
+                            
+                            <!-- ORDER CARDS CONTAINER -->
+                            <div class="order-cards-container" id="rejectedCards">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p class="text-muted mt-2">Loading orders...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Driver and Vehicle Assignment Modal -->
+    <div class="modal fade" id="assignDriverVehicleModal" tabindex="-1" role="dialog" aria-labelledby="assignDriverVehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignDriverVehicleModalLabel">Assign Driver and Vehicle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignDriverVehicleForm">
+                        <div class="form-group">
+                            <label for="driverSelectOrders">Select Driver <span class="text-danger">*</span></label>
+                            <select class="form-control" id="driverSelectOrders" required>
+                                <option value="">Loading drivers...</option>
+                            </select>
+                            <small class="form-text text-muted">Select a driver for this delivery</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicleSelectOrders">Select Vehicle <span class="text-danger">*</span></label>
+                            <select class="form-control" id="vehicleSelectOrders" required>
+                                <option value="">Loading vehicles...</option>
+                            </select>
+                            <small class="form-text text-muted">Select a vehicle for this delivery</small>
+                        </div>
+                        <div id="assignErrorOrders" class="alert alert-danger" style="display: none;"></div>
+                        <div id="assignLoadingOrders" class="text-center" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Processing...
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="confirmAssignBtnOrders">
+                        <i class="fas fa-check mr-2"></i>Assign and Mark Out for Delivery
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Admin Notification System (load early) -->
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    
+    <!-- Admin Order Notifications - Polls for new order notifications -->
+    <script src="../Admin_assets/js/admin-order-notifications.js"></script>
+    
+    <!-- Admin Notification Center - Mailbox for viewing all notifications -->
+    <script src="../Admin_assets/js/admin-notification-center.js"></script>
+    
+    <!-- Admin Authentication Check - MUST load first to verify session -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Load Orders from Database -->
+    <script src="../Admin_assets/js/load_orders.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="../Admin_assets/js/OrdersAdmin.js"></script>
+    
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Settings Modal -->
+    <div class="modal fade" id="orderSettingsModal" tabindex="-1" role="dialog" aria-labelledby="orderSettingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderSettingsModalLabel">
+                        <i class="fas fa-cog"></i> Order Configuration Settings
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="orderSettingsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin fa-2x"></i>
+                        <p class="mt-2">Loading settings...</p>
+                    </div>
+                    
+                    <form id="orderSettingsForm" style="display: none;">
+                        <!-- Auto-calculate from Fleet -->
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="autoCalculateFromFleet" name="auto_calculate_from_fleet">
+                                <label class="custom-control-label" for="autoCalculateFromFleet">
+                                    <strong>Auto-calculate minimum from fleet capacity</strong>
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">
+                                When enabled, minimum order weight is automatically calculated as a percentage of the smallest vehicle capacity.
+                            </small>
+                        </div>
+                        
+                        <!-- Minimum Order Weight Percentage (shown when auto-calculate is enabled) -->
+                        <div class="form-group" id="percentageGroup" style="display: none;">
+                            <label for="minOrderWeightPercentage">Minimum Weight Percentage (%)</label>
+                            <input type="number" class="form-control" id="minOrderWeightPercentage" name="min_order_weight_percentage" min="1" max="100" step="0.1">
+                            <small class="form-text text-muted">
+                                Percentage of smallest vehicle capacity to use as minimum order weight (e.g., 25% of 200kg = 50kg minimum).
+                            </small>
+                        </div>
+                        
+                        <!-- Fixed Minimum Order Weight (shown when auto-calculate is disabled) -->
+                        <div class="form-group" id="fixedWeightGroup">
+                            <label for="minOrderWeightKg">Minimum Order Weight (kg)</label>
+                            <input type="number" class="form-control" id="minOrderWeightKg" name="min_order_weight_kg" min="0" step="0.01">
+                            <small class="form-text text-muted">
+                                Fixed minimum order weight in kilograms. Orders below this weight will be rejected (unless exceptions apply).
+                            </small>
+                        </div>
+                        
+                        <!-- Disable Minimum Weight Toggle -->
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="disableMinimumWeight" name="disable_minimum_weight">
+                                <label class="custom-control-label" for="disableMinimumWeight">
+                                    <strong>Disable minimum weight requirement</strong>
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">
+                                When enabled, the minimum order weight is not enforced. Orders of any weight will be accepted.
+                            </small>
+                        </div>
+                        
+                        <!-- Minimum Order Value -->
+                        <div class="form-group">
+                            <label for="minOrderValue">Minimum Order Value (₱)</label>
+                            <input type="number" class="form-control" id="minOrderValue" name="min_order_value" min="0" step="0.01">
+                            <small class="form-text text-muted">
+                                Minimum order value in pesos. Set to 0 to disable. Can be combined with weight minimum (OR condition).
+                            </small>
+                            <div class="custom-control custom-switch mt-2">
+                                <input type="checkbox" class="custom-control-input" id="disableMinimumOrderValue" name="disable_minimum_order_value">
+                                <label class="custom-control-label" for="disableMinimumOrderValue">
+                                    <strong>Disable minimum order value requirement</strong>
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">
+                                When enabled, the minimum order value is not enforced. Orders of any value will be accepted.
+                            </small>
+                        </div>
+                        
+                        <!-- Allow Heavy Single Items -->
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="allowHeavySingleItems" name="allow_heavy_single_items">
+                                <label class="custom-control-label" for="allowHeavySingleItems">
+                                    <strong>Allow heavy single items</strong>
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">
+                                When enabled, a single product that exceeds the minimum weight requirement can bypass the minimum order rule.
+                            </small>
+                        </div>
+                        
+                        <!-- Allow Below Minimum with Fee -->
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="allowBelowMinimumWithFee" name="allow_below_minimum_with_fee">
+                                <label class="custom-control-label" for="allowBelowMinimumWithFee">
+                                    <strong>Allow orders below minimum with premium fee</strong>
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">
+                                When enabled, orders below minimum can still be placed but will incur a premium delivery fee.
+                            </small>
+                        </div>
+                        
+                        <!-- Premium Delivery Fee (shown when allow below minimum is enabled) -->
+                        <div class="form-group" id="premiumFeeGroup" style="display: none;">
+                            <label for="premiumDeliveryFee">Premium Delivery Fee (₱)</label>
+                            <input type="number" class="form-control" id="premiumDeliveryFee" name="premium_delivery_fee" min="0" step="0.01">
+                            <small class="form-text text-muted">
+                                Additional fee charged for orders below minimum weight when the option above is enabled.
+                            </small>
+                        </div>
+                        
+                        <!-- Current Calculated Minimum (Info Display) -->
+                        <div class="alert alert-info" id="calculatedMinInfo" style="display: none;">
+                            <strong><i class="fas fa-info-circle"></i> Current Calculated Minimum:</strong>
+                            <span id="calculatedMinValue">-</span> kg
+                            <br>
+                            <small>This is automatically calculated from your fleet capacity.</small>
+                        </div>
+                        
+                        <!-- Delivery Scheduling Settings -->
+                        <hr class="my-4">
+                        <h6 class="mb-3"><i class="fas fa-calendar-alt mr-2"></i>Delivery Scheduling Settings</h6>
+                        
+                        <!-- Minimum Advance Notice -->
+                        <div class="form-group">
+                            <label for="minAdvanceNoticeDays">Minimum Advance Notice (Days)</label>
+                            <input type="number" class="form-control" id="minAdvanceNoticeDays" name="min_advance_notice_days" min="0" max="30" step="1">
+                            <small class="form-text text-muted">
+                                Minimum number of days in advance customers must select delivery date (e.g., 3 = cannot select today, tomorrow, or day after tomorrow).
+                            </small>
+                        </div>
+                        
+                        <!-- Maximum Advance Notice -->
+                        <div class="form-group">
+                            <label for="maxAdvanceNoticeDays">Maximum Advance Notice (Days)</label>
+                            <input type="number" class="form-control" id="maxAdvanceNoticeDays" name="max_advance_notice_days" min="1" max="90" step="1">
+                            <small class="form-text text-muted">
+                                Maximum number of days in advance customers can select delivery date.
+                            </small>
+                        </div>
+                        
+                        <!-- Max Deliveries/Orders Per Day -->
+                        <div class="form-group">
+                            <label for="maxDeliveriesPerDay">Max Deliveries/Orders Per Day</label>
+                            <input type="number" class="form-control" id="maxDeliveriesPerDay" name="max_deliveries_per_day" min="0" step="1" placeholder="0 = no limit">
+                            <small class="form-text text-muted">
+                                Maximum number of orders/deliveries allowed per calendar day. When reached, that date is locked in the calendar. Set to 0 to allow unlimited.
+                            </small>
+                        </div>
+                        
+                        <!-- Volume Discount Settings -->
+                        <hr class="my-4">
+                        <h6 class="mb-3"><i class="fas fa-percent mr-2"></i>Volume Discount Settings</h6>
+                        <p class="text-muted mb-3">Configure quantity-based discounts for large volume orders. Discounts are applied based on total item quantity in the order.</p>
+                        
+                        <!-- Tier 1 Discount -->
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountTier1Min">Tier 1: Minimum Quantity</label>
+                                    <input type="number" class="form-control" id="discountTier1Min" name="volume_discount_tier1_min" min="1" step="1" value="20">
+                                    <small class="form-text text-muted">Minimum items for Tier 1 discount</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountTier1Percent">Tier 1: Discount (%)</label>
+                                    <input type="number" class="form-control" id="discountTier1Percent" name="volume_discount_tier1_percent" min="0" max="100" step="0.1" value="5">
+                                    <small class="form-text text-muted">Discount percentage for Tier 1</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tier 2 Discount -->
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountTier2Min">Tier 2: Minimum Quantity</label>
+                                    <input type="number" class="form-control" id="discountTier2Min" name="volume_discount_tier2_min" min="1" step="1" value="50">
+                                    <small class="form-text text-muted">Minimum items for Tier 2 discount</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountTier2Percent">Tier 2: Discount (%)</label>
+                                    <input type="number" class="form-control" id="discountTier2Percent" name="volume_discount_tier2_percent" min="0" max="100" step="0.1" value="10">
+                                    <small class="form-text text-muted">Discount percentage for Tier 2</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tier 3 Discount -->
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountTier3Min">Tier 3: Minimum Quantity</label>
+                                    <input type="number" class="form-control" id="discountTier3Min" name="volume_discount_tier3_min" min="1" step="1" value="100">
+                                    <small class="form-text text-muted">Minimum items for Tier 3 discount</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountTier3Percent">Tier 3: Discount (%)</label>
+                                    <input type="number" class="form-control" id="discountTier3Percent" name="volume_discount_tier3_percent" min="0" max="100" step="0.1" value="15">
+                                    <small class="form-text text-muted">Discount percentage for Tier 3</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tier 4 Discount -->
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountTier4Min">Tier 4: Minimum Quantity</label>
+                                    <input type="number" class="form-control" id="discountTier4Min" name="volume_discount_tier4_min" min="1" step="1" value="200">
+                                    <small class="form-text text-muted">Minimum items for Tier 4 discount</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountTier4Percent">Tier 4: Discount (%)</label>
+                                    <input type="number" class="form-control" id="discountTier4Percent" name="volume_discount_tier4_percent" min="0" max="100" step="0.1" value="20">
+                                    <small class="form-text text-muted">Discount percentage for Tier 4</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            <strong>Note:</strong> Customers qualify for the highest tier they meet. For example, if a customer orders 150 items, they will receive Tier 3 discount (15%), not Tier 2.
+                        </div>
+                        
+                        <div id="orderSettingsError" class="alert alert-danger" style="display: none;"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveOrderSettingsBtn">
+                        <i class="fas fa-save"></i> Save Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

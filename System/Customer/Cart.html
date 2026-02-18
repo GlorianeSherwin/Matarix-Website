@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>MATARIX - Shopping Cart</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../Customer_assets/css/Cart.css" rel="stylesheet">
+    <!-- Notifications System CSS - MUST load before scripts -->
+    <link href="../Customer_assets/css/notifications.css" rel="stylesheet">
+    <!-- Mobile Enhancements -->
+    <link href="../Customer_assets/css/mobile-enhancements.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Header -->
+    <div class="header">
+        <div class="container-fluid">
+            <!-- Logo - Left -->
+            <div class="logo">
+                <a href="./MainPage.html">
+                    <img src="../Customer_assets/images/LOGO.png" alt="MATARIX Logo">
+                </a>
+            </div>
+            <!-- Icons - Right -->
+            <div class="header-icons">
+                <a href="notifications.html" style="color: white; text-decoration: none;">
+                    <i class="far fa-bell"></i>
+                </a>
+                <a href="../Customer/Cart.html" style="color: white; text-decoration: none;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-badge" style="display: none;">0</span>
+                </a>
+                <a href="OrderSummary.html" style="color: white; text-decoration: none;" title="Order Summary">
+                    <i class="fas fa-clipboard-list"></i>
+                </a>
+                <a href="./CustomerProfile.html" style="color: white; text-decoration: none;">
+                    <i class="far fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay (for mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="./MainPage.html" class="sidebar-item"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="./Quotation.html" class="sidebar-item"><i class="fas fa-cubes"></i> Materials</a></li>
+                <li><a href="./OrderSummary.html" class="sidebar-item"><i class="fas fa-box"></i> Orders</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-content">
+                    <h1 class="page-title">Shopping Cart</h1>
+                    <p class="page-subtitle">Review your selected materials before checkout</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline-secondary" onclick="window.history.back()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn btn-outline-secondary ml-2" onclick="continueShopping()">
+                        <i class="fas fa-cubes"></i> Browse Materials
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Cart Items Section -->
+                <div class="col-lg-8 mb-4">
+                    <div class="cart-section">
+                        <div class="cart-header">
+                            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0;">
+                                    <input type="checkbox" id="selectAllCheckbox" style="width: 18px; height: 18px; cursor: pointer;">
+                                    <span>Select All</span>
+                                </label>
+                                <h3 style="margin: 0; flex: 1;">Cart Items (<span id="cartItemCount">0</span>)</h3>
+                                <div style="display: flex; gap: 10px;">
+                                    <button class="btn btn-danger btn-sm" id="deleteSelectedBtn" onclick="deleteSelectedItems()" style="display: none;">
+                                        <i class="fas fa-trash"></i> Delete Selected
+                                    </button>
+                                    <button class="btn btn-link text-danger" onclick="clearCart()">
+                                        <i class="fas fa-trash"></i> Clear All
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cart items will be loaded dynamically here -->
+                        <div id="cartItemsContainer">
+                            <!-- Cart items will be inserted here by load_cart.js -->
+                        </div>
+
+                        <!-- Empty Cart Message (hidden by default) -->
+                        <div class="empty-cart" id="emptyCart" style="display: none;">
+                            <div class="empty-cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h3>Your cart is empty</h3>
+                            <p>Add some materials to get started with your order</p>
+                            <button class="btn btn-custom" onclick="continueShopping()">
+                                <i class="fas fa-cubes"></i> Browse Materials
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart Summary Section -->
+                <div class="col-lg-4 mb-4">
+                    <div class="cart-summary">
+                        <div class="summary-header">
+                            <h3>Order Summary</h3>
+                        </div>
+                        
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">₱0.00</span>
+                            </div>
+                            <div class="summary-row" id="discountRow" style="display: none;">
+                                <span>Volume Discount (<span id="discountPercent">0%</span>):</span>
+                                <span id="discountAmount">-₱0.00</span>
+                            </div>
+                            <div class="summary-row" id="totalWeightRow" style="display: none;">
+                                <span>Total Weight:</span>
+                                <span id="totalWeight">0.00 kg</span>
+                            </div>
+                            <!-- Minimum Order Weight Progress -->
+                            <div class="summary-row" id="minOrderWeightRow" style="display: none;">
+                                <span>Minimum Required:</span>
+                                <span id="minOrderWeight">0.00 kg</span>
+                            </div>
+                            <div class="summary-row" id="minOrderProgressRow" style="display: none;">
+                                <div class="min-order-progress-container" style="width: 100%; margin-top: 5px;">
+                                    <div class="progress" style="height: 8px; border-radius: 4px; background-color: #e9ecef;">
+                                        <div id="minOrderProgressBar" class="progress-bar" role="progressbar" style="width: 0%; background-color: #28a745; transition: width 0.3s ease;"></div>
+                                    </div>
+                                    <small id="minOrderProgressText" class="text-muted" style="display: block; margin-top: 5px; font-size: 11px;"></small>
+                                </div>
+                            </div>
+                            <div class="summary-row" id="minOrderWarning" style="display: none;">
+                                <span class="text-warning" style="font-size: 12px;">
+                                    <i class="fas fa-exclamation-triangle"></i> 
+                                    <span id="minOrderWarningText"></span>
+                                </span>
+                            </div>
+                            <div class="summary-row" id="shippingRow">
+                                <span>Shipping:</span>
+                                <span id="shippingValue" class="text-success">Free</span>
+                            </div>
+
+                            <div class="summary-divider"></div>
+                            <div class="summary-total">
+                                <span>Total:</span>
+                                <span id="grandTotal">₱0.00</span>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="cartDeliveryMethodValue" value="Standard Delivery">
+                        <!-- Delivery Method Selection (change anytime before checkout) -->
+                        <div class="delivery-method-section mt-3 mb-3">
+                            <h6 class="mb-2" style="font-weight: 600; color: #333;">Delivery Method</h6>
+                            <div class="delivery-method-options">
+                                <label class="delivery-method-option" id="deliveryOptionStandard">
+                                    <input type="radio" name="cartDeliveryMethod" value="Standard Delivery" checked>
+                                    <span class="delivery-method-card">
+                                        <i class="fas fa-truck"></i>
+                                        <span class="delivery-method-label">Standard Delivery</span>
+                                        <small class="d-block text-muted mt-1">Minimum order applies. We deliver to you.</small>
+                                    </span>
+                                </label>
+                                <label class="delivery-method-option" id="deliveryOptionPickup">
+                                    <input type="radio" name="cartDeliveryMethod" value="Pick Up">
+                                    <span class="delivery-method-card">
+                                        <i class="fas fa-store"></i>
+                                        <span class="delivery-method-label">Pick Up</span>
+                                        <small class="d-block text-muted mt-1">No minimum. Pick up from the store.</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="checkout-actions">
+                        <button type="button" id="checkoutBtn" class="btn btn-custom btn-block btn-checkout" onclick="proceedToCheckout()">
+                            <i class="fas fa-credit-card"></i> Proceed to Checkout
+                        </button>
+                        <button type="button" id="checkoutDisabledBtn" class="btn btn-secondary btn-block" disabled style="display: none; cursor: not-allowed;">
+                            <i class="fas fa-lock"></i> Minimum Order Not Met
+                        </button>
+                    </div>
+
+
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+    <!-- Main Content End -->
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Customer Authentication Check - MUST load first to verify session -->
+    <!-- Custom Notification System (load early to replace browser alerts) -->
+    <script src="../Customer_assets/js/notifications.js"></script>
+    
+    <script src="../Customer_assets/js/customer_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Cart Manager - Must load for cart functionality -->
+    <script src="../Customer_assets/js/cart_manager.js"></script>
+    
+    <!-- Load Cart Items from localStorage -->
+    <script src="../Customer_assets/js/load_cart.js"></script>
+    
+    <script>
+        // Apply promo code (if needed in future)
+        function applyPromo() {
+            const promoCode = document.getElementById('promoCode');
+            if (promoCode) {
+                const code = promoCode.value.trim();
+                if (code) {
+                    if (code.toUpperCase() === 'SAVE10') {
+                        alert('Promo code applied! 10% discount added.');
+                    } else {
+                        alert('Invalid promo code. Please try again.');
+                    }
+                }
+            }
+        }
+
+        // Proceed to checkout
+        function proceedToCheckout() {
+            const cart = window.CartManager ? window.CartManager.getCart() : [];
+            if (cart.length === 0) {
+                alert('Your cart is empty. Add some items first!');
+                return;
+            }
+            window.location.href = 'Checkout.html';
+        }
+
+    </script>
+    
+    <!-- Navigation Tracker - Handle origin-aware navigation -->
+    <script src="../Customer_assets/js/navigation-tracker.js"></script>
+    <!-- Mobile Navigation Handler -->
+    <script src="../Customer_assets/js/mobile-navigation.js"></script>
+    <!-- Enhanced Mobile Navigation -->
+    <script src="../Customer_assets/js/mobile-navigation-enhanced.js"></script>
+    <!-- Sidebar Navigation -->
+    <script src="../Customer_assets/js/sidebar-navigation.js"></script>
+    <!-- Global Sidebar Toggle (Fallback) -->
+    <script src="../Customer_assets/js/sidebar-toggle-global.js"></script>
+    
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="./MainPage.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#products" class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="./OrderSummary.html" class="nav-item">
+            <i class="fas fa-box"></i>
+            <span>Orders</span>
+        </a>
+    </nav>
+    
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    
+    </main>
+    <!-- Main Content End -->
+</body>
+</html>

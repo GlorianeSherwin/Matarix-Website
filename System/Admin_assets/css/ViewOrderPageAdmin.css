@@ -1,0 +1,727 @@
+/* styles.css - View Order Details Page Styles */
+
+/* ===== BODY STYLES ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* ==========================================
+   DEFAULT HEADER STYLES
+========================================== */
+
+/* Main Header Container */
+.main-header {
+    background-color: #444444;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* MATARIX Logo Image */
+.logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Search Container */
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    position: relative;
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Search Input Field */
+.search-input {
+    background-color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px 12px 50px;
+    font-size: 14px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+/* Search Icon */
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 16px;
+}
+
+/* Header Actions Container */
+.header-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Header Action Buttons */
+.header-action-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.header-action-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   DEFAULT SIDEBAR STYLES
+========================================== */
+
+/* Main Layout Container */
+.main-layout {
+    min-height: calc(100vh - 110px);
+}
+
+/* Sidebar Container */
+.sidebar-container {
+    background-color: #940909;
+    padding: 0;
+    min-height: calc(100vh - 110px);
+    position: relative;
+    max-width: 175px; /* Reduced by 30% from 250px */
+}
+
+/* Navigation Links Container */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    display: block;
+    padding: 20px 25px;
+    color: #e2e8f0;
+    border-bottom: 0.5px solid #4a5568;
+    transition: background-color 0.3s;
+    text-decoration: underline;
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+    padding-left: 30px;
+}
+
+/* Active Navigation Link */
+.nav-link.active {
+    background-color: rgba(255,255,255,0.2);
+    font-weight: 600;
+    border-left: 4px solid white;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+/* Logout Button */
+.logout-button {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* ==========================================
+   ORDER DETAILS CONTENT STYLES
+========================================== */
+
+/* Order Details Content Container - compact, less white space */
+.order-details-content {
+    padding: 16px 20px 24px;
+    background-color: #f8f9fa;
+}
+
+/* ===== CUSTOMER HEADER - Compact card layout ===== */
+.order-details-header {
+    margin-bottom: 16px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.order-details-header .row {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.order-details-header .row > [class*="col-"] {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 8px;
+}
+
+.order-detail-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 14px;
+    height: 100%;
+    min-height: 0;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.order-detail-card-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #666;
+    margin: 0 0 6px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.order-detail-card-customer .customer-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+}
+
+.order-detail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-detail-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.order-detail-list li:last-child {
+    margin-bottom: 0;
+}
+
+.order-detail-list li i {
+    color: #666;
+    margin-top: 3px;
+    width: 16px;
+    text-align: center;
+}
+
+.order-detail-card-availability .delivery-info {
+    text-align: left;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.order-detail-card-availability .delivery-date {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.order-detail-card-availability .delivery-label {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.order-status-list li {
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+}
+
+.order-status-list li strong {
+    min-width: 110px;
+    font-weight: 600;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+.proof-updated-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Customer Name (standalone) */
+.customer-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+/* Customer Address */
+.customer-address {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Customer Phone */
+.customer-phone {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* View Profile Button */
+.view-profile-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.view-profile-btn:hover {
+    background-color: #c82333;
+}
+
+/* Delivery Information (fallback when not in card) */
+.delivery-info {
+    text-align: right;
+}
+
+.delivery-label {
+    color: #666;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.delivery-date {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.delivery-time {
+    color: #666;
+    font-size: 14px;
+}
+
+/* ===== ORDER ITEMS TABLE ===== */
+.order-items-container {
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.order-items-section-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #555;
+    margin: 0 0 10px 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+}
+
+.order-items-container .table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Order Items Table */
+.order-items-table {
+    margin-bottom: 0;
+}
+
+.order-items-table thead th {
+    background-color: #f0f0f0;
+    border: none;
+    font-weight: 600;
+    color: #333;
+    font-size: 12px;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.order-items-table tbody td {
+    padding: 10px;
+    vertical-align: middle;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 13px;
+}
+
+.order-items-table tbody tr:hover {
+    background-color: #fafafa;
+}
+
+/* Product Information Cell */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Product Image */
+.product-image {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 5px;
+    background-color: #e8e8e8;
+    border: 1px solid #ddd;
+}
+
+/* Product Name */
+.product-name {
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+}
+
+/* Table Cell Styles */
+.quantity {
+    font-weight: 600;
+    color: #333;
+}
+
+.variation {
+    color: #666;
+    font-size: 13px;
+}
+
+.price {
+    font-weight: 600;
+    color: #333;
+}
+
+.total {
+    font-weight: bold;
+    color: #333;
+    font-size: 15px;
+}
+
+/* ===== ORDER TOTAL SECTION ===== */
+.order-total-section {
+    text-align: right;
+    padding-top: 12px;
+    margin-top: 10px;
+    border-top: 2px solid #333;
+}
+
+.order-total-section #orderTotalBreakdown {
+    max-width: 280px;
+    margin-left: auto;
+}
+
+.order-total-section #orderTotalBreakdown div {
+    padding: 4px 0 !important;
+}
+
+.total-amount {
+    font-size: 20px;
+    font-weight: bold;
+    color: #222;
+}
+
+/* ===== PAYMENT AND ACTIONS SECTION ===== */
+.payment-actions-section {
+    background: #fff;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+/* Payment Information */
+.payment-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.payment-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0;
+}
+
+/* View Receipt Link */
+.view-receipt-link {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.view-receipt-link:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.view-receipt-link i {
+    margin-right: 8px;
+}
+
+/* Track Delivery / info buttons - red to match sidebar */
+.order-details-content .btn-info,
+.payment-actions-section .btn-info {
+    background-color: #940909 !important;
+    border-color: #940909 !important;
+    color: #fff !important;
+}
+
+.order-details-content .btn-info:hover,
+.payment-actions-section .btn-info:hover {
+    background-color: #7a0707 !important;
+    border-color: #7a0707 !important;
+    color: #fff !important;
+}
+
+/* Action Buttons Container */
+.action-buttons-container {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+/* Accept Order Button */
+.accept-order-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.accept-order-btn:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+/* Reject Order Button */
+.reject-order-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.reject-order-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* Prepare Order Button / Ready Button */
+.prepare-order-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.prepare-order-btn:hover:not(:disabled) {
+    background-color: #218838;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.prepare-order-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Order Complete Button */
+.order-complete-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.order-complete-btn:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .order-details-content {
+        padding: 12px 14px 18px;
+    }
+
+    .order-detail-card {
+        min-height: auto;
+    }
+
+    .order-details-header .row > [class*="col-"] {
+        margin-bottom: 8px;
+    }
+
+    .delivery-info {
+        text-align: left;
+    }
+
+    .payment-actions-section {
+        padding: 20px 15px;
+    }
+
+    .action-buttons-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .prepare-order-btn,
+    .order-complete-btn,
+    .accept-order-btn,
+    .reject-order-btn {
+        width: 100%;
+    }
+
+    .product-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .order-items-table {
+        font-size: 12px;
+    }
+
+    .total-amount {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-details-content {
+        padding: 10px;
+    }
+
+    .customer-name {
+        font-size: 20px;
+    }
+
+    .order-items-container {
+        padding: 15px;
+    }
+
+    .order-items-table thead th,
+    .order-items-table tbody td {
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+    .product-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .payment-actions-section {
+        padding: 15px 10px;
+    }
+}

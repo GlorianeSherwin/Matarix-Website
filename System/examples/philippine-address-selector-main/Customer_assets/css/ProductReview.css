@@ -1,0 +1,847 @@
+/* MATARIX Review Products - CSS Styles */
+
+:root {
+    /* Main MATARIX colors from gradient reference */
+    --matarix-primary: #252121;    /* 7% stop */
+    --matarix-secondary: #665D5D;  /* 34% stop */
+    --matarix-accent: #2C1E1E;     /* 96% stop */
+    
+    /* Alternative gradient colors from second reference */
+    --matarix-red-dark: #940909;   /* 0% stop */
+    --matarix-red-mid: #BE3030;    /* 38% stop */
+    --matarix-red-light: #BC3131;  /* 68% stop */
+    --matarix-red-bright: #911616; /* 100% stop */
+    
+    /* Supporting colors */
+    --matarix-white: #ffffff;
+    --matarix-light-gray: #f8f9fa;
+    --matarix-border: #dee2e6;
+    --matarix-text-muted: #6c757d;
+    --matarix-success: #28a745;
+    --matarix-warning: #ffc107;
+    --orange: #FF9800;
+    --star-color: #ffc107;
+    --star-empty: #e0e0e0;
+}
+
+/* Back Button Styles */
+.btn-back {
+    background: var(--matarix-red-light);
+    border: 2px solid var(--matarix-red-light);
+    color: var(--matarix-white);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 2px 8px rgba(188, 49, 49, 0.3);
+}
+
+.btn-back:hover {
+    background: var(--matarix-red-dark);
+    border-color: var(--matarix-red-dark);
+    color: var(--matarix-white);
+    transform: translateX(-5px);
+    box-shadow: 0 4px 12px rgba(188, 49, 49, 0.4);
+}
+
+.btn-back:active {
+    transform: translateX(-3px) scale(0.98);
+}
+
+.btn-back i {
+    font-size: 0.9rem;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--matarix-light-gray);
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* HEADER NAVIGATION STYLES */
+.matarix-header {
+    background: linear-gradient(135deg, var(--matarix-red-dark) 0%, var(--matarix-red-mid) 38%, var(--matarix-red-light) 68%, var(--matarix-red-bright) 100%) !important;
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    color: var(--matarix-white) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.logo-img {
+    max-height: 50px;
+    width: auto;
+}
+
+/* SEARCH BAR */
+.search-container {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-input {
+    border-radius: 25px;
+    padding: 8px 40px 8px 20px;
+    border: 2px solid transparent;
+    width: 100%;
+    background-color: var(--matarix-white);
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.search-input:focus {
+    border-color: var(--matarix-red-light);
+    box-shadow: 0 0 0 0.2rem rgba(188, 49, 49, 0.25);
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--matarix-text-muted);
+    pointer-events: none;
+}
+
+/* HEADER ICONS */
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-icons {
+    color: var(--matarix-white);
+    font-size: 1.2rem;
+    margin-left: 15px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+}
+
+.navbar-icons:hover {
+    color: var(--matarix-white);
+    text-decoration: none;
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+/* MAIN CONTAINER */
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 70px);
+}
+
+/* SIDEBAR NAVIGATION STYLES */
+.sidebar {
+    background: linear-gradient(180deg, #495057 0%, #343a40 50%, #212529 100%);
+    min-height: calc(100vh - 70px);
+    padding: 0;
+    position: relative;
+    transition: all 0.3s ease;
+    width: 200px;
+    flex: 0 0 200px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.sidebar-content {
+    position: relative;
+    z-index: 10;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 5;
+    display: none;
+}
+
+.sidebar-item {
+    padding: 15px 20px;
+    color: var(--matarix-white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.sidebar-item:hover {
+    background-color: rgba(255,255,255,0.15);
+    color: var(--matarix-white);
+    text-decoration: none;
+    transform: translateX(5px);
+}
+
+.sidebar-item.active {
+    background-color: rgba(255,255,255,0.25);
+    border-left: 4px solid var(--matarix-red-light);
+}
+
+.sidebar-item i {
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+/* MAIN CONTENT AREA */
+.main-content {
+    padding: 30px;
+    min-height: calc(100vh - 70px);
+    flex: 1;
+    width: calc(100% - 160px);
+    padding-left: 30px;
+    margin-left: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.container-fluid .row {
+    margin: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+/* Page Header */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--matarix-border);
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--matarix-primary);
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* PROGRESS TRACKER - Horizontal layout */
+.progress-tracker-container {
+    background: var(--matarix-white);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-tracker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* Line only spans statuses (Pending through Completed), not To Rate/History */
+.progress-tracker-statuses {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.progress-tracker-statuses::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background-color: #e0e0e0;
+    z-index: 1;
+}
+
+.progress-tracker-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* No lines on or between To Rate and History - they are actions, not statuses */
+.progress-tracker-actions::before,
+.progress-tracker-actions::after,
+.progress-step-action::before,
+.progress-step-action::after {
+    display: none !important;
+}
+
+/* Action steps (To Rate, History) - never light up, not statuses */
+.progress-step-action .step-icon,
+.progress-step-action.filter-active .step-icon {
+    background: #f5f5f5 !important;
+    color: #999 !important;
+    border-color: #e0e0e0 !important;
+    box-shadow: none !important;
+}
+.progress-step-action .step-label,
+.progress-step-action.filter-active .step-label {
+    color: #666 !important;
+    font-weight: 500 !important;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.progress-step:hover {
+    transform: translateY(-2px);
+}
+
+.step-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    background: var(--matarix-white);
+    border: 3px solid #e0e0e0;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+.step-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    color: #666;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Active state - "To Rate" (Orange) */
+.progress-step.active .step-icon {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--matarix-white);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.progress-step.active .step-label {
+    color: var(--orange);
+    font-weight: 600;
+}
+
+/* Completed states (Green) */
+.progress-step.completed .step-icon {
+    background: var(--matarix-success);
+    border-color: var(--matarix-success);
+    color: var(--matarix-white);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.progress-step.completed .step-label {
+    color: var(--matarix-success);
+    font-weight: 600;
+}
+
+/* Separate clickable items (History) */
+.progress-step.clickable-separate .step-icon {
+    background: var(--matarix-white);
+    border: 2px dashed #ccc;
+    color: #999;
+}
+
+.progress-step.clickable-separate:hover .step-icon {
+    border-color: var(--matarix-red-light);
+    color: var(--matarix-red-light);
+}
+
+.progress-step.clickable-separate:hover .step-label {
+    color: var(--matarix-red-light);
+}
+
+/* REVIEW CARD */
+.review-card {
+    background: var(--matarix-white);
+    border: 1px solid var(--matarix-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    background: var(--matarix-light-gray);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--matarix-primary);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.item-description {
+    color: var(--matarix-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.item-price {
+    color: var(--matarix-red-mid);
+    font-weight: 700;
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* RATING SECTION */
+.rating-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 200px;
+}
+
+.star-rating {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.star {
+    font-size: 2rem;
+    color: var(--star-empty);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.star:hover,
+.star.hover {
+    color: var(--star-color);
+    transform: scale(1.1);
+}
+
+.star.filled {
+    color: var(--star-color);
+}
+
+.rating-text {
+    color: var(--matarix-secondary);
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* BUTTONS */
+.btn-feedback {
+    background: var(--orange);
+    color: var(--matarix-white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-feedback:hover {
+    background: #e68900;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.btn-custom {
+    background: var(--matarix-red-mid);
+    color: var(--matarix-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-custom:hover {
+    background: var(--matarix-red-dark);
+    color: var(--matarix-white);
+}
+
+/* ITEM REVIEWS SECTION */
+.item-reviews-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--matarix-primary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--matarix-border);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.item-review-card {
+    background: var(--matarix-white);
+    border: 1px solid var(--matarix-border);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.item-info .item-image {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+}
+
+.item-info .item-name {
+    font-size: 1rem;
+    margin-bottom: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.item-specs {
+    color: var(--matarix-text-muted);
+    font-size: 0.85rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.item-rating {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.item-rating .star-rating {
+    margin: 0;
+}
+
+.item-rating .star {
+    font-size: 1.5rem;
+}
+
+.btn-item-feedback {
+    background: var(--matarix-light-gray);
+    color: var(--matarix-secondary);
+    border: 2px solid var(--matarix-border);
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-item-feedback:hover {
+    background: var(--matarix-red-light);
+    color: var(--matarix-white);
+    border-color: var(--matarix-red-light);
+    transform: translateY(-1px);
+}
+
+/* REVIEW ACTIONS */
+.review-actions {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.btn-submit-review {
+    background: var(--matarix-success);
+    color: var(--matarix-white);
+    border: none;
+    padding: 12px 40px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-submit-review:hover {
+    background: #1e7e34;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* MODAL STYLES */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    background: var(--matarix-red-mid);
+    color: var(--matarix-white);
+    border-radius: 12px 12px 0 0;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.close {
+    color: var(--matarix-white);
+    opacity: 0.8;
+    text-shadow: none;
+}
+
+.close:hover {
+    color: var(--matarix-white);
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.modal-rating {
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.modal-rating .star {
+    font-size: 2.5rem;
+    margin: 0 5px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--matarix-primary);
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 2px solid var(--matarix-border);
+    padding: 12px;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.form-control:focus {
+    border-color: var(--matarix-red-light);
+    box-shadow: 0 0 0 0.2rem rgba(188, 49, 49, 0.25);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--matarix-border);
+    padding: 20px 30px;
+}
+
+.btn-secondary {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    #sidebarToggle {
+        display: block;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -200px;
+        top: 70px;
+        height: calc(100vh - 70px);
+        z-index: 999;
+        transition: left 0.3s ease;
+        width: 200px;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    .sidebar-overlay.show {
+        display: block;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .search-container {
+        margin: 0 10px;
+        max-width: 200px;
+    }
+
+    /* Progress tracker mobile */
+    .progress-tracker-container {
+        padding: 8px 4px !important;
+        margin-bottom: 12px !important;
+        transform: scale(0.85) !important;
+        transform-origin: top center !important;
+    }
+    
+    .progress-tracker {
+        flex-wrap: nowrap !important;
+        gap: 2px !important;
+        justify-content: space-between !important;
+        padding: 6px 2px !important;
+    }
+    
+    .progress-step {
+        min-width: 0 !important;
+        flex: 1 1 0 !important;
+        max-width: 16.66% !important;
+        padding: 0 1px !important;
+    }
+    
+    .progress-tracker-statuses::before {
+        display: none !important;
+    }
+    
+    .step-icon {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 0.65rem !important;
+        border-width: 1.5px !important;
+        margin-bottom: 2px !important;
+    }
+    
+    .step-label {
+        font-size: 0.5rem !important;
+        line-height: 1.1 !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .order-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .rating-section {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .star {
+        font-size: 1.8rem;
+    }
+
+    .item-review-card {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .item-rating {
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-submit-review {
+        padding: 10px 30px;
+        font-size: 0.9rem;
+    }
+
+    .modal-rating .star {
+        font-size: 2rem;
+    }
+}

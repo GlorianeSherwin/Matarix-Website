@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <title>Terms of Service - MATARIX</title>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Link to External CSS File -->
+    <link rel="stylesheet" href="../Customer_assets/css/TermsOfService.css?v=2.0">
+    <!-- Mobile Enhancements CSS -->
+    <link href="../Customer_assets/css/mobile-enhancements.css" rel="stylesheet">
+    
+    <!-- Continuous monitoring script - ensures back button ALWAYS exists and is visible -->
+    <script>
+        // Continuous monitoring - runs forever to ensure button exists
+        (function() {
+            var checkCount = 0;
+            var maxChecks = 1000; // Run for about 10 seconds (100 checks * 100ms)
+            
+            function createBackButton() {
+                var backBtn = document.getElementById('backButton');
+                
+                // If button doesn't exist, create it
+                if (!backBtn) {
+                    var agreementSection = document.querySelector('.agreement-section');
+                    if (agreementSection) {
+                        var newBtn = document.createElement('button');
+                        newBtn.type = 'button';
+                        newBtn.className = 'back-button';
+                        newBtn.id = 'backButton';
+                        newBtn.style.cssText = 'display: inline-block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; background-color: #dc3545 !important; color: white !important; border: none !important; padding: 12px 30px !important; border-radius: 6px !important; font-size: 15px !important; font-weight: 600 !important; cursor: pointer !important; z-index: 9999 !important;';
+                        newBtn.innerHTML = '<i class="fas fa-arrow-left"></i> Back';
+                        
+                        newBtn.onclick = function() {
+                            // Get the referrer page
+                            var referrer = document.referrer || sessionStorage.getItem('previousPage') || 'MainPage.html';
+                            var previousPage = 'MainPage.html'; // Default
+                            
+                            // Check if referrer contains MainPage or LandingPage
+                            if (referrer.includes('MainPage.html')) {
+                                previousPage = 'MainPage.html';
+                            } else if (referrer.includes('LandingPage.html')) {
+                                previousPage = 'LandingPage.html';
+                            }
+                            
+                            window.location.href = previousPage;
+                        };
+                        
+                        agreementSection.appendChild(newBtn);
+                        return true; // Button created
+                    }
+                } else {
+                    // Button exists, ensure it's visible
+                    backBtn.style.cssText = 'display: inline-block !important; visibility: visible !important; opacity: 1 !important; position: relative !important; background-color: #dc3545 !important; color: white !important; border: none !important; padding: 12px 30px !important; border-radius: 6px !important; font-size: 15px !important; font-weight: 600 !important; cursor: pointer !important; z-index: 9999 !important;';
+                }
+                return false; // Button already exists
+            }
+            
+            // Store referrer when page loads
+            var referrer = document.referrer || '';
+            if (referrer) {
+                sessionStorage.setItem('previousPage', referrer);
+            }
+            
+            // Run immediately
+            createBackButton();
+            
+            // Run continuously every 100ms
+            var intervalId = setInterval(function() {
+                checkCount++;
+                var created = createBackButton();
+                
+                // If button exists and is visible, we can stop checking after a while
+                if (checkCount > 50 && !created) {
+                    clearInterval(intervalId);
+                } else if (checkCount >= maxChecks) {
+                    clearInterval(intervalId);
+                }
+            }, 100);
+            
+            // Also run on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    createBackButton();
+                });
+            } else {
+                createBackButton();
+            }
+            
+            // Run at various intervals
+            setTimeout(createBackButton, 0);
+            setTimeout(createBackButton, 50);
+            setTimeout(createBackButton, 100);
+            setTimeout(createBackButton, 200);
+            setTimeout(createBackButton, 500);
+            setTimeout(createBackButton, 1000);
+        })();
+    </script>
+    
+    <!-- Immediate cleanup script - runs before DOM is ready -->
+    <script>
+        // Run immediately to catch cached content
+        (function() {
+            function removeCompleteRegButton() {
+                // Remove by class
+                var completeRegBtn = document.querySelector('.complete-registration-btn');
+                if (completeRegBtn) {
+                    completeRegBtn.remove();
+                }
+                
+                // Remove by text content (case insensitive) - BUT PROTECT BACK BUTTON
+                var allButtons = document.querySelectorAll('button');
+                allButtons.forEach(function(btn) {
+                    // Skip the back button - protect it from removal
+                    if (btn.id === 'backToRegistration' || btn.classList.contains('back-button')) {
+                        return; // Skip this button
+                    }
+                    var btnText = btn.textContent || btn.innerText || '';
+                    if (btnText.toUpperCase().includes('COMPLETE REGISTRATION')) {
+                        btn.remove();
+                    }
+                });
+                
+                // Remove any links with "Complete Registration" text
+                var allLinks = document.querySelectorAll('a');
+                allLinks.forEach(function(link) {
+                    var linkText = link.textContent || link.innerText || '';
+                    if (linkText.toUpperCase().includes('COMPLETE REGISTRATION')) {
+                        link.remove();
+                    }
+                });
+                
+                // Always ensure back button is visible after cleanup
+                var backBtn = document.getElementById('backButton');
+                if (backBtn) {
+                    backBtn.style.display = 'inline-block';
+                    backBtn.style.visibility = 'visible';
+                }
+            }
+            
+            // Run immediately
+            removeCompleteRegButton();
+            
+            // Run when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', removeCompleteRegButton);
+            } else {
+                removeCompleteRegButton();
+            }
+            
+            // Run after a short delay to catch any late-rendered content
+            setTimeout(removeCompleteRegButton, 100);
+            setTimeout(removeCompleteRegButton, 500);
+            setTimeout(removeCompleteRegButton, 1000);
+            
+            // Use MutationObserver to catch dynamically added elements
+            if (window.MutationObserver) {
+                var observer = new MutationObserver(function(mutations) {
+                    removeCompleteRegButton();
+                    // Ensure back button is always visible after mutations
+                    setTimeout(function() {
+                        var backBtn = document.getElementById('backButton');
+                        if (backBtn) {
+                            backBtn.style.display = 'inline-block';
+                            backBtn.style.visibility = 'visible';
+                        }
+                    }, 50);
+                });
+                
+                // Start observing when body is available
+                if (document.body) {
+                    observer.observe(document.body, {
+                        childList: true,
+                        subtree: true,
+                        attributes: true,
+                        attributeFilter: ['class', 'style']
+                    });
+                } else {
+                    document.addEventListener('DOMContentLoaded', function() {
+                        observer.observe(document.body, {
+                            childList: true,
+                            subtree: true,
+                            attributes: true,
+                            attributeFilter: ['class', 'style']
+                        });
+                    });
+                }
+            }
+            
+            // Final safeguard - ensure back button exists and is visible after all scripts
+            setTimeout(function() {
+                var backBtn = document.getElementById('backButton');
+                if (backBtn) {
+                    backBtn.style.display = 'inline-block';
+                    backBtn.style.visibility = 'visible';
+                } else {
+                    // If back button doesn't exist, something went wrong - log it
+                    console.warn('Back button not found in DOM');
+                }
+            }, 1500);
+        })();
+    </script>
+</head>
+<body>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- MAIN CONTAINER -->
+    <div class="terms-container">
+        
+        <!-- TOP LEFT CORNER TRIANGLE -->
+        <div class="corner-triangle top-left">
+            <!-- MATARIX LOGO -->
+            <div class="logo-section">
+                <img src="../Customer_assets/images/MatarixWhite_logo.png" alt="MATARIX Logo" class="matarix-logo">
+            </div>
+        </div>
+        
+        <!-- BOTTOM RIGHT CORNER TRIANGLE -->
+        <div class="corner-triangle bottom-right"></div>
+        
+        <!-- TERMS CONTENT CARD -->
+        <div class="terms-card">
+            
+            <!-- TERMS HEADER -->
+            <div class="terms-header">
+                <h1 class="terms-title">TERMS OF SERVICE</h1>
+            </div>
+            
+            <!-- TERMS CONTENT -->
+            <div class="terms-content">
+                
+                <!-- LAST UPDATED -->
+                <div class="terms-section">
+                    <p class="terms-last-updated">
+                        <strong>Last Updated: December 09, 2025</strong>
+                    </p>
+                </div>
+                
+                <!-- WELCOME SECTION -->
+                <div class="terms-section">
+                    <p class="terms-intro">
+                        Welcome to Matarix: A Web-based Ordering System with Delivery Tracking for Matarik Construction Supply. By accessing or using our website and placing an order, you agree to be bound by the following Terms of Service. Please read them carefully.
+                    </p>
+                </div>
+                
+                <!-- 1. ACCEPTANCE OF TERMS -->
+                <div class="terms-section">
+                    <h3 class="section-number">1. Acceptance of Terms</h3>
+                    <p class="section-text">
+                        By accessing our website, creating an account, or placing an order, you confirm that you have read, understood, and agreed to these Terms of Service.
+                    </p>
+                </div>
+                
+                <!-- 2. ORDERING PROCESS -->
+                <div class="terms-section">
+                    <h3 class="section-number">2. Ordering Process</h3>
+                    <p class="section-text">
+                        Orders are confirmed immediately upon placement. Customers can complete payment via GCash or choose Cash on Delivery (COD) / Pay On-Site at checkout.
+                    </p>
+                    <p class="section-text">
+                        <strong>Approval includes:</strong>
+                    </p>
+                    <ul class="section-list">
+                        <li>Verifying item availability</li>
+                        <li>Checking stock levels</li>
+                        <li>Confirming pricing and delivery schedule</li>
+                    </ul>
+                    <p class="section-text">
+                        Payment can be made at checkout via GCash (pay now) or Cash on Delivery / Pay On-Site (pay when you receive your order).
+                    </p>
+                </div>
+                
+                <!-- 3. STOCK AVAILABILITY -->
+                <div class="terms-section">
+                    <h3 class="section-number">3. Stock Availability</h3>
+                    <p class="section-text">
+                        All products listed on the website are subject to availability.
+                    </p>
+                    <p class="section-text">
+                        We reserve the right to adjust orders based on stock levels.
+                    </p>
+                    <p class="section-text">
+                        If an item is out of stock, customers will be notified before payment.
+                    </p>
+                </div>
+                
+                <!-- 4. NO CANCELLATION AND NO REFUND POLICY -->
+                <div class="terms-section">
+                    <h3 class="section-number">4. No Cancellation and No Refund Policy</h3>
+                    <p class="section-text">
+                        Once payment has been made and we have started preparing your order, cancellations and refunds are strictly not allowed.
+                    </p>
+                    <p class="section-text">
+                        <strong>Preparation includes:</strong>
+                    </p>
+                    <ul class="section-list">
+                        <li>Packing items</li>
+                        <li>Scheduling delivery</li>
+                        <li>Allocating stock</li>
+                    </ul>
+                    <p class="section-text">
+                        Any changes to the order after preparation may not be accommodated.
+                    </p>
+                </div>
+                
+                <!-- 5. PRICING AND PAYMENTS -->
+                <div class="terms-section">
+                    <h3 class="section-number">5. Pricing and Payments</h3>
+                    <p class="section-text">
+                        Prices displayed on the website may change without prior notice.
+                    </p>
+                    <p class="section-text">
+                        Payments must be made only through the approved channels stated in the order confirmation.
+                    </p>
+                    <p class="section-text">
+                        The customer is responsible for ensuring that payment details are accurate.
+                    </p>
+                </div>
+                
+                <!-- 6. DELIVERY AND LEAD TIME -->
+                <div class="terms-section">
+                    <h3 class="section-number">6. Delivery and Lead Time</h3>
+                    <p class="section-text">
+                        Delivery schedules are based on the availability of products and driver routes.
+                    </p>
+                    <p class="section-text">
+                        Delays may occur due to traffic, weather, or unforeseen circumstances.
+                    </p>
+                    <p class="section-text">
+                        We will notify customers of delivery updates whenever possible.
+                    </p>
+                </div>
+                
+                <!-- 7. CUSTOMER RESPONSIBILITIES -->
+                <div class="terms-section">
+                    <h3 class="section-number">7. Customer Responsibilities</h3>
+                    <p class="section-text">
+                        Customers agree to:
+                    </p>
+                    <ul class="section-list">
+                        <li>Provide accurate information when placing orders</li>
+                        <li>Ensure someone is present to receive the delivery</li>
+                        <li>Review order details before confirming payment</li>
+                    </ul>
+                </div>
+                
+                <!-- 8. LIMITATION OF LIABILITY -->
+                <div class="terms-section">
+                    <h3 class="section-number">8. Limitation of Liability</h3>
+                    <p class="section-text">
+                        We are not liable for:
+                    </p>
+                    <ul class="section-list">
+                        <li>Delays caused by incorrect customer information</li>
+                        <li>Product shortages due to supplier delays</li>
+                        <li>Any losses incurred due to misuse of our website</li>
+                    </ul>
+                </div>
+                
+                <!-- 9. CHANGES TO THE TERMS -->
+                <div class="terms-section">
+                    <h3 class="section-number">9. Changes to the Terms</h3>
+                    <p class="section-text">
+                        We may update these Terms of Service at any time.
+                    </p>
+                    <p class="section-text">
+                        Changes will be posted on this page, and continued use of the website means you accept the updated terms.
+                    </p>
+                </div>
+                
+                <!-- 10. CONTACT US -->
+                <div class="terms-section">
+                    <h3 class="section-number">10. Contact Us</h3>
+                    <p class="section-text">
+                        For questions or concerns, you may contact us at:
+                    </p>
+                    <p class="section-text">
+                        <strong>Email:</strong> <a href="mailto:customerservice@matarik.com" class="contact-email">customerservice@matarik.com</a>
+                    </p>
+                </div>
+                
+            </div>
+            
+            <!-- BACK BUTTON SECTION -->
+            <div class="agreement-section">
+                <!-- BACK BUTTON -->
+                <button type="button" class="back-button" id="backButton" style="display: inline-block !important; visibility: visible !important; opacity: 1 !important;">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <!-- Ensure correct button is displayed (prevent cached button from showing) -->
+    <script>
+        // Aggressively remove any old "Complete Registration" button that might be cached
+        (function() {
+            // Remove by class
+            var completeRegBtn = document.querySelector('.complete-registration-btn');
+            if (completeRegBtn) {
+                completeRegBtn.remove();
+            }
+            
+            // Remove by text content (case insensitive) - BUT PROTECT BACK BUTTON
+            var allButtons = document.querySelectorAll('button');
+            allButtons.forEach(function(btn) {
+                // Skip the back button - protect it from removal
+                if (btn.id === 'backButton' || btn.classList.contains('back-button')) {
+                    return; // Skip this button
+                }
+                var btnText = btn.textContent || btn.innerText || '';
+                if (btnText.toUpperCase().includes('COMPLETE REGISTRATION')) {
+                    btn.remove();
+                }
+            });
+            
+            // Remove any links with "Complete Registration" text
+            var allLinks = document.querySelectorAll('a');
+            allLinks.forEach(function(link) {
+                var linkText = link.textContent || link.innerText || '';
+                if (linkText.toUpperCase().includes('COMPLETE REGISTRATION')) {
+                    link.remove();
+                }
+            });
+            
+            // Always ensure back button is visible and in the correct location
+            var backBtn = document.getElementById('backButton');
+            if (backBtn) {
+                backBtn.style.display = 'inline-block';
+                backBtn.style.visibility = 'visible';
+            }
+        })();
+    </script>
+
+    <!-- Bootstrap 4 JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Customer Authentication Check - MUST load first to verify session -->
+    <script src="../Customer_assets/js/customer_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Store referrer when page loads
+            var referrer = document.referrer || '';
+            if (referrer) {
+                sessionStorage.setItem('previousPage', referrer);
+            }
+            
+            // Ensure back button is visible (jQuery safeguard)
+            var $backBtn = $('#backButton');
+            if ($backBtn.length) {
+                $backBtn.css({
+                    'display': 'inline-block',
+                    'visibility': 'visible'
+                });
+            }
+            
+            // Back button - return to previous page (MainPage or LandingPage)
+            $(document).on('click', '#backButton', function() {
+                // Get the referrer page
+                var referrer = document.referrer || sessionStorage.getItem('previousPage') || 'MainPage.html';
+                var previousPage = 'MainPage.html'; // Default
+                
+                // Check if referrer contains MainPage or LandingPage
+                if (referrer.includes('MainPage.html')) {
+                    previousPage = 'MainPage.html';
+                } else if (referrer.includes('LandingPage.html')) {
+                    previousPage = 'LandingPage.html';
+                }
+                
+                window.location.href = previousPage;
+            });
+            
+            // Also ensure back button exists after jQuery loads
+            setTimeout(function() {
+                var $backBtn = $('#backButton');
+                if (!$backBtn.length) {
+                    // Button still doesn't exist, create it
+                    var agreementSection = $('.agreement-section');
+                    if (agreementSection.length) {
+                        var newBtn = $('<button>', {
+                            type: 'button',
+                            class: 'back-button',
+                            id: 'backButton',
+                            html: '<i class="fas fa-arrow-left"></i> Back',
+                            css: {
+                                'display': 'inline-block',
+                                'visibility': 'visible',
+                                'opacity': '1'
+                            }
+                        });
+                        agreementSection.append(newBtn);
+                    }
+                } else {
+                    // Button exists, ensure it's visible
+                    $backBtn.css({
+                        'display': 'inline-block',
+                        'visibility': 'visible',
+                        'opacity': '1'
+                    });
+                }
+            }, 100);
+        });
+    </script>
+    </main>
+    <!-- Main Content End -->
+    
+    <!-- Enhanced Mobile Navigation -->
+    <script src="../Customer_assets/js/mobile-navigation-enhanced.js"></script>
+    
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="../index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#products" class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Products</span>
+        </a>
+        <a href="../Customer/Login.html" class="nav-item">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
+        </a>
+        <a href="../Customer/Registration.html" class="nav-item">
+            <i class="fas fa-user-plus"></i>
+            <span>Sign Up</span>
+        </a>
+    </nav>
+    
+    <!-- ========== BACK TO TOP BUTTON ========== -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    
+</body>
+</html>

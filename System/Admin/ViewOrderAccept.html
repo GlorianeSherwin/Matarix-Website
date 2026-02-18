@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Order Details - MATARIX</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../Admin_assets/css/ViewOrderPageAdmin.css">
+    <!-- Admin Notifications CSS -->
+    <link rel="stylesheet" href="../Admin_assets/css/admin-notifications.css">
+    <link rel="stylesheet" href="../Admin_assets/css/admin-sidebar-fixed.css">
+</head>
+<body>
+     <!-- MAIN HEADER SECTION -->
+    <header class="main-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                
+                <!-- LEFT SECTION: MATARIX Logo -->
+                <div class="col-md-4">
+                    <div class="logo-container">
+                        <!-- MATARIX LOGO IMAGE -->
+                        <img src="../Admin_assets/images/logo.png" alt="MATARIX Logo" class="logo-image">
+                    </div>
+                </div>
+                
+                <!-- CENTER SECTION: Empty (Search removed) -->
+                <div class="col-md-4"></div>
+                
+                <!-- RIGHT SECTION: Header Action Icons -->
+                <div class="col-md-4">
+                    <div class="header-actions">
+                        <!-- EMAIL/MESSAGES ICON BUTTON -->
+                        <!-- NOTIFICATIONS ICON BUTTON -->
+                        <button class="header-action-btn" id="notifications-btn" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+                        </button>
+
+                        <!-- USER PROFILE ICON BUTTON -->
+                        <button class="header-action-btn" id="profile-btn">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT CONTAINER -->
+    <div class="main-layout">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- LEFT SIDEBAR NAVIGATION -->
+                <aside class="col-md-2 sidebar-container">
+                    <nav class="sidebar-nav">
+                        
+                        <!-- SIDEBAR NAVIGATION LINKS -->
+                        <ul class="nav-links">
+                            <!-- ORDERS NAVIGATION LINK (ACTIVE) -->
+                            <li>
+                                <a href="../Admin/OrdersAdmin.html" class="nav-link active" id="orders-nav">
+                                    <span>Orders</span>
+                                </a>
+                            </li>
+                            
+                            <!-- INVENTORY NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/InventoryAdmin.html" class="nav-link" id="inventory-nav">
+                                    <span>Inventory</span>
+                                </a>
+                            </li>
+                            
+                            <!-- DELIVERIES NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/DeliveriesAdmin.html" class="nav-link" id="deliveries-nav">
+                                    <span>Deliveries</span>
+                                </a>
+                            </li>
+                            
+                            <!-- ANALYTICS NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/ReportsAdmin.html" class="nav-link" id="analytics-nav">
+                                    <span>Sales and Reports</span>
+                                </a>
+                            </li>
+                            
+                            <!-- USER MANAGEMENT NAVIGATION LINK -->
+                            <li>
+                                <a href="../Admin/UserManagement.html" class="nav-link" id="user-management-nav">
+                                    <span>User Management</span>
+                                </a>
+                            </li>
+                        </ul>     
+                    </nav>
+                    
+                    <!-- SIDEBAR FOOTER WITH LOGOUT BUTTON -->
+                    <div class="sidebar-footer">
+                        <button class="logout-button">Logout</button>
+                    </div>
+                </aside>
+
+                <!-- ORDER DETAILS CONTENT SECTION -->
+                <div class="col-md-10 order-details-content">
+                    
+                    <!-- Customer & Order Info - Clean two-column layout -->
+                    <div class="customer-header order-details-header">
+                        <div class="row">
+                            <!-- Left: Customer contact -->
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="order-detail-card order-detail-card-customer">
+                                    <h3 class="order-detail-card-title">Customer</h3>
+                                    <h2 class="customer-name">Carla Mendoza</h2>
+                                    <ul class="order-detail-list">
+                                        <li><i class="fas fa-map-marker-alt"></i><span class="customer-address">Blk 12 Dagupan St, Camarin, Caloocan City</span></li>
+                                        <li><i class="fas fa-phone"></i><span class="customer-phone">09123456789</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Availability -->
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="order-detail-card order-detail-card-availability">
+                                    <h3 class="order-detail-card-title">Customer Availability</h3>
+                                    <div class="delivery-info">
+                                        <span class="delivery-label" style="display: block; margin-bottom: 4px;">Preferred date & time</span>
+                                        <div class="delivery-date">Loading...</div>
+                                        <div class="delivery-time" style="display: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Order & delivery -->
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="order-detail-card order-detail-card-status">
+                                    <h3 class="order-detail-card-title">Order & delivery</h3>
+                                    <ul class="order-detail-list order-status-list">
+                                        <li><strong>Delivery method:</strong> <span id="deliveryMethodText">Loading...</span></li>
+                                        <li class="payment-method-detail" id="paymentMethodDetail"><strong>Payment method:</strong> <span id="paymentMethodText">—</span></li>
+                                        <li><strong>Order status:</strong> <span id="orderStatusText">Loading...</span></li>
+                                        <li><strong>Payment status:</strong> <span id="paymentStatusText">Loading...</span></li>
+                                        <li id="proofUpdatedTag" style="display: none;"><span class="badge badge-info proof-updated-badge"><i class="fas fa-sync-alt mr-1"></i>Proof of payment updated</span></li>
+                                        <li><p style="margin: 0;"><strong>Delivery status:</strong> <span id="deliveryStatusText">Loading...</span></p></li>
+                                        <li><p style="margin: 0;"><strong>Delivery fee:</strong> <span id="deliveryFeeText">Loading...</span></p></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Assigned driver & vehicle (only shown when driver is assigned) -->
+                            <div class="col-lg-3 col-md-6 col-12" id="assignedDriverVehicleCardWrap" style="display: none;">
+                                <div class="order-detail-card order-detail-card-driver" id="assignedDriverVehicleCard">
+                                    <h3 class="order-detail-card-title">Assigned driver & vehicle</h3>
+                                    <ul class="order-detail-list" id="assignedDriverVehicleList">
+                                        <li><strong>Driver:</strong> <span id="assignedDriverName">—</span></li>
+                                        <li><strong>Phone:</strong> <span id="assignedDriverPhone">—</span></li>
+                                        <li><strong>Vehicle:</strong> <span id="assignedVehicleModel">—</span></li>
+                                        <li><strong>Delivery time:</strong> <span id="assignedDeliveryTime">—</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rejection Notice (shown when order is rejected) -->
+                    <div id="rejectionNotice" class="alert alert-danger mb-4" style="display: none;">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-times-circle fa-2x mr-3 mt-1"></i>
+                            <div class="flex-grow-1">
+                                <h5 class="alert-heading mb-2">
+                                    <strong>This order has been rejected</strong>
+                                </h5>
+                                <p class="mb-2">
+                                    Order <span id="rejectionOrderNumber"></span> has been rejected.
+                                </p>
+                                <p class="mb-2" id="rejectionDateInfo" style="display: none;">
+                                    <strong>Rejected on:</strong> <span id="rejectionDate"></span>
+                                </p>
+                                <p class="mb-0" id="rejectionReasonInfo" style="display: none;">
+                                    <strong>Reason:</strong> <span id="rejectionReason"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Items Table -->
+                    <div class="order-items-container">
+                        <h3 class="order-items-section-title">Order items</h3>
+                        <!-- ORDER ITEMS TABLE -->
+                        <div class="table-responsive">
+                            <table id="orderItemsTable" class="table order-items-table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th class="variation-column" style="display: none;">Variation</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Order items will be dynamically loaded here -->
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">Loading order items...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- ORDER TOTAL -->
+                        <div class="order-total-section">
+                            <div id="orderTotalBreakdown" style="text-align: right;">
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #dee2e6;">
+                                    <span style="font-weight: 500;">Subtotal:</span>
+                                    <span id="orderSubtotal">₱0.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #dee2e6;">
+                                    <span style="font-weight: 500;">Delivery Fee:</span>
+                                    <span style="color: #28a745; font-weight: 600;">Free Delivery</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px 0; margin-top: 8px; border-top: 2px solid #333;">
+                                    <span style="font-weight: 700; font-size: 18px;">Total:</span>
+                                    <span class="total-amount" style="font-weight: 700; font-size: 18px;">₱0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment and Action Buttons Section -->
+                    <div class="payment-actions-section">
+                        <div class="row align-items-center">
+                            
+                            <!-- LEFT SECTION: Payment Information -->
+                            <div class="col-md-6">
+                                <!-- VIEW RECEIPT LINK - Visible for approved orders -->
+                                <!-- VIEW PROOF OF PAYMENT LINK - Visible when order is Order Placed + GCash -->
+                                <div style="margin-bottom: 15px;">
+                                    <a href="#" class="view-receipt-link" style="display: none;"> 
+                                        <i class="fas fa-receipt mr-2"></i>View Receipt
+                                    </a>
+                                    <a href="#" class="view-proof-of-payment-link" id="viewProofOfPaymentLink" style="display: none; margin-left: 15px;"> 
+                                        <i class="fas fa-image mr-2"></i>View Proof of Payment
+                                    </a>
+                                </div>
+                                
+                                <div class="payment-info">
+                                    <!-- PAYMENT METHOD -->
+                                    <h3 class="payment-title">Paid thru: GCash</h3>
+                                    <!-- PROOF OF DELIVERY IMAGE (uploaded by driver when completing delivery) -->
+                                    <div class="proof-of-delivery-container" id="proofOfDeliveryContainer" style="display: none; margin-top: 15px;">
+                                        <label class="proof-label" style="display: block; font-weight: 600; margin-bottom: 10px; color: #2c3e50;">Proof of Delivery:</label>
+                                        <div class="proof-image-wrapper" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 10px; background: #f8f9fa; max-width: 400px;">
+                                            <img id="proofOfDeliveryImage" src="" alt="Proof of Delivery" style="max-width: 100%; height: auto; border-radius: 4px; cursor: pointer;" onclick="openProofModal(this.src)">
+                                        </div>
+                                        <small class="text-muted" style="display: block; margin-top: 5px;">Click image to view full size</small>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- RIGHT SECTION: Action Buttons -->
+                            <div class="col-md-6">
+                                <div class="action-buttons-container">
+                                    <!-- ACCEPT ORDER BUTTON (shown for pending approval) -->
+                                    <button class="accept-order-btn" id="acceptOrderBtn" style="display: none;">
+                                        <i class="fas fa-check"></i> Accept Order
+                                    </button>
+                                    <!-- REJECT ORDER BUTTON (shown for pending approval) -->
+                                    <button class="reject-order-btn" id="rejectOrderBtn" style="display: none;">
+                                        <i class="fas fa-times"></i> Reject Order
+                                    </button>
+                                    <!-- ACCEPT PAYMENT BUTTON (shown for waiting payment orders) -->
+                                    <button class="btn btn-primary" id="setProcessingBtn" style="display: none; margin-right: 10px;">
+                                        <i class="fas fa-check-circle mr-2"></i>Accept Payment
+                                    </button>
+                                    <!-- READY ORDER BUTTON (shown for processing orders) -->
+                                    <button class="prepare-order-btn" id="prepareOrderBtn" style="display: none;">Ready</button>
+                                    <!-- READY FOR DELIVERY BUTTON (shown for ready orders) -->
+                                    <button class="btn btn-success" id="readyForDeliveryBtn" style="display: none; margin-left: 10px;">
+                                        <i class="fas fa-truck mr-2"></i>Ready for Delivery
+                                    </button>
+                                    <!-- OUT FOR DELIVERY BUTTON (shown after assignment, unclickable) -->
+                                    <button class="btn btn-secondary" id="outForDeliveryStatusBtn" style="display: none; margin-left: 10px;" disabled>
+                                        <i class="fas fa-truck mr-2"></i>Out for Delivery
+                                    </button>
+                                    <!-- TRACK DELIVERY BUTTON (shown for ready orders) -->
+                                    <a href="../Admin/DeliveriesAdmin.html" class="btn btn-info" id="trackDeliveryBtn" style="display: none; margin-left: 10px;">
+                                        <i class="fas fa-map-marker-alt mr-2"></i>Track Delivery
+                                    </a>
+                                    <!-- ORDER COMPLETE BUTTON (Pick Up orders, Ready status) -->
+                                    <button class="btn btn-success order-complete-btn" id="orderCompleteBtn" style="display: none; margin-left: 10px;">
+                                        <i class="fas fa-check-circle mr-2"></i>Order Complete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS and dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Admin Notifications System - MUST load before other scripts -->
+    <script src="../Admin_assets/js/admin-notifications.js"></script>
+    
+    <!-- Admin Order Notifications - Polls for new order notifications -->
+    <script src="../Admin_assets/js/admin-order-notifications.js"></script>
+    
+    <!-- Admin Notification Center - Mailbox for viewing all notifications -->
+    <script src="../Admin_assets/js/admin-notification-center.js"></script>
+    
+    <!-- Admin Authentication Check - MUST load first to verify session -->
+    <script src="../Admin_assets/js/admin_auth_check.js"></script>
+    
+    <!-- URL Authentication Helper - MUST load to preserve user_id in URLs -->
+    <script src="../Customer_assets/js/url_auth_helper.js"></script>
+    
+    <!-- Load Order Details - Using NEW filename to bypass all caching -->
+    <script>
+        // Force load with timestamp to ensure fresh load
+        (function() {
+            const script = document.createElement('script');
+            script.src = '../Admin_assets/js/load_order_details_v3.js?v=' + new Date().getTime();
+            script.onload = function() {
+                console.log('✅✅✅ load_order_details_v3.js loaded successfully ✅✅✅');
+            };
+            script.onerror = function() {
+                console.error('❌❌❌ Failed to load load_order_details_v3.js ❌❌❌');
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
+    
+    <!-- Driver and Vehicle Assignment Modal -->
+    <div class="modal fade" id="assignDriverVehicleModal" tabindex="-1" role="dialog" aria-labelledby="assignDriverVehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignDriverVehicleModalLabel">Assign Driver and Vehicle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignDriverVehicleForm">
+                        <div class="form-group">
+                            <label for="driverSelect">Select Driver <span class="text-danger">*</span></label>
+                            <select class="form-control" id="driverSelect" required>
+                                <option value="">Loading drivers...</option>
+                            </select>
+                            <small class="form-text text-muted">Select a driver for this delivery</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicleSelect">Select Vehicle <span class="text-danger">*</span></label>
+                            <select class="form-control" id="vehicleSelect" required>
+                                <option value="">Loading vehicles...</option>
+                            </select>
+                            <small class="form-text text-muted">Select a vehicle for this delivery</small>
+                        </div>
+                        <div id="assignError" class="alert alert-danger" style="display: none;"></div>
+                        <div id="assignLoading" class="text-center" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Processing...
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="confirmAssignBtn">
+                        <i class="fas fa-check mr-2"></i>Assign and Mark Out for Delivery
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Reject Proof of Payment Modal (reason dropdown + request reupload) -->
+    <div class="modal fade" id="rejectProofModal" tabindex="-1" role="dialog" aria-labelledby="rejectProofModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title" id="rejectProofModalLabel">
+                        <i class="fas fa-times-circle text-danger mr-2"></i>Reject Proof of Payment
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted mb-3">The customer will be notified to upload a new proof of payment. Please select a reason for the rejection.</p>
+                    <div class="form-group">
+                        <label for="rejectProofReasonSelect"><strong>Reason for rejection</strong></label>
+                        <select class="form-control" id="rejectProofReasonSelect" required>
+                            <option value="">-- Select a reason --</option>
+                            <option value="Image is blurry or unreadable">Image is blurry or unreadable</option>
+                            <option value="Wrong transaction or receipt uploaded">Wrong transaction or receipt uploaded</option>
+                            <option value="Amount does not match order total">Amount does not match order total</option>
+                            <option value="Screenshot or image is incomplete">Screenshot or image is incomplete</option>
+                            <option value="Receipt is expired or invalid">Receipt is expired or invalid</option>
+                            <option value="Duplicate or already used receipt">Duplicate or already used receipt</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="rejectProofOtherWrapper" style="display: none;">
+                        <label for="rejectProofOtherReason">Specify reason</label>
+                        <textarea class="form-control" id="rejectProofOtherReason" rows="2" placeholder="Enter the reason for rejection..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="rejectProofConfirmBtn">
+                        <i class="fas fa-times-circle mr-2"></i>Reject & Request Reupload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Open proof of payment modal. Loads image via fetch (with credentials) so 401 doesn't show login page.
+        // options: { orderId, canReject } to show "Reject proof" button in modal
+        function openProofModal(imageSrc, options) {
+            var modal = document.getElementById('proofModal');
+            var modalImage = document.getElementById('proofModalImage');
+            var modalError = document.getElementById('proofModalError');
+            var footer = document.getElementById('proofModalFooter');
+            var rejectBtn = document.getElementById('rejectProofFromModalBtn');
+            if (!modal || !modalImage) return;
+
+            modalError.style.display = 'none';
+            modalError.textContent = '';
+            modalImage.style.display = 'none';
+            modalImage.src = '';
+            if (modal._proofBlobUrl) {
+                URL.revokeObjectURL(modal._proofBlobUrl);
+                modal._proofBlobUrl = null;
+            }
+
+            var orderId = options && options.orderId;
+            var canReject = options && options.canReject;
+            if (rejectBtn) {
+                rejectBtn.style.display = (canReject && orderId) ? 'inline-block' : 'none';
+            }
+            modal.dataset.orderId = orderId || '';
+
+            function showImage(blobUrl) {
+                modalImage.src = blobUrl;
+                modalImage.style.display = 'block';
+            }
+            function showErr(msg) {
+                modalError.textContent = msg || 'Could not load proof of payment. Please refresh the page and try again.';
+                modalError.style.display = 'block';
+            }
+
+            if (!imageSrc || !imageSrc.trim()) {
+                showErr('No proof image URL available.');
+                $('#proofModal').modal('show');
+                return;
+            }
+
+            fetch(imageSrc, { method: 'GET', credentials: 'include' })
+                .then(function(r) {
+                    if (!r.ok) {
+                        if (r.status === 401) showErr('Session may have expired. Please refresh the page and log in again.');
+                        else showErr('Could not load proof of payment (' + r.status + ').');
+                        $('#proofModal').modal('show');
+                        return;
+                    }
+                    return r.blob();
+                })
+                .then(function(blob) {
+                    if (!blob) return;
+                    var url = URL.createObjectURL(blob);
+                    modal._proofBlobUrl = url;
+                    showImage(url);
+                    $('#proofModal').modal('show');
+                })
+                .catch(function() {
+                    showErr('Could not load proof of payment. Check your connection and try again.');
+                });
+        }
+        
+        window.openProofModal = openProofModal;
+
+        // Show/hide "Other reason" textarea when dropdown selection is "Other"
+        (function() {
+            var sel = document.getElementById('rejectProofReasonSelect');
+            var otherWrap = document.getElementById('rejectProofOtherWrapper');
+            if (sel && otherWrap) {
+                sel.addEventListener('change', function() {
+                    otherWrap.style.display = this.value === 'Other' ? 'block' : 'none';
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Proof of Payment Modal -->
+    <div class="modal fade" id="proofOfPaymentModal" tabindex="-1" role="dialog" aria-labelledby="proofOfPaymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="proofOfPaymentModalLabel">
+                        <i class="fas fa-image mr-2"></i>Proof of Payment
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center" style="background: #f8f9fa; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+                    <img id="proofOfPaymentModalImage" src="" alt="Proof of Payment" style="max-width: 100%; max-height: 600px; height: auto; border-radius: 8px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" id="requestNewProofBtn" style="display: none;">
+                        <i class="fas fa-sync-alt mr-2"></i>Request a New Proof of Payment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Handle "Request a New Proof of Payment" button in proof of payment modal
+        (function() {
+            const btn = document.getElementById('requestNewProofBtn');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const orderId = urlParams.get('order_id');
+                    
+                    if (orderId && typeof window.openRejectProofModal === 'function') {
+                        // Close the proof modal and open the reject modal
+                        $('#proofOfPaymentModal').modal('hide');
+                        window.openRejectProofModal(parseInt(orderId, 10));
+                    } else if (orderId) {
+                        // Fallback: just show a simple alert
+                        alert('You can now reject this proof and request a new one.');
+                    } else {
+                        alert('Error: Order ID not found.');
+                    }
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Notifications Center Modal -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationsModalLabel">
+                        <i class="fas fa-bell mr-2"></i>Notifications
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+                    <div id="notificationsLoading" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p class="text-muted mt-2">Loading notifications...</p>
+                    </div>
+                    <div id="notificationsList" style="display: none;">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                    <div id="notificationsEmpty" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-inbox" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="text-muted mt-3">No notifications yet</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="markAllReadBtn" style="display: none;">
+                        <i class="fas fa-check-double mr-2"></i>Mark All as Read
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

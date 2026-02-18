@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "roles": {
+    "Admin": {
+      "displayName": "Admin",
+      "immutable": true,
+      "permissions": ["*"]
+    },
+    "Store Employee": {
+      "displayName": "Store Employee",
+      "immutable": true,
+      "permissions": [
+        "inventory.view",
+        "inventory.add",
+        "inventory.edit",
+        "inventory.delete",
+
+        "products.view",
+        "products.add",
+        "products.edit",
+        "products.delete",
+
+        "orders.view",
+        "orders.edit",
+        "orders.accept",
+        "orders.cancel",
+
+        "deliveries.view",
+        "deliveries.assign",
+        "deliveries.update_status",
+
+        "reports.view",
+        "notifications.view_admin"
+      ]
+    },
+    "Delivery Driver": {
+      "displayName": "Delivery Driver",
+      "immutable": true,
+      "permissions": [
+        "deliveries.view_assigned",
+        "deliveries.update_status",
+        "deliveries.complete",
+        "deliveries.view_history",
+        "notifications.view_driver"
+      ]
+    },
+    "Customer": {
+      "displayName": "Customer",
+      "immutable": true,
+      "permissions": [
+        "products.browse",
+        "cart.add",
+        "orders.create",
+        "orders.view_own",
+        "deliveries.track_own",
+        "profile.update_own"
+      ]
+    }
+  },
+  "permissionLabels": {
+    "inventory.view": "View inventory",
+    "inventory.add": "Add inventory items",
+    "inventory.edit": "Edit inventory items",
+    "inventory.delete": "Delete inventory items",
+
+    "products.view": "View products",
+    "products.add": "Add products",
+    "products.edit": "Edit products",
+    "products.delete": "Delete products",
+
+    "orders.view": "View orders",
+    "orders.create": "Place orders",
+    "orders.view_own": "View own order history",
+    "orders.edit": "Edit orders",
+    "orders.accept": "Accept/approve orders",
+    "orders.cancel": "Cancel/reject orders",
+
+    "deliveries.view": "View deliveries",
+    "deliveries.view_assigned": "View assigned deliveries",
+    "deliveries.view_history": "View delivery history",
+    "deliveries.assign": "Manage delivery assignments",
+    "deliveries.update_status": "Update delivery status",
+    "deliveries.complete": "Mark deliveries complete",
+
+    "users.view": "View users",
+    "users.create": "Create users",
+    "users.edit": "Edit users",
+    "users.deactivate": "Deactivate users",
+
+    "reports.view": "View reports and analytics",
+    "system.configure": "System configuration"
+    ,
+    "notifications.view_admin": "View admin notifications",
+    "notifications.view_driver": "View driver notifications"
+  }
+}
+

@@ -1,0 +1,260 @@
+/* AdminLogin.css - Admin Login Form Styles */
+
+/* ===== BODY STYLES ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===== TOP LEFT CORNER TEXT ===== */
+.top-left-text {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #999;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+/* ===== BACKGROUND SECTION ===== */
+/* BACKGROUND CONTAINER with same placeholder image as registration */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../images/BackgroundLoginRegistration.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #4a4a4a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== MAIN CONTAINER WITH TWO WHITE RECTANGLES ===== */
+.login-container {
+    display: flex;
+    width: 800px;
+    height: 500px;
+}
+
+/* ===== LEFT WHITE RECTANGLE - FORM SECTION ===== */
+.left-rectangle {
+    background-color: white;
+    width: 50%;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px 0 0 15px; /* Round left corners only */
+}
+
+/* ===== RIGHT WHITE RECTANGLE - IMAGE SECTION ===== */
+.right-rectangle {
+    background-color: white;
+    background-image: url('../images/RegistrationBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40%;
+    min-height: 500px;
+    border-radius: 0 15px 15px 0; /* Round right corners only */
+}
+
+/* ===== LOGO SECTION ===== */
+.logo-section {
+    text-align: center;
+    padding-left: 50px;
+}
+
+/* LOGO ICON - Replace with your actual logo */
+.logo-icon {
+    height: 200px;
+    width: auto;
+    text-align: center;
+    padding: 8px;
+    display: block;
+}
+
+.matarix-text {
+    color: #d32f2f;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* ===== FORM SECTION ===== */
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* INPUT WITH ICON CONTAINER */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* INPUT ICONS */
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: #999;
+    font-size: 16px;
+    z-index: 3;
+}
+
+/* FORM INPUT FIELDS */
+.form-input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f5f5f5;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* INPUT FIELD FOCUS STATE */
+.form-input:focus {
+    border-color: #d32f2f;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.2);
+}
+
+.form-input::placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+/* ===== FORGOT PASSWORD SECTION ===== */
+.forgot-password-section {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* FORGOT PASSWORD LINK */
+.forgot-password-link {
+    color: #666;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.forgot-password-link:hover {
+    color: #d32f2f;
+    text-decoration: underline;
+}
+
+/* ===== LOGIN BUTTON ===== */
+.login-button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 0 20px 0;
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+/* LOGIN BUTTON HOVER EFFECT */
+.login-button:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(211, 47, 47, 0.3);
+}
+
+/* ===== SIGNUP LINK SECTION ===== */
+.signup-link-section {
+    text-align: center;
+}
+
+/* SIGNUP LINK */
+.signup-link {
+    color: #666;
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.signup-link:hover {
+    color: #d32f2f;
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 968px) {
+    .login-container {
+        width: 90%;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+    
+    .left-rectangle {
+        width: 100%;
+        padding: 40px 30px;
+    }
+    
+    .right-rectangle {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .left-rectangle {
+        padding: 30px 25px;
+    }
+    
+    .right-rectangle {
+        height: 150px;
+    }
+    
+    .logo-icon {
+        height: 40px;
+    }
+    
+    .matarix-text {
+        font-size: 20px;
+    }
+    
+    .top-left-text {
+        top: 10px;
+        left: 10px;
+        font-size: 12px;
+    }
+}

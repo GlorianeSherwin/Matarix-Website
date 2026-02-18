@@ -1,0 +1,420 @@
+/* AdminLogin.css - Admin Login Form Styles */
+
+/* ===== BODY STYLES ===== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* Allow scrolling on mobile */
+        height: auto;
+        min-height: 100vh;
+    }
+}
+
+/* ===== TOP LEFT CORNER TEXT ===== */
+.top-left-text {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #999;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+/* ===== BACKGROUND SECTION ===== */
+/* BACKGROUND CONTAINER with same placeholder image as registration */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../images/BackgroundLoginRegistration.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #4a4a4a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .background-container {
+        position: relative;
+        min-height: 100vh;
+        padding: 20px;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+}
+
+/* ===== MAIN CONTAINER WITH TWO WHITE RECTANGLES ===== */
+.login-container {
+    display: flex;
+    width: 800px;
+    height: 560px;
+}
+
+/* ===== LEFT WHITE RECTANGLE - FORM SECTION ===== */
+.left-rectangle {
+    background-color: white;
+    width: 50%;
+    padding: 40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px 0 0 15px; /* Round left corners only */
+}
+
+/* ===== RIGHT WHITE RECTANGLE - IMAGE SECTION ===== */
+.right-rectangle {
+    background-color: white;
+    background-image: url('../images/RegistrationBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 40%;
+    min-height: 560px;
+    border-radius: 0 15px 15px 0; /* Round right corners only */
+}
+
+/* ===== LOGO SECTION ===== */
+.logo-section {
+    text-align: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* LOGO ICON - Replace with your actual logo */
+.logo-icon {
+    height: 180px;
+    width: auto;
+    max-width: 100%;
+    padding: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+.matarix-text {
+    color: #d32f2f;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* ===== FORM SECTION ===== */
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* INPUT WITH ICON CONTAINER */
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* INPUT ICONS */
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: #999;
+    font-size: 16px;
+    z-index: 3;
+}
+
+/* FORM INPUT FIELDS */
+.form-input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f5f5f5;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* Password input with toggle button - add right padding */
+.password-input {
+    padding-right: 45px;
+}
+
+/* Password toggle button */
+.password-toggle-btn {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    transition: color 0.3s ease;
+    outline: none;
+}
+
+.password-toggle-btn:hover {
+    color: #d32f2f;
+}
+
+.password-toggle-btn:focus {
+    color: #d32f2f;
+    outline: 2px solid rgba(211, 47, 47, 0.3);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* INPUT FIELD FOCUS STATE */
+.form-input:focus {
+    border-color: #d32f2f;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.2);
+}
+
+.form-input::placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+/* Hide native password reveal icons (Edge/IE) to prevent UI overlap */
+.password-input::-ms-reveal,
+.password-input::-ms-clear {
+    display: none;
+}
+
+/* ===== FORGOT PASSWORD SECTION ===== */
+.forgot-password-section {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* FORGOT PASSWORD LINK */
+.forgot-password-link {
+    color: #666;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.forgot-password-link:hover {
+    color: #d32f2f;
+    text-decoration: underline;
+}
+
+/* ===== LOGIN BUTTON ===== */
+.login-button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 0 15px 0;
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+/* LOGIN BUTTON HOVER EFFECT */
+.login-button:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(211, 47, 47, 0.3);
+}
+
+/* ===== SIGNUP LINK SECTION ===== */
+.signup-link-section {
+    text-align: center;
+    margin-top: -10px;
+}
+
+/* SIGNUP LINK */
+.signup-link {
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.signup-link:hover {
+    color: #d32f2f;
+    text-decoration: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 968px) {
+    .login-container {
+        width: 90%;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin: 0;
+    }
+    
+    .left-rectangle {
+        width: 100%;
+        padding: 30px 25px;
+        border-radius: 15px;
+    }
+    
+    .right-rectangle {
+        display: none; /* Hide image section on mobile */
+    }
+    
+    .logo-icon {
+        height: 100px;
+    }
+    
+    .form-input {
+        padding: 12px 12px 12px 40px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    .input-icon {
+        font-size: 14px;
+        left: 12px;
+    }
+    
+    .password-toggle-btn {
+        right: 12px;
+        font-size: 14px;
+    }
+    
+    .login-button {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+    
+    .forgot-password-link {
+        font-size: 12px;
+    }
+    
+    .signup-link {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .background-container {
+        padding: 15px;
+        padding-top: 30px;
+    }
+    
+    .login-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    .left-rectangle {
+        padding: 25px 20px;
+        border-radius: 12px;
+    }
+    
+    .logo-section {
+        margin-bottom: 20px;
+    }
+    
+    .logo-icon {
+        height: 80px;
+    }
+    
+    .form-group {
+        margin-bottom: 12px;
+    }
+    
+    .form-input {
+        padding: 12px 12px 12px 38px;
+        font-size: 16px; /* Prevent zoom on iOS */
+        border-radius: 6px;
+        border-width: 1.5px;
+    }
+    
+    .input-icon {
+        font-size: 14px;
+        left: 12px;
+    }
+    
+    .password-input {
+        padding-right: 40px;
+    }
+    
+    .password-toggle-btn {
+        right: 12px;
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    
+    .forgot-password-section {
+        margin-bottom: 12px;
+    }
+    
+    .forgot-password-link {
+        font-size: 12px;
+    }
+    
+    .login-button {
+        padding: 12px 25px;
+        font-size: 14px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+        letter-spacing: 0.5px;
+    }
+    
+    .signup-link-section {
+        margin-top: 0;
+    }
+    
+    .signup-link {
+        font-size: 12px;
+    }
+    
+    #loginMessage {
+        font-size: 13px;
+        padding: 10px 12px;
+        min-height: 40px;
+    }
+    
+    .top-left-text {
+        top: 10px;
+        left: 10px;
+        font-size: 11px;
+    }
+}

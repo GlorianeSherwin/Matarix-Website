@@ -1,0 +1,117 @@
+/**
+ * Customer Notifications CSS
+ * Styling for customer notification system
+ */
+
+/* Notification Badge - Red Circle with White Number */
+.notification-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #dc3545;
+    color: #ffffff;
+    border-radius: 50%;
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    line-height: 20px;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+    padding: 0;
+    text-align: center;
+    animation: pulseBadge 2s infinite;
+    z-index: 10;
+}
+
+@keyframes pulseBadge {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 3px 12px rgba(220, 53, 69, 0.6);
+    }
+}
+
+.notification-badge:hover {
+    animation: none;
+    transform: scale(1.15);
+    box-shadow: 0 4px 16px rgba(220, 53, 69, 0.7);
+    background: #c82333;
+}
+
+/* Ensure notification button has relative positioning for badge */
+#customerNotificationsBtn,
+.navbar-icons[title="Notifications"],
+.signin-btn[title="Notifications"] {
+    position: relative;
+}
+
+/* Notification Item Styles */
+.notification-item {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.notification-item:hover {
+    background-color: #f8f9fa;
+}
+
+.notification-item.unread {
+    background-color: #e7f3ff;
+    border-left: 4px solid #007bff;
+}
+
+.notification-item.unread:hover {
+    background-color: #d0e7ff;
+}
+
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    flex-shrink: 0;
+}
+
+.notification-item.unread .notification-icon {
+    background-color: #e7f3ff;
+}
+
+.notification-date-group {
+    margin-bottom: 20px;
+}
+
+.mark-read-btn {
+    padding: 5px 10px;
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.mark-read-btn:hover {
+    color: #007bff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .notification-badge {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+        min-width: 18px;
+    }
+}

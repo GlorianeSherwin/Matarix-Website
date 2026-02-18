@@ -1,0 +1,399 @@
+/**
+ * Admin Notification System
+ * Toast-style notifications for API responses
+ */
+
+/* Notification Container */
+#admin-notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    max-width: 400px;
+    pointer-events: none;
+}
+
+/* Individual Notification */
+.admin-notification {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    min-width: 300px;
+    max-width: 400px;
+    pointer-events: auto;
+    animation: slideInRight 0.3s ease-out;
+    border-left: 4px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.admin-notification.closing {
+    animation: slideOutRight 0.3s ease-in forwards;
+}
+
+/* Notification Types */
+.admin-notification.success {
+    border-left-color: #28a745;
+    background: linear-gradient(to right, #d4edda 0%, #ffffff 10%);
+}
+
+.admin-notification.error {
+    border-left-color: #dc3545;
+    background: linear-gradient(to right, #f8d7da 0%, #ffffff 10%);
+}
+
+.admin-notification.warning {
+    border-left-color: #ffc107;
+    background: linear-gradient(to right, #fff3cd 0%, #ffffff 10%);
+}
+
+.admin-notification.info {
+    border-left-color: #17a2b8;
+    background: linear-gradient(to right, #d1ecf1 0%, #ffffff 10%);
+}
+
+/* Notification Icon */
+.admin-notification-icon {
+    font-size: 24px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.admin-notification.success .admin-notification-icon {
+    color: #28a745;
+}
+
+.admin-notification.error .admin-notification-icon {
+    color: #dc3545;
+}
+
+.admin-notification.warning .admin-notification-icon {
+    color: #ffc107;
+}
+
+.admin-notification.info .admin-notification-icon {
+    color: #17a2b8;
+}
+
+/* Notification Content */
+.admin-notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-notification-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.admin-notification-message {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+/* Notification Details (for API responses) */
+.admin-notification-details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 12px;
+    color: #888;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.admin-notification-details pre {
+    margin: 0;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+/* Close Button */
+.admin-notification-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.admin-notification-close:hover {
+    color: #333;
+}
+
+/* Progress Bar */
+.admin-notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    overflow: hidden;
+}
+
+.admin-notification-progress-bar {
+    height: 100%;
+    background: currentColor;
+    animation: progressBar 5s linear forwards;
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* Custom Confirmation Dialog */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==========================================
+   NOTIFICATION BADGE - CUTE DESIGN
+   (For header notification icon)
+========================================== */
+
+/* Notification Badge - Red Circle with White Number */
+.notification-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #dc3545;
+    color: #ffffff;
+    border-radius: 50%;
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    line-height: 20px;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+    padding: 0;
+    text-align: center;
+    animation: pulseBadge 2s infinite;
+    z-index: 10;
+}
+
+@keyframes pulseBadge {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 3px 12px rgba(220, 53, 69, 0.6);
+    }
+}
+
+.notification-badge:hover {
+    animation: none;
+    transform: scale(1.15);
+    box-shadow: 0 4px 16px rgba(220, 53, 69, 0.7);
+    background: #c82333;
+}
+
+/* Ensure header action button has relative positioning for badge */
+.header-action-btn {
+    position: relative;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
+.admin-confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.admin-confirm-modal {
+    background: #2c3e50;
+    border-radius: 12px;
+    padding: 0;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    animation: slideDown 0.3s ease-out;
+    overflow: hidden;
+}
+
+.admin-confirm-modal .admin-confirm-header {
+    padding: 24px 24px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-confirm-modal .admin-confirm-header i {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.admin-confirm-modal .admin-confirm-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.admin-confirm-modal .admin-confirm-body {
+    padding: 0 24px 16px;
+    color: #e0e0e0;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.admin-confirm-modal .admin-confirm-footer {
+    padding: 16px 24px;
+    background: #34495e;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid #3d566e;
+}
+
+.admin-confirm-modal button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 80px;
+}
+
+.admin-confirm-modal .admin-confirm-ok {
+    background: #007bff;
+    color: white;
+}
+
+.admin-confirm-modal .admin-confirm-ok:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.admin-confirm-modal .admin-confirm-ok.danger {
+    background: #dc3545;
+}
+
+.admin-confirm-modal .admin-confirm-ok.danger:hover {
+    background: #c82333;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.admin-confirm-modal .admin-confirm-cancel {
+    background: #6c757d;
+    color: white;
+}
+
+.admin-confirm-modal .admin-confirm-cancel:hover {
+    background: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #admin-notification-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .admin-notification {
+        min-width: auto;
+        max-width: none;
+    }
+    
+    .admin-confirm-modal {
+        width: 95%;
+        max-width: none;
+    }
+}
+
